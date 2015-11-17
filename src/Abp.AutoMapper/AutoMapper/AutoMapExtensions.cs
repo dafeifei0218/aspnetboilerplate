@@ -2,6 +2,9 @@
 
 namespace Abp.AutoMapper
 {
+    /// <summary>
+    /// AutoMap扩展
+    /// </summary>
     public static class AutoMapExtensions
     {
         /// <summary>

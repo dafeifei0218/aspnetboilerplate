@@ -7,9 +7,15 @@ using Castle.Core.Logging;
 
 namespace Abp.AutoMapper
 {
+    /// <summary>
+    /// AbpAutoMapper模块
+    /// </summary>
     [DependsOn(typeof (AbpKernelModule))]
     public class AbpAutoMapperModule : AbpModule
     {
+        /// <summary>
+        /// 日志
+        /// </summary>
         public ILogger Logger { get; set; }
 
         private readonly ITypeFinder _typeFinder;
@@ -17,6 +23,10 @@ namespace Abp.AutoMapper
         private static bool _createdMappingsBefore;
         private static readonly object _syncObj = new object();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="typeFinder">类型过滤器</param>
         public AbpAutoMapperModule(ITypeFinder typeFinder)
         {
             _typeFinder = typeFinder;
@@ -28,6 +38,9 @@ namespace Abp.AutoMapper
             CreateMappings();
         }
 
+        /// <summary>
+        /// 创建映射
+        /// </summary>
         private void CreateMappings()
         {
             lock (_syncObj)
@@ -45,6 +58,9 @@ namespace Abp.AutoMapper
             }
         }
 
+        /// <summary>
+        /// 查找AutoMap、AutoMapFrom、AutoMapTo自定义属性
+        /// </summary>
         private void FindAndAutoMapTypes()
         {
             var types = _typeFinder.Find(type =>
@@ -61,6 +77,9 @@ namespace Abp.AutoMapper
             }
         }
 
+        /// <summary>
+        /// 创建其他映射
+        /// </summary>
         private void CreateOtherMappings()
         {
             var localizationManager = IocManager.Resolve<ILocalizationManager>();
