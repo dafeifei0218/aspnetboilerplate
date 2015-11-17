@@ -28,11 +28,13 @@ namespace Abp.Domain.Uow
         
         /// <summary>
         /// Gets if this unit of work is transactional.
+        /// 工作单元设置
         /// </summary>
         UnitOfWorkOptions Options { get; }
 
         /// <summary>
         /// Gets data filter configurations for this unit of work.
+        /// 数据过滤配置
         /// </summary>
         IReadOnlyList<DataFilterConfiguration> Filters { get; }
 

@@ -24,19 +24,23 @@ namespace Abp.Domain.Uow
         {
             if (_unitOfWorkManager.Current != null)
             {
+                //如果当前已经在工作单元中，则直接执行被拦截类的方法
                 //Continue with current uow
                 invocation.Proceed();
                 return;
             }
 
+            //获取方法上的UnitOfWorkAttribute，如果没有返回NULL，invocation.MethodInvocationTarget为被拦截类的类型
             var unitOfWorkAttr = UnitOfWorkAttribute.GetUnitOfWorkAttributeOrNull(invocation.MethodInvocationTarget);
             if (unitOfWorkAttr == null || unitOfWorkAttr.IsDisabled)
             {
+                //如果当前方法上没有UnitOfWorkAttribute或者是设置为Disabled，则直接调用呗拦截类的方法
                 //No need to a uow
                 invocation.Proceed();
                 return;
             }
 
+            //表示是需要将这个方法作为工作单元，详情点击查看
             //No current uow, run a new one
             PerformUow(invocation, unitOfWorkAttr.CreateOptions());
         }

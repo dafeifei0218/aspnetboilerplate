@@ -92,11 +92,14 @@ namespace Abp.Domain.Uow
                 throw new ArgumentNullException("options");
             }
 
+            //防止Begin被多次调用
             PreventMultipleBegin();
             Options = options; //TODO: Do not set options like that, instead make a copy?
 
+            //过滤配置
             SetFilters(options.FilterOverrides);
 
+            //抽象方法，子类实现
             BeginUow();
         }
 
@@ -190,9 +193,11 @@ namespace Abp.Domain.Uow
         /// <inheritdoc/>
         public void Complete()
         {
+            //防止Complete被多次调用
             PreventMultipleComplete();
             try
             {
+                //抽象方法，子类实现
                 CompleteUow();
                 _succeed = true;
                 OnCompleted();
