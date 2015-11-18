@@ -13,7 +13,8 @@ namespace Abp.Domain.Uow
     {
         /// <summary>
         /// Initializes the registerer.
-        /// </summary>sssss
+        /// ³õÊ¼»¯×¢²á
+        /// </summary>
         /// <param name="iocManager">IOC manager</param>
         public static void Initialize(IIocManager iocManager)
         {

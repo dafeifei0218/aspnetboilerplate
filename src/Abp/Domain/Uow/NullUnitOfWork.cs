@@ -6,6 +6,7 @@ namespace Abp.Domain.Uow
     /// Null implementation of unit of work.
     /// It's used if no component registered for <see cref="IUnitOfWork"/>.
     /// This ensures working ABP without a database.
+    /// 工作单元空实现
     /// </summary>
     public sealed class NullUnitOfWork : UnitOfWorkBase
     {

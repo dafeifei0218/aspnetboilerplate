@@ -14,8 +14,14 @@ namespace Abp.Domain.Uow
     /// </summary>
     public abstract class UnitOfWorkBase : IUnitOfWork
     {
+        /// <summary>
+        /// 唯一的标识ID
+        /// </summary>
         public string Id { get; private set; }
 
+        /// <summary>
+        /// 外层工作单元
+        /// </summary>
         public IUnitOfWork Outer { get; set; }
 
         /// <inheritdoc/>
@@ -84,6 +90,9 @@ namespace Abp.Domain.Uow
             AbpSession = NullAbpSession.Instance;
         }
 
+        /// <summary>
+        /// 开始工作单元.
+        /// </summary>
         /// <inheritdoc/>
         public void Begin(UnitOfWorkOptions options)
         {
@@ -403,5 +412,7 @@ namespace Abp.Domain.Uow
 
             return filterIndex;
         }
+
+
     }
 }

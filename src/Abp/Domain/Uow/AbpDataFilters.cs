@@ -4,6 +4,7 @@ namespace Abp.Domain.Uow
 {
     /// <summary>
     /// Standard filters of ABP.
+    /// AbpÊı¾İ¹ıÂËÆ÷
     /// </summary>
     public static class AbpDataFilters
     {
@@ -12,6 +13,7 @@ namespace Abp.Domain.Uow
         /// Soft delete filter.
         /// Prevents getting deleted data from database.
         /// See <see cref="ISoftDelete"/> interface.
+        /// ÈíÉ¾³ı
         /// </summary>
         public const string SoftDelete = "SoftDelete";
 

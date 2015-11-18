@@ -6,6 +6,9 @@ namespace Abp.Domain.Uow
     /// Defines a unit of work.
     /// This interface is internally used by ABP.
     /// Use <see cref="IUnitOfWorkManager.Begin()"/> to start a new unit of work.
+    /// 工作单元接口
+    /// 此接口ABP内部使用
+    /// 使用 <see cref="IUnitOfWorkManager.Begin()"/> 开始一个新的工作单元
     /// </summary>
     public interface IUnitOfWork : IActiveUnitOfWork, IUnitOfWorkCompleteHandle
     {

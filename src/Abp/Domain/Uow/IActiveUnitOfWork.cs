@@ -8,21 +8,25 @@ namespace Abp.Domain.Uow
     /// This interface is used to work with active unit of work.
     /// This interface can not be injected.
     /// Use <see cref="IUnitOfWorkManager"/> instead.
+    /// 活动工作单元接口。
     /// </summary>
     public interface IActiveUnitOfWork
     {
         /// <summary>
         /// This event is raised when this UOW is successfully completed.
+        /// UOW成功时执行此事件。
         /// </summary>
         event EventHandler Completed;
 
         /// <summary>
         /// This event is raised when this UOW is failed.
+        /// UOW失败时执行此事件。
         /// </summary>
         event EventHandler<UnitOfWorkFailedEventArgs> Failed;
 
         /// <summary>
         /// This event is raised when this UOW is disposed.
+        /// UOW设置时执行此事件。
         /// </summary>
         event EventHandler Disposed;
         
@@ -40,6 +44,7 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Is this UOW disposed?
+        /// 是否UOW的设置
         /// </summary>
         bool IsDisposed { get; }
 
