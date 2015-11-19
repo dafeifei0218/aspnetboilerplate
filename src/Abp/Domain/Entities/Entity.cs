@@ -4,6 +4,7 @@ namespace Abp.Domain.Entities
 {
     /// <summary>
     /// A shortcut of <see cref="Entity{TPrimaryKey}"/> for most used primary key type (<see cref="int"/>).
+    /// 实体，主键为int
     /// </summary>
     [Serializable]
     public abstract class Entity : Entity<int>, IEntity

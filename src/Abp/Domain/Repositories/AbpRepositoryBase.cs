@@ -10,6 +10,7 @@ namespace Abp.Domain.Repositories
     /// <summary>
     /// Base class to implement <see cref="IRepository{TEntity,TPrimaryKey}"/>.
     /// It implements some methods in most simple way.
+    /// Abp²Ö´¢»ùÀà
     /// </summary>
     /// <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key of the entity</typeparam>

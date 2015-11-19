@@ -10,6 +10,7 @@ namespace Abp.Domain.Repositories
 {
     /// <summary>
     /// This interface is implemented by all repositories to ensure implementation of fixed methods.
+    /// 带泛型的仓储接口
     /// </summary>
     /// <typeparam name="TEntity">Main Entity type this repository works on</typeparam>
     /// <typeparam name="TPrimaryKey">Primary key type of the entity</typeparam>
@@ -21,33 +22,38 @@ namespace Abp.Domain.Repositories
         /// Used to get a IQueryable that is used to retrieve entities from entire table.
         /// <see cref="UnitOfWorkAttribute"/> attribute must be used to be able to call this method since this method
         /// returns IQueryable and it requires open database connection to use it.
+        /// 获取全部实体
         /// </summary>
         /// <returns>IQueryable to be used to select entities from database</returns>
         IQueryable<TEntity> GetAll();
 
         /// <summary>
         /// Used to get all entities.
+        /// 获取全部实体
         /// </summary>
-        /// <returns>List of all entities</returns>
+        /// <returns>List of all entities 全部实体列表</returns>
         List<TEntity> GetAllList();
 
         /// <summary>
         /// Used to get all entities.
+        /// 异步获取全部实体
         /// </summary>
-        /// <returns>List of all entities</returns>
+        /// <returns>List of all entities 全部实体列表</returns>
         Task<List<TEntity>> GetAllListAsync();
 
         /// <summary>
         /// Used to get all entities based on given <paramref name="predicate"/>.
+        /// 获取全部实体
         /// </summary>
-        /// <param name="predicate">A condition to filter entities</param>
-        /// <returns>List of all entities</returns>
+        /// <param name="predicate">A condition to filter entities 条件</param>
+        /// <returns>List of all entities 全部实体列表</returns>
         List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Used to get all entities based on given <paramref name="predicate"/>.
+        /// 异步获取全部实体
         /// </summary>
-        /// <param name="predicate">A condition to filter entities</param>
+        /// <param name="predicate">A condition to filter entities 条件</param>
         /// <returns>List of all entities</returns>
         Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate);
 
@@ -55,6 +61,7 @@ namespace Abp.Domain.Repositories
         /// Used to run a query over entire entities.
         /// <see cref="UnitOfWorkAttribute"/> attribute is not always necessary (as opposite to <see cref="GetAll"/>)
         /// if <paramref name="queryMethod"/> finishes IQueryable with ToList, FirstOrDefault etc..
+        /// 获取单个实体
         /// </summary>
         /// <typeparam name="T">Type of return value of this method</typeparam>
         /// <param name="queryMethod">This method is used to query over entities</param>
@@ -63,15 +70,17 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Gets an entity with given primary key.
+        /// 获取一个给定主键的实体。
         /// </summary>
-        /// <param name="id">Primary key of the entity to get</param>
+        /// <param name="id">Primary key of the entity to get 主键</param>
         /// <returns>Entity</returns>
         TEntity Get(TPrimaryKey id);
 
         /// <summary>
         /// Gets an entity with given primary key.
+        /// 获取一个给定主键的实体。
         /// </summary>
-        /// <param name="id">Primary key of the entity to get</param>
+        /// <param name="id">Primary key of the entity to get 主键</param>
         /// <returns>Entity</returns>
         Task<TEntity> GetAsync(TPrimaryKey id);
 
