@@ -21,6 +21,7 @@ namespace Abp.EntityFramework
 {
     /// <summary>
     /// Base class for all DbContext classes in the application.
+    /// Abp数据上下文
     /// </summary>
     public abstract class AbpDbContext : DbContext, IShouldInitialize
     {

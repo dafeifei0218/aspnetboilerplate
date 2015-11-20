@@ -6,8 +6,16 @@ using Abp.Reflection.Extensions;
 
 namespace Abp.EntityFramework.Repositories
 {
+    /// <summary>
+    /// EntityFramework通用仓储注册类
+    /// </summary>
     internal static class EntityFrameworkGenericRepositoryRegistrar
     {
+        /// <summary>
+        /// 注册数据上下文
+        /// </summary>
+        /// <param name="dbContextType">数据上下文类型</param>
+        /// <param name="iocManager">IOC管理</param>
         public static void RegisterForDbContext(Type dbContextType, IIocManager iocManager)
         {
             var autoRepositoryAttr = dbContextType.GetSingleAttributeOrNull<AutoRepositoryTypesAttribute>();

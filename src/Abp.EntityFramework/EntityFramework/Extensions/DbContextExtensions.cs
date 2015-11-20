@@ -7,8 +7,16 @@ using Abp.Reflection;
 
 namespace Abp.EntityFramework.Extensions
 {
+    /// <summary>
+    /// 数据上下文扩展类
+    /// </summary>
     internal static class DbContextExtensions
     {
+        /// <summary>
+        /// 获取数据上下文类型集合
+        /// </summary>
+        /// <param name="dbContextType">数据上下文类型</param>
+        /// <returns></returns>
         public static IEnumerable<Type> GetEntityTypes(this Type dbContextType)
         {
             return

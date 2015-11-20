@@ -7,9 +7,14 @@ namespace Abp.EntityFramework.Dependency
 {
     /// <summary>
     /// Registers classes derived from AbpDbContext with configurations.
+    /// 
     /// </summary>
     public class EntityFrameworkConventionalRegisterer : IConventionalDependencyRegistrar
     {
+        /// <summary>
+        /// 注册程序集
+        /// </summary>
+        /// <param name="context"></param>
         public void RegisterAssembly(IConventionalRegistrationContext context)
         {
             context.IocManager.IocContainer.Register(
@@ -29,6 +34,11 @@ namespace Abp.EntityFramework.Dependency
                         })));
         }
 
+        /// <summary>
+        /// 获取链接字符串名称
+        /// </summary>
+        /// <param name="iocResolver"></param>
+        /// <returns></returns>
         private static string GetNameOrConnectionStringOrNull(IIocResolver iocResolver)
         {
             if (iocResolver.IsRegistered<IAbpStartupConfiguration>())

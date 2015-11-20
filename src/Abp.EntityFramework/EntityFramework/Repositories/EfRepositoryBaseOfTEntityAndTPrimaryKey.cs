@@ -11,21 +11,24 @@ namespace Abp.EntityFramework.Repositories
 {
     /// <summary>
     /// Implements IRepository for Entity Framework.
+    /// EntityFramework仓储实现
     /// </summary>
-    /// <typeparam name="TDbContext">DbContext which contains <see cref="TEntity"/>.</typeparam>
-    /// <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
-    /// <typeparam name="TPrimaryKey">Primary key of the entity</typeparam>
+    /// <typeparam name="TDbContext">DbContext which contains <see cref="TEntity"/>. 数据上下文</typeparam>
+    /// <typeparam name="TEntity">Type of the Entity for this repository 实体</typeparam>
+    /// <typeparam name="TPrimaryKey">Primary key of the entity 主键</typeparam>
     public class EfRepositoryBase<TDbContext, TEntity, TPrimaryKey> : AbpRepositoryBase<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
     {
         /// <summary>
         /// Gets EF DbContext object.
+        /// 数据上下文
         /// </summary>
         protected virtual TDbContext Context { get { return _dbContextProvider.DbContext; } }
 
         /// <summary>
         /// Gets DbSet for given entity.
+        /// 
         /// </summary>
         protected virtual DbSet<TEntity> Table { get { return Context.Set<TEntity>(); } }
 
@@ -33,13 +36,18 @@ namespace Abp.EntityFramework.Repositories
 
         /// <summary>
         /// Constructor
+        /// 构造函数
         /// </summary>
-        /// <param name="dbContextProvider"></param>
+        /// <param name="dbContextProvider">数据上下文提供者</param>
         public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
         {
             _dbContextProvider = dbContextProvider;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override IQueryable<TEntity> GetAll()
         {
             return Table;

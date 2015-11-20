@@ -7,6 +7,7 @@ namespace Abp.EntityFramework.Extensions
 {
     /// <summary>
     /// Extension methods for <see cref="IQueryable"/> and <see cref="IQueryable{T}"/>.
+    /// Queryable¿©’π¿‡
     /// </summary>
     public static class QueryableExtensions
     {
