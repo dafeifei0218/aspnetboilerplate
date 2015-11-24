@@ -15,8 +15,9 @@
 
         /// <summary>
         /// Checks if this entity is transient (not persisted to database and it has not an <see cref="Id"/>).
+        /// 检查实体是否是瞬态的（没有Id不持久化到数据库）
         /// </summary>
-        /// <returns>True, if this entity is transient</returns>
+        /// <returns>True, if this entity is transient. true：表示实体是瞬态的</returns>
         bool IsTransient();
     }
 }
