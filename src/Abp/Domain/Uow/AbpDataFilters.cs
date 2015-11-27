@@ -21,6 +21,8 @@ namespace Abp.Domain.Uow
         /// "MustHaveTenant".
         /// Tenant filter to prevent getting data that is
         /// not belong to current tenant.
+        /// 必须有租户
+        /// 租户过滤器，以防止获得的数据不属于当前租户。
         /// </summary>
         public const string MustHaveTenant = "MustHaveTenant";
 
@@ -28,16 +30,20 @@ namespace Abp.Domain.Uow
         /// "MayHaveTenant".
         /// Tenant filter to prevent getting data that is
         /// not belong to current tenant.
+        /// 可能有租户
+        /// 租户过滤器，以防止获得的数据不属于当前租户。
         /// </summary>
         public const string MayHaveTenant = "MayHaveTenant";
 
         /// <summary>
         /// Standard parameters of ABP.
+        /// ABP默认参数
         /// </summary>
         public static class Parameters
         {
             /// <summary>
             /// "tenantId".
+            /// 租户Id
             /// </summary>
             public const string TenantId = "tenantId";
         }
