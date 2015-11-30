@@ -5,6 +5,9 @@ using Abp.Localization;
 
 namespace Abp.Application.Navigation
 {
+    /// <summary>
+    /// 导航管理类
+    /// </summary>
     internal class NavigationManager : INavigationManager, ISingletonDependency
     {
         public IDictionary<string, MenuDefinition> Menus { get; private set; }
@@ -17,6 +20,11 @@ namespace Abp.Application.Navigation
         private readonly IIocResolver _iocResolver;
         private readonly INavigationConfiguration _configuration;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="iocResolver"></param>
+        /// <param name="configuration"></param>
         public NavigationManager(IIocResolver iocResolver, INavigationConfiguration configuration)
         {
             _iocResolver = iocResolver;
@@ -28,6 +36,9 @@ namespace Abp.Application.Navigation
                     };
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             var context = new NavigationProviderContext(this);

@@ -26,7 +26,13 @@ namespace Abp.Application.Navigation
             PermissionChecker = NullPermissionChecker.Instance;
             AbpSession = NullAbpSession.Instance;
         }
-
+        
+        /// <summary>
+        /// 获取菜单
+        /// </summary>
+        /// <param name="menuName"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<UserMenu> GetMenuAsync(string menuName, long? userId)
         {
             var menuDefinition = _navigationManager.Menus.GetOrDefault(menuName);
@@ -40,6 +46,11 @@ namespace Abp.Application.Navigation
             return userMenu;
         }
 
+        /// <summary>
+        /// 获取菜单
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<IReadOnlyList<UserMenu>> GetMenusAsync(long? userId)
         {
             var userMenus = new List<UserMenu>();
