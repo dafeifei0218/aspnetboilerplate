@@ -6,16 +6,19 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Default implementation for <see cref="IFeatureChecker"/>.
+    /// 功能检查
     /// </summary>
     public class FeatureChecker : IFeatureChecker, ITransientDependency
     {
         /// <summary>
         /// Reference to current session.
+        /// 当前Session会话
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         /// <summary>
         /// Reference to the store used to get feature values.
+        /// 获取功能值的储存
         /// </summary>
         public IFeatureValueStore FeatureValueStore { get; set; }
 
@@ -23,6 +26,7 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Creates a new <see cref="FeatureChecker"/> object.
+        /// 构造函数
         /// </summary>
         public FeatureChecker(IFeatureManager featureManager)
         {

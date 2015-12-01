@@ -9,6 +9,7 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Some extension methods for <see cref="IFeatureChecker"/>.
+    /// 功能检查配置扩展
     /// </summary>
     public static class FeatureCheckerExtensions
     {       
