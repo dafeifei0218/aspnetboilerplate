@@ -36,6 +36,10 @@ namespace Abp.Application.Features
             AbpSession = NullAbpSession.Instance;
         }
 
+        /// <summary>
+        /// 根据名称获取功能点
+        /// </summary>
+        /// <param name="name">Unique feature name 功能名称</param>
         /// <inheritdoc/>
         public Task<string> GetValueAsync(string name)
         {
@@ -47,6 +51,12 @@ namespace Abp.Application.Features
             return GetValueAsync(AbpSession.TenantId.Value, name);
         }
 
+        /// <summary>
+        /// 根据租户Id和租户名称，获取一个功能名称
+        /// </summary>
+        /// <param name="tenantId">Tenant's Id 租户Id</param>
+        /// <param name="name">Unique feature name 功能名称</param>
+        /// <returns>Feature's current value 功能值</returns>
         /// <inheritdoc/>
         public async Task<string> GetValueAsync(int tenantId, string name)
         {

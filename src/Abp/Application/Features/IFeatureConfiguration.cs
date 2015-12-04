@@ -4,7 +4,7 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Used to configure feature system.
-    /// 功能配置
+    /// 功能配置接口
     /// </summary>
     public interface IFeatureConfiguration
     {

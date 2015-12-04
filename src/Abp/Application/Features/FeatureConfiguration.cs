@@ -9,6 +9,9 @@ namespace Abp.Application.Features
     {
         public ITypeList<FeatureProvider> Providers { get; private set; }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public FeatureConfiguration()
         {
             Providers = new TypeList<FeatureProvider>();
