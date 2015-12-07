@@ -4,11 +4,13 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Used in <see cref="IFeatureDependency.IsSatisfiedAsync"/> method.
+    /// 功能依赖上下文
     /// </summary>
     public interface IFeatureDependencyContext
     {
         /// <summary>
         /// Gets the <see cref="IIocResolver"/>.
+        /// 获取依赖注入解析器
         /// </summary>
         /// <value>
         /// The ioc resolver.
@@ -17,6 +19,7 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Gets the <see cref="IFeatureChecker"/>.
+        /// 获取功能检查器
         /// </summary>
         /// <value>
         /// The feature checker.

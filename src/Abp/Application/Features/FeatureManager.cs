@@ -7,18 +7,27 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Implements <see cref="IFeatureManager"/>.
+    /// 功能管理类
     /// </summary>
     internal class FeatureManager : FeatureDefinitionContextBase, IFeatureManager, ISingletonDependency
     {
         private readonly IIocManager _iocManager;
         private readonly IFeatureConfiguration _featureConfiguration;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocManager">依赖注入管理类</param>
+        /// <param name="featureConfiguration">功能配置</param>
         public FeatureManager(IIocManager iocManager, IFeatureConfiguration featureConfiguration)
         {
             _iocManager = iocManager;
             _featureConfiguration = featureConfiguration;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             foreach (var providerType in _featureConfiguration.Providers)

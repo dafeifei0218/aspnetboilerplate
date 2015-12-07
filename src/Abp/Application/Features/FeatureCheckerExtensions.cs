@@ -18,10 +18,11 @@ namespace Abp.Application.Features
         /// 
         /// This is a shortcut for <see cref="GetValue(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
         /// So, this method should be used only if TenantId can be obtained from the session.
+        /// 根据功能名称获取功能。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="featureName">Unique feature name</param>
-        /// <returns>Feature's current value</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
+        /// <returns>Feature's current value 当前功能值</returns>
         public static string GetValue(this IFeatureChecker featureChecker, string featureName)
         {
             return AsyncHelper.RunSync(() => featureChecker.GetValueAsync(featureName));
@@ -29,11 +30,12 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Gets value of a feature by it's name. This is sync version of <see cref="IFeatureChecker.GetValueAsync(int, string)"/>
+        /// 根据租户Id，功能名称获取功能
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="tenantId">Tenant's Id</param>
-        /// <param name="featureName">Unique feature name</param>
-        /// <returns>Feature's current value</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="tenantId">Tenant's Id 租户Id</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
+        /// <returns>Feature's current value 当前功能值</returns>
         public static string GetValue(this IFeatureChecker featureChecker, int tenantId, string featureName)
         {
             return AsyncHelper.RunSync(() => featureChecker.GetValueAsync(tenantId, featureName));
@@ -45,10 +47,12 @@ namespace Abp.Application.Features
         /// 
         /// This is a shortcut for <see cref="IsEnabledAsync(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
         /// So, this method should be used only if TenantId can be obtained from the session.
+        /// 检查功能是否启用。
+        /// 应该是特征的布尔值。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="featureName">Unique feature name</param>
-        /// <returns>True, if current feature's value is "true".</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
+        /// <returns>True, if current feature's value is "true". true：功能值为“true”</returns>
         public static async Task<bool> IsEnabledAsync(this IFeatureChecker featureChecker, string featureName)
         {
             return string.Equals(await featureChecker.GetValueAsync(featureName), "true", StringComparison.InvariantCultureIgnoreCase);
@@ -57,11 +61,13 @@ namespace Abp.Application.Features
         /// <summary>
         /// Checks if given feature is enabled.
         /// This should be used for boolean-value features.
+        /// 检查功能是否启用。
+        /// 应该是特征的布尔值。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="tenantId">Tenant's Id</param>
-        /// <param name="featureName">Unique feature name</param>
-        /// <returns>True, if current feature's value is "true".</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="tenantId">Tenant's Id 租户Id</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
+        /// <returns>True, if current feature's value is "true". true：功能值为“true”</returns>
         public static async Task<bool> IsEnabledAsync(this IFeatureChecker featureChecker, int tenantId, string featureName)
         {
             return string.Equals(await featureChecker.GetValueAsync(tenantId, featureName), "true", StringComparison.InvariantCultureIgnoreCase);
@@ -73,10 +79,11 @@ namespace Abp.Application.Features
         /// 
         /// This is a shortcut for <see cref="IsEnabled(IFeatureChecker, int, string)"/> that uses <see cref="IAbpSession.TenantId"/> as tenantId.
         /// So, this method should be used only if TenantId can be obtained from the session.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="name">Unique feature name</param>
-        /// <returns>True, if current feature's value is "true".</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="name">Unique feature name 功能名称</param>
+        /// <returns>True, if current feature's value is "true". true：功能值为“true”</returns>
         public static bool IsEnabled(this IFeatureChecker featureChecker, string name)
         {
             return AsyncHelper.RunSync(() => featureChecker.IsEnabledAsync(name));
@@ -85,11 +92,12 @@ namespace Abp.Application.Features
         /// <summary>
         /// Checks if given feature is enabled.
         /// This should be used for boolean-value features.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="tenantId">Tenant's Id</param>
-        /// <param name="featureName">Unique feature name</param>
-        /// <returns>True, if current feature's value is "true".</returns>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="tenantId">Tenant's Id 租户Id</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
+        /// <returns>True, if current feature's value is "true". true：功能值为“true”</returns>
         public static bool IsEnabled(this IFeatureChecker featureChecker, int tenantId, string featureName)
         {
             return AsyncHelper.RunSync(() => featureChecker.IsEnabledAsync(tenantId, featureName));
@@ -97,10 +105,11 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Used to check if one of all given features are enabled.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
-        /// <param name="featureNames">Name of the features</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more. true：全部为启用；false：一个或更多个为未启用</param>
+        /// <param name="featureNames">Name of the features 功能名称集合</param>
         public static async Task<bool> IsEnabledAsync(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
         {
             if (featureNames.IsNullOrEmpty())
@@ -136,10 +145,11 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Used to check if one of all given features are enabled.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
-        /// <param name="featureNames">Name of the features</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more. true：全部为启用；false：一个或更多个为未启用</param>
+        /// <param name="featureNames">Name of the features 功能名称集合</param>
         public static bool IsEnabled(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
         {
             return AsyncHelper.RunSync(() => featureChecker.IsEnabledAsync(requiresAll, featureNames));
@@ -147,9 +157,10 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="featureName">Unique feature name</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
         public static async Task CheckEnabledAsync(this IFeatureChecker featureChecker, string featureName)
         {
             if (!(await featureChecker.IsEnabledAsync(featureName)))
@@ -160,9 +171,10 @@ namespace Abp.Application.Features
         
         /// <summary>
         /// Checks if given feature is enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="featureName">Unique feature name</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="featureName">Unique feature name 功能名称</param>
         public static void CheckEnabled(this IFeatureChecker featureChecker, string featureName)
         {
             if (!featureChecker.IsEnabled(featureName))
@@ -173,10 +185,11 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
-        /// <param name="featureNames">Name of the features</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more. true：全部为启用；false：一个或更多个为未启用</param>
+        /// <param name="featureNames">Name of the features 功能名称集合</param>
         /// <returns></returns>
         public static async Task CheckEnabledAsync(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
         {
@@ -217,10 +230,11 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Checks if one of all given features are enabled. Throws <see cref="AbpAuthorizationException"/> if not.
+        /// 检查功能是否启用。
         /// </summary>
-        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance</param>
-        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
-        /// <param name="featureNames">Name of the features</param>
+        /// <param name="featureChecker"><see cref="IFeatureChecker"/> instance 实例</param>
+        /// <param name="requiresAll">True, to require all given features are enabled. False, to require one or more. true：全部为启用；false：一个或更多个为未启用</param>
+        /// <param name="featureNames">Name of the features 功能名称集合</param>
         public static void CheckEnabled(this IFeatureChecker featureChecker, bool requiresAll, params string[] featureNames)
         {
             AsyncHelper.RunSync(() => featureChecker.CheckEnabledAsync(requiresAll, featureNames));

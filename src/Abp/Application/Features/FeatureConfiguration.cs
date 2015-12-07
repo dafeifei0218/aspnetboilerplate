@@ -7,6 +7,9 @@ namespace Abp.Application.Features
     /// </summary>
     internal class FeatureConfiguration : IFeatureConfiguration
     {
+        /// <summary>
+        /// 功能提供者列表
+        /// </summary>
         public ITypeList<FeatureProvider> Providers { get; private set; }
 
         /// <summary>

@@ -23,10 +23,10 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Gets a feature with given name or null if can not find.
-        /// 
+        /// 获取一个功能，如果未找不到返回null
         /// </summary>
-        /// <param name="name">Unique name of the feature</param>
-        /// <returns><see cref="Feature"/> object or null</returns>
+        /// <param name="name">Unique name of the feature 功能名称</param>
+        /// <returns><see cref="Feature"/> object or null 功能对象或null</returns>
         Feature GetOrNull(string name);
     }
 }

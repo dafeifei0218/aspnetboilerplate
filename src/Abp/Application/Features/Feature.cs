@@ -10,7 +10,7 @@ namespace Abp.Application.Features
     /// <summary>
     /// Defines a feature of the application. A <see cref="Feature"/> can be used in a multi-tenant application
     /// to enable disable some application features depending on editions and tenants.
-    /// 功能，定义应用程序的功能。可用于多租户应用程序的功能启用禁用某些应用程序功能
+    /// 特征， 定义应用程序的功能。可用于多租户应用程序的功能启用禁用某些应用程序功能
     /// </summary>
     public class Feature
     {
@@ -41,7 +41,7 @@ namespace Abp.Application.Features
         /// <summary>
         /// Parent of this feature, if one exists.
         /// If set, this feature can be enabled only if parent is enabled.
-        /// 父功能，如果父功能启用该功能也启用
+        /// 父特征，如果设置，该功能可以启用仅当父功能启用。
         /// </summary>
         public Feature Parent { get; private set; }
 
