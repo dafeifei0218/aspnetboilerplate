@@ -5,6 +5,7 @@ namespace Abp.Configuration.Startup
 {
     /// <summary>
     /// Used for localization configurations.
+    /// 本地化配置接口
     /// </summary>
     public interface ILocalizationConfiguration
     {

@@ -5,6 +5,7 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// This is the main interface that must be implemented to be able to load/change values of settings.
+    /// 设置管理类接口
     /// </summary>
     public interface ISettingManager
     {

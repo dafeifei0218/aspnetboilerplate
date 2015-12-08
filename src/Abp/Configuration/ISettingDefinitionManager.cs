@@ -4,6 +4,7 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// Defines setting definition manager.
+    /// 设置定义管理类接口
     /// </summary>
     public interface ISettingDefinitionManager
     {

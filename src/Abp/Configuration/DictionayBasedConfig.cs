@@ -6,20 +6,24 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// Used to set/get custom configuration.
+    /// 字典基础配置
     /// </summary>
     public class DictionayBasedConfig : IDictionaryBasedConfig
     {
         /// <summary>
         /// Dictionary of custom configuration.
+        /// 自定义配置字典
         /// </summary>
         protected Dictionary<string, object> CustomSettings { get; private set; }
 
         /// <summary>
         /// Gets/sets a config value.
         /// Returns null if no config with given name.
+        /// 获取/设置配置值。
+        /// 如果未找到对象返回null
         /// </summary>
-        /// <param name="name">Name of the config</param>
-        /// <returns>Value of the config</returns>
+        /// <param name="name">Name of the config 配置名称</param>
+        /// <returns>Value of the config 配置值</returns>
         public object this[string name]
         {
             get { return CustomSettings.GetOrDefault(name); }
@@ -28,6 +32,7 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         protected DictionayBasedConfig()
         {

@@ -6,44 +6,53 @@ namespace Abp.Configuration
     /// <summary>
     /// Defines a setting.
     /// A setting is used to configure and change behavior of the application.
+    /// 设置定义。
+    /// 设置用于配置和更改应用程序的行为。
     /// </summary>
     public class SettingDefinition
     {
         /// <summary>
         /// Unique name of the setting.
+        /// 设置名称
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
         /// Display name of the setting.
         /// This can be used to show setting to the user.
+        /// 设置显示名称
         /// </summary>
         public ILocalizableString DisplayName { get; private set; }
 
         /// <summary>
         /// A brief description for this setting.
+        /// 设置描述
         /// </summary>
         public ILocalizableString Description { get; private set; }
 
         /// <summary>
         /// Scopes of this setting.
         /// Default value: <see cref="SettingScopes.Application"/>.
+        /// 设置范围
         /// </summary>
         public SettingScopes Scopes { get; private set; }
 
         /// <summary>
         /// Is this setting inherited from parent scopes.
         /// Default: True.
+        /// 是否继承，默认值：true
         /// </summary>
         public bool IsInherited { get; set; }
 
         /// <summary>
         /// Gets/sets group for this setting.
+        /// 设置定义分组
         /// </summary>
         public SettingDefinitionGroup Group { get; private set; }
 
         /// <summary>
         /// Default value of the setting.
+        /// 设置默认值
         /// </summary>
         public string DefaultValue { get; private set; }
 
@@ -56,6 +65,7 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Can be used to store a custom object related to this setting.
+        /// 自定义数据
         /// </summary>
         public object CustomData { get; set; }
 

@@ -4,6 +4,7 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// Represents a setting information.
+    /// 设置信息
     /// </summary>
     [Serializable]
     public class SettingInfo
@@ -11,27 +12,32 @@ namespace Abp.Configuration
         /// <summary>
         /// TenantId for this setting.
         /// TenantId is null if this setting is not Tenant level.
+        /// 租户Id
         /// </summary>
         public int? TenantId { get; set; }
 
         /// <summary>
         /// UserId for this setting.
         /// UserId is null if this setting is not user level.
+        /// 用户Id
         /// </summary>
         public long? UserId { get; set; }
 
         /// <summary>
         /// Unique name of the setting.
+        /// 设置名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
         /// Value of the setting.
+        /// 设置的值
         /// </summary>
         public string Value { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="SettingInfo"/> object.
+        /// 构造函数
         /// </summary>
         public SettingInfo()
         {
@@ -40,11 +46,12 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Creates a new <see cref="SettingInfo"/> object.
+        /// 构造函数
         /// </summary>
-        /// <param name="tenantId">TenantId for this setting. TenantId is null if this setting is not Tenant level.</param>
-        /// <param name="userId">UserId for this setting. UserId is null if this setting is not user level.</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="value">Value of the setting</param>
+        /// <param name="tenantId">TenantId for this setting. TenantId is null if this setting is not Tenant level. 租户Id</param>
+        /// <param name="userId">UserId for this setting. UserId is null if this setting is not user level. 用户Id</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="value">Value of the setting 设置的值</param>
         public SettingInfo(int? tenantId, long? userId, string name, string value)
         {
             TenantId = tenantId;
