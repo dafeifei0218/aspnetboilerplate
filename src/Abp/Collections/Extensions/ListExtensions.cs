@@ -5,15 +5,17 @@ namespace Abp.Collections.Extensions
 {
     /// <summary>
     /// Extension methods for <see cref="IList{T}"/>.
+    /// 强类型列表的扩展方法
     /// </summary>
     public static class ListExtensions
     {
         /// <summary>
         /// Sort a list by a topological sorting, which consider their  dependencies
+        /// 按依赖排序，
         /// </summary>
-        /// <typeparam name="T">The type of the members of values.</typeparam>
-        /// <param name="source">A list of objects to sort</param>
-        /// <param name="getDependencies">Function to resolve the dependencies</param>
+        /// <typeparam name="T">The type of the members of values. 类型</typeparam>
+        /// <param name="source">A list of objects to sort 被排序的列表</param>
+        /// <param name="getDependencies">Function to resolve the dependencies </param>
         /// <returns></returns>
         public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
         {
@@ -33,9 +35,9 @@ namespace Abp.Collections.Extensions
         }
 
         /// <summary>
-        /// 
+        /// 按依赖访问排序
         /// </summary>
-        /// <typeparam name="T">The type of the members of values.</typeparam>
+        /// <typeparam name="T">The type of the members of values. 类型</typeparam>
         /// <param name="item">Item to resolve</param>
         /// <param name="getDependencies">Function to resolve the dependencies</param>
         /// <param name="sorted">List with the sortet items</param>

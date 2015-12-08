@@ -6,7 +6,7 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Default implementation for <see cref="IFeatureChecker"/>.
-    /// 功能检查
+    /// 特征检查
     /// </summary>
     public class FeatureChecker : IFeatureChecker, ITransientDependency
     {
@@ -18,7 +18,7 @@ namespace Abp.Application.Features
 
         /// <summary>
         /// Reference to the store used to get feature values.
-        /// 获取功能值的储存
+        /// 特征值存储，用于获取特征值的储存引用
         /// </summary>
         public IFeatureValueStore FeatureValueStore { get; set; }
 

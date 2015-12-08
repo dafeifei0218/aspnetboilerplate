@@ -6,6 +6,7 @@ namespace Abp.Collections
 {
     /// <summary>
     /// A shortcut for <see cref="TypeList{TBaseType}"/> to use object as base type.
+    /// 类型列表
     /// </summary>
     public class TypeList : TypeList<object>, ITypeList
     {
@@ -13,26 +14,30 @@ namespace Abp.Collections
 
     /// <summary>
     /// Extends <see cref="List{Type}"/> to add restriction a specific base type.
+    /// 类型列表
     /// </summary>
-    /// <typeparam name="TBaseType">Base Type of <see cref="Type"/>s in this list</typeparam>
+    /// <typeparam name="TBaseType">Base Type of <see cref="Type"/>s in this list 列表的基础类型</typeparam>
     public class TypeList<TBaseType> : ITypeList<TBaseType>
     {
         /// <summary>
         /// Gets the count.
+        /// 获取数量
         /// </summary>
         /// <value>The count.</value>
         public int Count { get { return _typeList.Count; } }
 
         /// <summary>
         /// Gets a value indicating whether this instance is read only.
+        /// 是否只读，
         /// </summary>
         /// <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
         public bool IsReadOnly { get { return false; } }
 
         /// <summary>
         /// Gets or sets the <see cref="Type"/> at the specified index.
+        /// 所引器
         /// </summary>
-        /// <param name="index">Index.</param>
+        /// <param name="index">Index. 索引</param>
         public Type this[int index]
         {
             get { return _typeList[index]; }
@@ -47,6 +52,7 @@ namespace Abp.Collections
 
         /// <summary>
         /// Creates a new <see cref="TypeList{T}"/> object.
+        /// 构造函数
         /// </summary>
         public TypeList()
         {

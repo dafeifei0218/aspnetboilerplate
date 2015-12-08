@@ -4,11 +4,13 @@ namespace Abp.Collections.Extensions
 {
     /// <summary>
     /// Extension methods for Dictionary.
+    /// 表示键/值对的泛型集合扩展方法。
     /// </summary>
     public static class DictionaryExtensions
     {
         /// <summary>
         /// This method is used to try to get a value in a dictionary if it does exists.
+        /// 试图获取值，如果他确实存在，尝试在字典中找到一个值。
         /// </summary>
         /// <typeparam name="T">Type of the value</typeparam>
         /// <param name="dictionary">The collection object</param>
