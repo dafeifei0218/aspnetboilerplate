@@ -32,6 +32,7 @@ namespace Abp.Collections.Extensions
 
         /// <summary>
         /// Gets a value from the dictionary with given key. Returns default value if can not find.
+        /// 
         /// </summary>
         /// <param name="dictionary">Dictionary to check and get</param>
         /// <param name="key">Key to find the value</param>
