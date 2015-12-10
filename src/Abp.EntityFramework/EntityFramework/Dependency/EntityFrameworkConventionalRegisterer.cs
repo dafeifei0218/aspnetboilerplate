@@ -7,14 +7,14 @@ namespace Abp.EntityFramework.Dependency
 {
     /// <summary>
     /// Registers classes derived from AbpDbContext with configurations.
-    /// 
+    /// EF常规注册类，从AbpDbContext（ABP数据上下文）配置继承
     /// </summary>
     public class EntityFrameworkConventionalRegisterer : IConventionalDependencyRegistrar
     {
         /// <summary>
         /// 注册程序集
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">常规注册上下文</param>
         public void RegisterAssembly(IConventionalRegistrationContext context)
         {
             context.IocManager.IocContainer.Register(
@@ -35,9 +35,9 @@ namespace Abp.EntityFramework.Dependency
         }
 
         /// <summary>
-        /// 获取链接字符串名称
+        /// 获取链接字符串名称，或者null
         /// </summary>
-        /// <param name="iocResolver"></param>
+        /// <param name="iocResolver">IOC控制反转解析器</param>
         /// <returns></returns>
         private static string GetNameOrConnectionStringOrNull(IIocResolver iocResolver)
         {

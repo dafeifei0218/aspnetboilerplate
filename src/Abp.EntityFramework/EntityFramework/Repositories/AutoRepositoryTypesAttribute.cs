@@ -6,7 +6,7 @@ namespace Abp.EntityFramework.Repositories
     /// <summary>
     /// Add this class to a DbContext to define auto-repository types for entities in this DbContext.
     /// This is useful if you inherit same DbContext by more than one DbContext.
-    /// Abp仓储类型自定义属性
+    /// 自动仓储类型自定义属性
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class AutoRepositoryTypesAttribute : Attribute

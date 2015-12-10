@@ -38,7 +38,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 预先初始化
         /// </summary>
         public override void PreInitialize()
         {
@@ -46,7 +46,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 初始化
         /// </summary>
         public override void Initialize()
         {
@@ -57,7 +57,8 @@ namespace Abp.EntityFramework
                     .ImplementedBy(typeof (UnitOfWorkDbContextProvider<>))
                     .LifestyleTransient()
                 );
-            
+
+            //注册通用仓储
             RegisterGenericRepositories();
         }
 
@@ -74,6 +75,7 @@ namespace Abp.EntityFramework
                     typeof(AbpDbContext).IsAssignableFrom(type)
                     );
 
+            //如果AbpDbContext未找到，则抛出异常
             if (dbContextTypes.IsNullOrEmpty())
             {
                 Logger.Warn("No class found derived from AbpDbContext.");

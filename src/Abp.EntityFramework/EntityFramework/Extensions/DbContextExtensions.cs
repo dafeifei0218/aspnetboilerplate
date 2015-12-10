@@ -13,7 +13,7 @@ namespace Abp.EntityFramework.Extensions
     internal static class DbContextExtensions
     {
         /// <summary>
-        /// 获取数据上下文类型集合
+        /// 获取实体类型集合
         /// </summary>
         /// <param name="dbContextType">数据上下文类型</param>
         /// <returns></returns>

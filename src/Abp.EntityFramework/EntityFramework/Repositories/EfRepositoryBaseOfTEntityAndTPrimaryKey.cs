@@ -28,7 +28,7 @@ namespace Abp.EntityFramework.Repositories
 
         /// <summary>
         /// Gets DbSet for given entity.
-        /// 
+        /// 获取DbSet实体
         /// </summary>
         protected virtual DbSet<TEntity> Table { get { return Context.Set<TEntity>(); } }
 
@@ -45,7 +45,7 @@ namespace Abp.EntityFramework.Repositories
         }
 
         /// <summary>
-        /// 
+        /// 获取全部数据
         /// </summary>
         /// <returns></returns>
         public override IQueryable<TEntity> GetAll()
@@ -53,6 +53,10 @@ namespace Abp.EntityFramework.Repositories
             return Table;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override async Task<List<TEntity>> GetAllListAsync()
         {
             return await GetAll().ToListAsync();

@@ -27,22 +27,26 @@ namespace Abp.EntityFramework
     {
         /// <summary>
         /// Used to get current session values.
+        /// 当前会话
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         /// <summary>
         /// Used to trigger entity change events.
+        /// 实体更改事件帮助类
         /// </summary>
         public IEntityChangedEventHelper EntityChangedEventHelper { get; set; }
 
         /// <summary>
         /// Reference to the logger.
+        /// 日志
         /// </summary>
         public ILogger Logger { get; set; }
 
         /// <summary>
         /// Constructor.
         /// Uses <see cref="IAbpStartupConfiguration.DefaultNameOrConnectionString"/> as connection string.
+        /// 构造函数
         /// </summary>
         protected AbpDbContext()
         {
@@ -53,7 +57,9 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
+        /// <param name="nameOrConnectionString">连接字符串</param>
         protected AbpDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
@@ -64,7 +70,9 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
+        /// <param name="model"></param>
         protected AbpDbContext(DbCompiledModel model)
             : base(model)
         {
@@ -75,7 +83,10 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
+        /// <param name="existingConnection"></param>
+        /// <param name="contextOwnsConnection"></param>
         protected AbpDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
@@ -86,7 +97,10 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
+        /// <param name="nameOrConnectionString">连接字符串</param>
+        /// <param name="model"></param>
         protected AbpDbContext(string nameOrConnectionString, DbCompiledModel model)
             : base(nameOrConnectionString, model)
         {
@@ -97,6 +111,7 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         protected AbpDbContext(ObjectContext objectContext, bool dbContextOwnsObjectContext)
             : base(objectContext, dbContextOwnsObjectContext)
@@ -108,6 +123,7 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         protected AbpDbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
@@ -117,6 +133,9 @@ namespace Abp.EntityFramework
             EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public virtual void Initialize()
         {
             Database.Initialize(false);
@@ -124,6 +143,10 @@ namespace Abp.EntityFramework
             this.SetFilterScopedParameterValue(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, AbpSession.TenantId);
         }
 
+        /// <summary>
+        /// 创建模型
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -132,6 +155,10 @@ namespace Abp.EntityFramework
             modelBuilder.Filter(AbpDataFilters.MayHaveTenant, (IMayHaveTenant t, int? tenantId) => t.TenantId == tenantId, 0);
         }
 
+        /// <summary>
+        /// 保存变更
+        /// </summary>
+        /// <returns></returns>
         public override int SaveChanges()
         {
             try
@@ -146,6 +173,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 保存变更-异步
+        /// </summary>
+        /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             try
@@ -160,6 +191,9 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void ApplyAbpConcepts()
         {
             foreach (var entry in ChangeTracker.Entries())
@@ -200,6 +234,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void CheckAndSetTenantIdProperty(DbEntityEntry entry)
         {
             if (entry.Entity is IMustHaveTenant)
@@ -212,6 +250,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void CheckAndSetMustHaveTenant(DbEntityEntry entry)
         {
             var entity = entry.Cast<IMustHaveTenant>().Entity;
@@ -243,6 +285,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void CheckMayHaveTenant(DbEntityEntry entry)
         {
             if (!this.IsFilterEnabled(AbpDataFilters.MayHaveTenant))
@@ -260,6 +306,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void SetCreationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IHasCreationTime)
@@ -273,6 +323,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void PreventSettingCreationAuditProperties(DbEntityEntry entry)
         {
             //TODO@Halil: Implement this when tested well (Issue #49)
@@ -287,6 +341,10 @@ namespace Abp.EntityFramework
             //}
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void SetModificationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IModificationAudited)
@@ -298,6 +356,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entry"></param>
         protected virtual void HandleSoftDelete(DbEntityEntry entry)
         {
             if (!(entry.Entity is ISoftDelete))
@@ -316,12 +378,20 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
         protected virtual void SetDeletionAuditProperties(IDeletionAudited entity)
         {
             entity.DeletionTime = Clock.Now;
             entity.DeleterUserId = AbpSession.UserId;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exception"></param>
         private void LogDbEntityValidationException(DbEntityValidationException exception)
         {
             Logger.Error("There are some validation errors while saving changes in EntityFramework:");

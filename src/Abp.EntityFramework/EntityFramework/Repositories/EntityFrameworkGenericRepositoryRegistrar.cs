@@ -18,6 +18,7 @@ namespace Abp.EntityFramework.Repositories
         /// <param name="iocManager">IOC管理</param>
         public static void RegisterForDbContext(Type dbContextType, IIocManager iocManager)
         {
+            //获取AutoRepositoryTypesAttribute自动仓储类型自定义属性的类型
             var autoRepositoryAttr = dbContextType.GetSingleAttributeOrNull<AutoRepositoryTypesAttribute>();
             if (autoRepositoryAttr == null)
             {
