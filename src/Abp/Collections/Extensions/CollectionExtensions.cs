@@ -34,6 +34,7 @@ namespace Abp.Collections.Extensions
                 throw new ArgumentNullException("source");
             }
 
+            //如果集合中包含item，则返回false
             if (source.Contains(item))
             {
                 return false;

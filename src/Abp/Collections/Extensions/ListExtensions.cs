@@ -15,7 +15,7 @@ namespace Abp.Collections.Extensions
         /// </summary>
         /// <typeparam name="T">The type of the members of values. 类型</typeparam>
         /// <param name="source">A list of objects to sort 被排序的列表</param>
-        /// <param name="getDependencies">Function to resolve the dependencies </param>
+        /// <param name="getDependencies">Function to resolve the dependencies 函数来解析依赖关系</param>
         /// <returns></returns>
         public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
         {
@@ -38,19 +38,21 @@ namespace Abp.Collections.Extensions
         /// 按依赖访问排序
         /// </summary>
         /// <typeparam name="T">The type of the members of values. 类型</typeparam>
-        /// <param name="item">Item to resolve</param>
-        /// <param name="getDependencies">Function to resolve the dependencies</param>
-        /// <param name="sorted">List with the sortet items</param>
-        /// <param name="visited">Dictionary with the visited items</param>
+        /// <param name="item">Item to resolve 被解析项目</param>
+        /// <param name="getDependencies">Function to resolve the dependencies 函数来解析依赖关系</param>
+        /// <param name="sorted">List with the sortet items 排序项目的列表</param>
+        /// <param name="visited">Dictionary with the visited items 访问项目的字典</param>
         private static void SortByDependenciesVisit<T>(T item, Func<T, IEnumerable<T>> getDependencies, List<T> sorted, Dictionary<T, bool> visited)
         {
             bool inProcess;
             var alreadyVisited = visited.TryGetValue(item, out inProcess);
 
+            //如果visited包含键为item的项目
             if (alreadyVisited)
             {
                 if (inProcess)
                 {
+                    //循环引用依赖
                     throw new ArgumentException("Cyclic dependency found!");
                 }
             }
