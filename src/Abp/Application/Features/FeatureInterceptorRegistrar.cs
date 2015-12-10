@@ -16,7 +16,7 @@ namespace Abp.Application.Features
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="iocManager">依赖注入管理类</param>
+        /// <param name="iocManager">IOC控制反转管理类</param>
         public static void Initialize(IIocManager iocManager)
         {
             iocManager.IocContainer.Kernel.ComponentRegistered += Kernel_ComponentRegistered;

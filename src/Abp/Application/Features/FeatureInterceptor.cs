@@ -17,7 +17,7 @@ namespace Abp.Application.Features
         /// Initializes a new instance of the <see cref="FeatureInterceptor"/> class.
         /// 构造函数
         /// </summary>
-        /// <param name="iocResolver">The ioc resolver. 依赖注入解析器</param>
+        /// <param name="iocResolver">The ioc resolver. IOC控制反转解析器</param>
         public FeatureInterceptor(IIocResolver iocResolver)
         {
             _iocResolver = iocResolver;

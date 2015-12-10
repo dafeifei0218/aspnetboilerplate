@@ -9,7 +9,7 @@ namespace Abp.Application.Features
     public class FeatureDependencyContext : IFeatureDependencyContext, ITransientDependency
     {
         /// <summary>
-        /// 依赖注入解析器
+        /// IOC控制反转解析器
         /// </summary>
         /// <inheritdoc/>
         public IIocResolver IocResolver { get; private set; }
@@ -24,7 +24,7 @@ namespace Abp.Application.Features
         /// Initializes a new instance of the <see cref="FeatureDependencyContext"/> class.
         /// 构造函数，初始化特征依赖上下文
         /// </summary>
-        /// <param name="iocResolver">The ioc resolver. 依赖注入解析器</param>
+        /// <param name="iocResolver">The ioc resolver. IOC控制反转解析器</param>
         /// <param name="featureChecker">The feature checker. 功能检查</param>
         public FeatureDependencyContext(IIocResolver iocResolver, IFeatureChecker featureChecker)
         {

@@ -10,7 +10,7 @@ namespace Abp.Application.Features
     {
         /// <summary>
         /// Gets the <see cref="IIocResolver"/>.
-        /// 获取依赖注入解析器
+        /// 获取IOC控制反转解析器
         /// </summary>
         /// <value>
         /// The ioc resolver.

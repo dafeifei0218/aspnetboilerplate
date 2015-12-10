@@ -17,7 +17,7 @@ namespace Abp.Application.Features
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="iocManager">依赖注入管理类</param>
+        /// <param name="iocManager">IOC控制反转管理类</param>
         /// <param name="featureConfiguration">功能配置</param>
         public FeatureManager(IIocManager iocManager, IFeatureConfiguration featureConfiguration)
         {
