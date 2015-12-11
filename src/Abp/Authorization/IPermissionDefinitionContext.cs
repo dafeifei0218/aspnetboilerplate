@@ -32,7 +32,7 @@ namespace Abp.Authorization
 
         /// <summary>
         /// Gets a permission with given name or null if can not find.
-        /// 获取权限或如果未找到返回 null
+        /// 获取给定权限名称的权限，如果没有给定名称的权限返回null
         /// </summary>
         /// <param name="name">Unique name of the permission 权限名称</param>
         /// <returns>Permission object or null 权限对象或null</returns>

@@ -13,9 +13,13 @@ namespace Abp.Authorization
 {
     /// <summary>
     /// Permission manager.
+    /// 权限管理类
     /// </summary>
     internal class PermissionManager : PermissionDefinitionContextBase, IPermissionManager, ISingletonDependency
     {
+        /// <summary>
+        /// ABP会话
+        /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         private readonly IIocManager _iocManager;
@@ -24,6 +28,7 @@ namespace Abp.Authorization
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         public PermissionManager(
             IIocManager iocManager, 
@@ -38,6 +43,9 @@ namespace Abp.Authorization
             AbpSession = NullAbpSession.Instance;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             foreach (var providerType in _authorizationConfiguration.Providers)
@@ -48,6 +56,11 @@ namespace Abp.Authorization
             Permissions.AddAllPermissions();
         }
 
+        /// <summary>
+        /// 根据权限名获取权限
+        /// </summary>
+        /// <param name="name">权限名称</param>
+        /// <returns></returns>
         public Permission GetPermission(string name)
         {
             var permission = Permissions.GetOrDefault(name);
@@ -59,6 +72,11 @@ namespace Abp.Authorization
             return permission;
         }
 
+        /// <summary>
+        /// 获取全部权限
+        /// </summary>
+        /// <param name="tenancyFilter">是否过滤租户信息</param>
+        /// <returns></returns>
         public IReadOnlyList<Permission> GetAllPermissions(bool tenancyFilter = true)
         {
             return Permissions.Values
@@ -70,6 +88,11 @@ namespace Abp.Authorization
                 ).ToImmutableList();
         }
 
+        /// <summary>
+        /// 获取全部权限
+        /// </summary>
+        /// <param name="multiTenancySides">多租户双方</param>
+        /// <returns></returns>
         public IReadOnlyList<Permission> GetAllPermissions(MultiTenancySides multiTenancySides)
         {
             return Permissions.Values
@@ -81,6 +104,11 @@ namespace Abp.Authorization
                 ).ToImmutableList();
         }
         
+        /// <summary>
+        /// 创建授权提供者
+        /// </summary>
+        /// <param name="providerType">提供者类型</param>
+        /// <returns></returns>
         private AuthorizationProvider CreateAuthorizationProvider(Type providerType)
         {
             if (!_iocManager.IsRegistered(providerType))

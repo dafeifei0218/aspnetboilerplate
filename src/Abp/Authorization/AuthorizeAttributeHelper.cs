@@ -37,6 +37,7 @@ namespace Abp.Authorization
         /// <returns></returns>
         public async Task AuthorizeAsync(IEnumerable<IAbpAuthorizeAttribute> authorizeAttributes)
         {
+            //如果UserId没有值，返回异常
             if (!AbpSession.UserId.HasValue)
             {
                 throw new AbpAuthorizationException("No user logged in!");

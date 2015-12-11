@@ -10,50 +10,60 @@ namespace Abp.Authorization
     /// <summary>
     /// Represents a permission.
     /// A permission is used to restrict functionalities of the application from unauthorized users.
+    /// 权限类
     /// </summary>
     public sealed class Permission
     {
         /// <summary>
         /// Parent of this permission if one exists.
         /// If set, this permission can be granted only if parent is granted.
+        /// 赋权限
         /// </summary>
         public Permission Parent { get; private set; }
 
         /// <summary>
         /// Unique name of the permission.
         /// This is the key name to grant permissions.
+        /// 权限名称
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
         /// Display name of the permission.
         /// This can be used to show permission to the user.
+        /// 权限显示名称
         /// </summary>
         public ILocalizableString DisplayName { get; set; }
 
         /// <summary>
         /// A brief description for this permission.
+        /// 权限描述
         /// </summary>
         public ILocalizableString Description { get; set; }
 
         /// <summary>
         /// Is this permission granted by default.
         /// Default value: false.
+        /// 是否授予权限
+        /// 默认值：false 不授予
         /// </summary>
         public bool IsGrantedByDefault { get; set; }
 
         /// <summary>
         /// Which side can use this permission.
+        /// 多租户双方，哪一方可以使用此权限
         /// </summary>
         public MultiTenancySides MultiTenancySides { get; set; }
 
         /// <summary>
         /// Depended feature(s) of this permission.
+        /// 此权限的依赖特征
         /// </summary>
         public IFeatureDependency FeatureDependency { get; set; }
 
         /// <summary>
         /// List of child permissions. A child permission can be granted only if parent is granted.
+        /// 子权限
         /// </summary>
         public IReadOnlyList<Permission> Children
         {
@@ -63,13 +73,14 @@ namespace Abp.Authorization
 
         /// <summary>
         /// Creates a new Permission.
+        /// 构造函数
         /// </summary>
-        /// <param name="name">Unique name of the permission</param>
-        /// <param name="displayName">Display name of the permission</param>
-        /// <param name="isGrantedByDefault">Is this permission granted by default. Default value: false.</param>
-        /// <param name="description">A brief description for this permission</param>
-        /// <param name="multiTenancySides">Which side can use this permission</param>
-        /// <param name="featureDependency">Depended feature(s) of this permission</param>
+        /// <param name="name">Unique name of the permission 权限名称</param>
+        /// <param name="displayName">Display name of the permission 权限显示名称</param>
+        /// <param name="isGrantedByDefault">Is this permission granted by default. Default value: false. 是否授予权限</param>
+        /// <param name="description">A brief description for this permission 权限描述</param>
+        /// <param name="multiTenancySides">Which side can use this permission 多租户双方，哪一方可以使用此权限</param>
+        /// <param name="featureDependency">Depended feature(s) of this permission 此权限的依赖特征</param>
         public Permission(
             string name,
             ILocalizableString displayName = null,
@@ -96,6 +107,7 @@ namespace Abp.Authorization
         /// <summary>
         /// Adds a child permission.
         /// A child permission can be granted only if parent is granted.
+        /// 添加子权限
         /// </summary>
         /// <returns>Returns newly created child permission</returns>
         public Permission CreateChildPermission(
