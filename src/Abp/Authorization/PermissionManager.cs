@@ -111,6 +111,7 @@ namespace Abp.Authorization
         /// <returns></returns>
         private AuthorizationProvider CreateAuthorizationProvider(Type providerType)
         {
+            //如果providerType未注册，则注册该providerType
             if (!_iocManager.IsRegistered(providerType))
             {
                 _iocManager.Register(providerType);

@@ -107,6 +107,7 @@ namespace Abp.Authorization
                 {
                     if (!(await permissionChecker.IsGrantedAsync(permissionName)))
                     {
+                        //未授予所需权限。所有这些权限必须被授予：
                         throw new AbpAuthorizationException(
                             "Required permissions are not granted. All of these permissions must be granted: " +
                             String.Join(", ", permissionNames)
@@ -124,6 +125,7 @@ namespace Abp.Authorization
                     }
                 }
 
+                //委授予所需权限。必须授予这些权限中的至少一个：
                 throw new AbpAuthorizationException(
                     "Required permissions are not granted. At least one of these permissions must be granted: " +
                     String.Join(", ", permissionNames)

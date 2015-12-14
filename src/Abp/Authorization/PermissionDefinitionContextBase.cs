@@ -10,6 +10,9 @@ namespace Abp.Authorization
     /// </summary>
     internal abstract class PermissionDefinitionContextBase : IPermissionDefinitionContext
     {
+        /// <summary>
+        /// 权限字典
+        /// </summary>
         protected readonly PermissionDictionary Permissions;
 
         /// <summary>
@@ -38,8 +41,10 @@ namespace Abp.Authorization
             MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,
             IFeatureDependency featureDependency = null)
         {
+            //权限字典中是否包含指定的键
             if (Permissions.ContainsKey(name))
             {
+                //权限字典中已经包含这个权限，名称为：
                 throw new AbpException("There is already a permission with name: " + name);
             }
 

@@ -14,19 +14,40 @@ using Castle.DynamicProxy;
 
 namespace Abp.Auditing
 {
+    /// <summary>
+    /// 审计拦截器
+    /// </summary>
     internal class AuditingInterceptor : IInterceptor
     {
+        /// <summary>
+        /// Abp会话
+        /// </summary>
         public IAbpSession AbpSession { get; set; }
 
+        /// <summary>
+        /// 日志
+        /// </summary>
         public ILogger Logger { get; set; }
 
+        /// <summary>
+        /// 审计存储
+        /// </summary>
         public IAuditingStore AuditingStore { get; set; }
 
+        //审计配置
         private readonly IAuditingConfiguration _configuration;
 
+        //审计信息提供者
         private readonly IAuditInfoProvider _auditInfoProvider;
+        //工作单元管理类
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="configuration">审计配置</param>
+        /// <param name="auditInfoProvider">审计信息提供者</param>
+        /// <param name="unitOfWorkManager">工作单元管理类</param>
         public AuditingInterceptor(IAuditingConfiguration configuration, IAuditInfoProvider auditInfoProvider, IUnitOfWorkManager unitOfWorkManager)
         {
             _configuration = configuration;
@@ -38,6 +59,10 @@ namespace Abp.Auditing
             AuditingStore = SimpleLogAuditingStore.Instance;
         }
 
+        /// <summary>
+        /// 拦截器
+        /// </summary>
+        /// <param name="invocation">调用</param>
         public void Intercept(IInvocation invocation)
         {
             if (!AuditingHelper.ShouldSaveAudit(invocation.MethodInvocationTarget, _configuration, AbpSession))
@@ -46,18 +71,27 @@ namespace Abp.Auditing
                 return;
             }
 
+            //创建审计
             var auditInfo = CreateAuditInfo(invocation);
 
+            //如果方法为异步方法
             if (AsyncHelper.IsAsyncMethod(invocation.Method))
             {
+                //执行异步审计
                 PerformAsyncAuditing(invocation, auditInfo);
             }
             else
             {
+                //执行同步审计
                 PerformSyncAuditing(invocation, auditInfo);
             }
         }
 
+        /// <summary>
+        /// 创建审计信息
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <returns></returns>
         private AuditInfo CreateAuditInfo(IInvocation invocation)
         {
             var auditInfo = new AuditInfo
@@ -79,6 +113,11 @@ namespace Abp.Auditing
             return auditInfo;
         }
 
+        /// <summary>
+        /// 执行同步审计
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <param name="auditInfo">审计信息</param>
         private void PerformSyncAuditing(IInvocation invocation, AuditInfo auditInfo)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -99,6 +138,12 @@ namespace Abp.Auditing
                 AuditingStore.Save(auditInfo);
             }
         }
+
+        /// <summary>
+        /// 执行异步审计
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <param name="auditInfo">审计信息</param>
         private void PerformAsyncAuditing(IInvocation invocation, AuditInfo auditInfo)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -122,6 +167,11 @@ namespace Abp.Auditing
             }
         }
 
+        /// <summary>
+        /// 转换参数到JSON
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <returns></returns>
         private string ConvertArgumentsToJson(IInvocation invocation)
         {
             try
@@ -150,6 +200,12 @@ namespace Abp.Auditing
             }
         }
 
+        /// <summary>
+        /// 保存审计信息
+        /// </summary>
+        /// <param name="auditInfo">审计信息</param>
+        /// <param name="stopwatch">提供一组方法和属性，可用于准确地测量运行时间。</param>
+        /// <param name="exception">异常</param>
         private void SaveAuditInfo(AuditInfo auditInfo, Stopwatch stopwatch, Exception exception)
         {
             stopwatch.Stop();
