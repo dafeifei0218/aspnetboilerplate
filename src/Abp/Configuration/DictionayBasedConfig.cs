@@ -41,10 +41,11 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets a configuration value as a specific type.
+        /// 根据配置名称获取配置值
         /// </summary>
-        /// <param name="name">Name of the config</param>
-        /// <typeparam name="T">Type of the config</typeparam>
-        /// <returns>Value of the configuration or null if not found</returns>
+        /// <param name="name">Name of the config 配置名称</param>
+        /// <typeparam name="T">Type of the config 配置类型</typeparam>
+        /// <returns>Value of the configuration or null if not found  配置值或未找到返回null</returns>
         public T Get<T>(string name)
         {
             var value = this[name];
@@ -56,9 +57,10 @@ namespace Abp.Configuration
         /// <summary>
         /// Used to set a string named configuration.
         /// If there is already a configuration with same <paramref name="name"/>, it's overwritten.
+        /// 设置配置
         /// </summary>
-        /// <param name="name">Unique name of the configuration</param>
-        /// <param name="value">Value of the configuration</param>
+        /// <param name="name">Unique name of the configuration 配置名称</param>
+        /// <param name="value">Value of the configuration 配置值</param>
         public void Set<T>(string name, T value)
         {
             this[name] = value;
@@ -66,9 +68,10 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets a configuration object with given name.
+        /// 根据配置名称获取配置值
         /// </summary>
-        /// <param name="name">Unique name of the configuration</param>
-        /// <returns>Value of the configuration or null if not found</returns>
+        /// <param name="name">Unique name of the configuration 配置名称</param>
+        /// <returns>Value of the configuration or null if not found  配置值或未找到返回null</returns>
         public object Get(string name)
         {
             return Get(name, null);
@@ -76,8 +79,9 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets a configuration object with given name.
+        /// 根据配置名称获取配置值
         /// </summary>
-        /// <param name="name">Unique name of the configuration</param>
+        /// <param name="name">Unique name of the configuration 配置名称</param>
         /// <param name="defaultValue">Default value of the object if can not found given configuration</param>
         /// <returns>Value of the configuration or null if not found</returns>
         public object Get(string name, object defaultValue)
@@ -93,9 +97,10 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets a configuration object with given name.
+        /// 根据配置名称获取配置值
         /// </summary>
-        /// <typeparam name="T">Type of the object</typeparam>
-        /// <param name="name">Unique name of the configuration</param>
+        /// <typeparam name="T">Type of the object 类型</typeparam>
+        /// <param name="name">Unique name of the configuration 配置名称</param>
         /// <param name="defaultValue">Default value of the object if can not found given configuration</param>
         /// <returns>Value of the configuration or null if not found</returns>
         public T Get<T>(string name, T defaultValue)
@@ -105,9 +110,10 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets a configuration object with given name.
+        /// 根据配置名称获取配置值
         /// </summary>
-        /// <typeparam name="T">Type of the object</typeparam>
-        /// <param name="name">Unique name of the configuration</param>
+        /// <typeparam name="T">Type of the object 类型</typeparam>
+        /// <param name="name">Unique name of the configuration 配置名称</param>
         /// <param name="creator">The function that will be called to create if given configuration is not found</param>
         /// <returns>Value of the configuration or null if not found</returns>
         public T GetOrCreate<T>(string name, Func<T> creator)
