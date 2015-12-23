@@ -7,16 +7,18 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// Extension methods for <see cref="ISettingManager"/>.
+    /// 设置管理扩展类
     /// </summary>
     public static class SettingManagerExtensions
     {
         /// <summary>
         /// Gets value of a setting in given type (<see cref="T"/>).
+        /// 获取设置值-异步
         /// </summary>
-        /// <typeparam name="T">Type of the setting to get</typeparam>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Value of the setting</returns>
+        /// <typeparam name="T">Type of the setting to get 设置类型</typeparam>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Value of the setting 设置值</returns>
         public static async Task<T> GetSettingValueAsync<T>(this ISettingManager settingManager, string name)
             where T : struct
         {
@@ -25,10 +27,11 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets current value of a setting for the application level.
+        /// 获取应用程序级别的设置的当前值-异步
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Current value of the setting for the application</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Current value of the setting for the application 应用程序的设置值</returns>
         public static async Task<T> GetSettingValueForApplicationAsync<T>(this ISettingManager settingManager, string name)
             where T : struct
         {
@@ -39,10 +42,10 @@ namespace Abp.Configuration
         /// Gets current value of a setting for a tenant level.
         /// It gets the setting value, overwritten by given tenant.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
-        /// <returns>Current value of the setting</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
+        /// <returns>Current value of the setting 设置值</returns>
         public static async Task<T> GetSettingValueForTenantAsync<T>(this ISettingManager settingManager, string name, int tenantId)
            where T : struct
         {
@@ -53,11 +56,11 @@ namespace Abp.Configuration
         /// Gets current value of a setting for a user level.
         /// It gets the setting value, overwritten by given tenant and user.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
         /// <param name="userId">User id</param>
-        /// <returns>Current value of the setting for the user</returns>
+        /// <returns>Current value of the setting for the user 设置值</returns>
         public static async Task<T> GetSettingValueForUserAsync<T>(this ISettingManager settingManager, string name, int tenantId, long userId)
            where T : struct
         {
@@ -68,9 +71,9 @@ namespace Abp.Configuration
         /// Gets current value of a setting.
         /// It gets the setting value, overwritten by application and the current user if exists.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Current value of the setting</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Current value of the setting 设置值</returns>
         public static string GetSettingValue(this ISettingManager settingManager, string name)
         {
             return AsyncHelper.RunSync(() => settingManager.GetSettingValueAsync(name));
@@ -79,9 +82,9 @@ namespace Abp.Configuration
         /// <summary>
         /// Gets current value of a setting for the application level.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Current value of the setting for the application</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Current value of the setting for the application 设置值</returns>
         public static string GetSettingValueForApplication(this ISettingManager settingManager, string name)
         {
             return AsyncHelper.RunSync(() => settingManager.GetSettingValueForApplicationAsync(name));
@@ -91,10 +94,10 @@ namespace Abp.Configuration
         /// Gets current value of a setting for a tenant level.
         /// It gets the setting value, overwritten by given tenant.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
-        /// <returns>Current value of the setting</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
+        /// <returns>Current value of the setting 设置值</returns>
         public static string GetSettingValueForTenant(this ISettingManager settingManager, string name, int tenantId)
         {
             return AsyncHelper.RunSync(() => settingManager.GetSettingValueForTenantAsync(name, tenantId));
@@ -104,11 +107,11 @@ namespace Abp.Configuration
         /// Gets current value of a setting for a user level.
         /// It gets the setting value, overwritten by given tenant and user.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
-        /// <param name="userId">User id</param>
-        /// <returns>Current value of the setting for the user</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
+        /// <param name="userId">User id 用户Id</param>
+        /// <returns>Current value of the setting for the user 设置值</returns>
         public static string GetSettingValueForUser(this ISettingManager settingManager, string name, int tenantId, long userId)
         {
             return AsyncHelper.RunSync(() => settingManager.GetSettingValueForUserAsync(name, tenantId, userId));
@@ -116,11 +119,12 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Gets value of a setting.
+        /// 获取设置值
         /// </summary>
         /// <typeparam name="T">Type of the setting to get</typeparam>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Value of the setting</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Value of the setting 设置值</returns>
         public static T GetSettingValue<T>(this ISettingManager settingManager, string name)
             where T : struct
         {
@@ -131,9 +135,9 @@ namespace Abp.Configuration
         /// Gets current value of a setting for the application level.
         /// </summary>
         /// <typeparam name="T">Type of the setting to get</typeparam>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <returns>Current value of the setting for the application</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <returns>Current value of the setting for the application 应用程序当前的设置值</returns>
         public static T GetSettingValueForApplication<T>(this ISettingManager settingManager, string name)
             where T : struct
         {
@@ -145,10 +149,10 @@ namespace Abp.Configuration
         /// It gets the setting value, overwritten by given tenant.
         /// </summary>
         /// <typeparam name="T">Type of the setting to get</typeparam>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
-        /// <returns>Current value of the setting</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
+        /// <returns>Current value of the setting 当前设置值</returns>
         public static T GetSettingValueForTenant<T>(this ISettingManager settingManager, string name, int tenantId)
             where T : struct
         {
@@ -160,10 +164,10 @@ namespace Abp.Configuration
         /// It gets the setting value, overwritten by given tenant and user.
         /// </summary>
         /// <typeparam name="T">Type of the setting to get</typeparam>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="tenantId">Tenant id</param>
-        /// <param name="userId">User id</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="tenantId">Tenant id 租户Id</param>
+        /// <param name="userId">User id 用户Id</param>
         /// <returns>Current value of the setting for the user</returns>
         public static T GetSettingValueForUser<T>(this ISettingManager settingManager, string name, int tenantId, long userId)
             where T : struct
@@ -175,8 +179,8 @@ namespace Abp.Configuration
         /// Gets current values of all settings.
         /// It gets all setting values, overwritten by application and the current user if exists.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <returns>List of setting values</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <returns>List of setting values 设置值列表</returns>
         public static IReadOnlyList<ISettingValue> GetAllSettingValues(this ISettingManager settingManager)
         {
             return AsyncHelper.RunSync(settingManager.GetAllSettingValuesAsync);
@@ -188,8 +192,8 @@ namespace Abp.Configuration
         /// If a setting's default value is used, it's not included the result list.
         /// If you want to get current values of all settings, use <see cref="GetAllSettingValues"/> method.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <returns>List of setting values</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <returns>List of setting values 设置值列表</returns>
         public static IReadOnlyList<ISettingValue> GetAllSettingValuesForApplication(this ISettingManager settingManager)
         {
             return AsyncHelper.RunSync(settingManager.GetAllSettingValuesForApplicationAsync);
@@ -201,9 +205,9 @@ namespace Abp.Configuration
         /// If a setting's default value is used, it's not included the result list.
         /// If you want to get current values of all settings, use <see cref="GetAllSettingValues"/> method.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="tenantId">Tenant to get settings</param>
-        /// <returns>List of setting values</returns>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="tenantId">Tenant to get settings 租户Id</param>
+        /// <returns>List of setting values 设置值列表</returns>
         public static IReadOnlyList<ISettingValue> GetAllSettingValuesForTenant(this ISettingManager settingManager, int tenantId)
         {
             return AsyncHelper.RunSync(() => settingManager.GetAllSettingValuesForTenantAsync(tenantId));
@@ -215,7 +219,7 @@ namespace Abp.Configuration
         /// If a setting's value is not set for the user (for example if user uses the default value), it's not included the result list.
         /// If you want to get current values of all settings, use <see cref="GetAllSettingValues"/> method.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
         /// <param name="userId">User to get settings</param>
         /// <returns>All settings of the user</returns>
         public static IReadOnlyList<ISettingValue> GetAllSettingValuesForTenant(this ISettingManager settingManager, long userId)
@@ -226,7 +230,7 @@ namespace Abp.Configuration
         /// <summary>
         /// Changes setting for the application level.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
         /// <param name="name">Unique name of the setting</param>
         /// <param name="value">Value of the setting</param>
         public static void ChangeSettingForApplication(this ISettingManager settingManager, string name, string value)
@@ -237,8 +241,8 @@ namespace Abp.Configuration
         /// <summary>
         /// Changes setting for a Tenant.
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="tenantId">TenantId</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="tenantId">TenantId 租户Id</param>
         /// <param name="name">Unique name of the setting</param>
         /// <param name="value">Value of the setting</param>
         public static void ChangeSettingForTenant(this ISettingManager settingManager, int tenantId, string name, string value)
@@ -248,11 +252,12 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Changes setting for a user.
+        /// 
         /// </summary>
-        /// <param name="settingManager">Setting manager</param>
-        /// <param name="userId">UserId</param>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="value">Value of the setting</param>
+        /// <param name="settingManager">Setting manager 设置管理类</param>
+        /// <param name="userId">UserId 用户Id</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="value">Value of the setting 设置值</param>
         public static void ChangeSettingForUser(this ISettingManager settingManager, long userId, string name, string value)
         {
             AsyncHelper.RunSync(() => settingManager.ChangeSettingForUserAsync(userId, name, value));

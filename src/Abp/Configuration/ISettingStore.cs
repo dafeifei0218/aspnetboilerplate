@@ -44,9 +44,9 @@ namespace Abp.Configuration
         /// Gets a list of setting.
         /// 获取全部设置-异步
         /// </summary>
-        /// <param name="tenantId">TenantId or null</param>
-        /// <param name="userId">UserId or null</param>
-        /// <returns>List of settings</returns>
+        /// <param name="tenantId">TenantId or null 租户Id</param>
+        /// <param name="userId">UserId or null 用户Id</param>
+        /// <returns>List of settings 设置信息列表</returns>
         Task<List<SettingInfo>> GetAllListAsync(int? tenantId, long? userId);
     }
 }

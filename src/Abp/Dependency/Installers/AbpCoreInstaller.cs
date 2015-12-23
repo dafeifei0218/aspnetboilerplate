@@ -12,6 +12,9 @@ using Castle.Windsor;
 
 namespace Abp.Dependency.Installers
 {
+    /// <summary>
+    /// Abp核心安装程序
+    /// </summary>
     internal class AbpCoreInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)

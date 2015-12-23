@@ -8,6 +8,7 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// Implements <see cref="ISettingDefinitionManager"/>.
+    /// 设置定义管理类
     /// </summary>
     internal class SettingDefinitionManager : ISettingDefinitionManager, ISingletonDependency
     {
@@ -17,6 +18,7 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         public SettingDefinitionManager(IIocManager iocManager, ISettingsConfiguration settingsConfiguration)
         {
@@ -25,6 +27,9 @@ namespace Abp.Configuration
             _settings = new Dictionary<string, SettingDefinition>();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             var context = new SettingDefinitionProviderContext();
@@ -39,6 +44,11 @@ namespace Abp.Configuration
             }
         }
 
+        /// <summary>
+        /// 获取设置定义
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         public SettingDefinition GetSettingDefinition(string name)
         {
             SettingDefinition settingDefinition;
@@ -50,11 +60,20 @@ namespace Abp.Configuration
             return settingDefinition;
         }
 
+        /// <summary>
+        /// 获取全部设置定义
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<SettingDefinition> GetAllSettingDefinitions()
         {
             return _settings.Values.ToImmutableList();
         }
 
+        /// <summary>
+        /// 创建设置提供者
+        /// </summary>
+        /// <param name="providerType">提供者类型</param>
+        /// <returns></returns>
         private SettingProvider CreateProvider(Type providerType)
         {
             if (!_iocManager.IsRegistered(providerType))

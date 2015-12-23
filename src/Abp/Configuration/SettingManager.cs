@@ -13,18 +13,24 @@ namespace Abp.Configuration
 {
     /// <summary>
     /// This class implements <see cref="ISettingManager"/> to manage setting values in the database.
+    /// 设置管理类
     /// </summary>
     public class SettingManager : ISettingManager, ISingletonDependency
     {
+        /// <summary>
+        /// 应用程序设置缓存键
+        /// </summary>
         public const string ApplicationSettingsCacheKey = "ApplicationSettings";
 
         /// <summary>
         /// Reference to the current Session.
+        /// Abp会话
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         /// <summary>
         /// Reference to the setting store.
+        /// 设置范围
         /// </summary>
         public ISettingStore SettingStore { get; set; }
 
@@ -32,7 +38,12 @@ namespace Abp.Configuration
         private readonly ITypedCache<string, Dictionary<string, SettingInfo>> _applicationSettingCache;
         private readonly ITypedCache<int, Dictionary<string, SettingInfo>> _tenantSettingCache;
         private readonly ITypedCache<long, Dictionary<string, SettingInfo>> _userSettingCache;
-        
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="settingDefinitionManager">设置定义管理类</param>
+        /// <param name="cacheManager">缓存挂历类</param>
         /// <inheritdoc/>
         public SettingManager(ISettingDefinitionManager settingDefinitionManager, ICacheManager cacheManager)
         {
@@ -48,32 +59,62 @@ namespace Abp.Configuration
 
         #region Public methods
 
+        /// <summary>
+        /// 获取当前设置值-异步
+        /// </summary>
+        /// <param name="name">设置名称</param>
         /// <inheritdoc/>
         public Task<string> GetSettingValueAsync(string name)
         {
             return GetSettingValueInternalAsync(name, AbpSession.TenantId, AbpSession.UserId);
         }
 
+        /// <summary>
+        /// 获取应用程序级别的设置的当前值-异步
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         public Task<string> GetSettingValueForApplicationAsync(string name)
         {
             return GetSettingValueInternalAsync(name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <param name="tenantId"></param>
+        /// <returns></returns>
         public Task<string> GetSettingValueForTenantAsync(string name, int tenantId)
         {
             return GetSettingValueInternalAsync(name, tenantId);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <param name="tenantId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public Task<string> GetSettingValueForUserAsync(string name, int? tenantId, long userId)
         {
             return GetSettingValueInternalAsync(name, tenantId, userId);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesAsync()
         {
             return await GetAllSettingValuesAsync(SettingScopes.Application | SettingScopes.Tenant | SettingScopes.User);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scopes">设置范围</param>
         /// <inheritdoc/>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesAsync(SettingScopes scopes)
         {
@@ -149,6 +190,9 @@ namespace Abp.Configuration
             return settingValues.Values.ToImmutableList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForApplicationAsync()
         {
@@ -157,6 +201,10 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
         /// <inheritdoc/>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForTenantAsync(int tenantId)
         {
@@ -165,6 +213,10 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId">用户Id</param>
         /// <inheritdoc/>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForUserAsync(long userId)
         {
@@ -173,6 +225,9 @@ namespace Abp.Configuration
                 .ToImmutableList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         [UnitOfWork]
         public virtual async Task ChangeSettingForApplicationAsync(string name, string value)
@@ -181,6 +236,9 @@ namespace Abp.Configuration
             await _applicationSettingCache.RemoveAsync(ApplicationSettingsCacheKey);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         [UnitOfWork]
         public virtual async Task ChangeSettingForTenantAsync(int tenantId, string name, string value)
@@ -201,11 +259,19 @@ namespace Abp.Configuration
 
         #region Private methods
 
+        /// <summary>
+        /// 获取程序集设置值
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         private async Task<string> GetSettingValueInternalAsync(string name, int? tenantId = null, long? userId = null)
         {
             var settingDefinition = _settingDefinitionManager.GetSettingDefinition(name);
 
             //Get for user if defined
+            //如果设置范围为用户
             if (settingDefinition.Scopes.HasFlag(SettingScopes.User) && userId.HasValue)
             {
                 var settingValue = await GetSettingValueForUserOrNullAsync(userId.Value, name);
@@ -221,6 +287,7 @@ namespace Abp.Configuration
             }
 
             //Get for tenant if defined
+            //如果设置范围为租户
             if (settingDefinition.Scopes.HasFlag(SettingScopes.Tenant) && tenantId.HasValue)
             {
                 var settingValue = await GetSettingValueForTenantOrNullAsync(tenantId.Value, name);
@@ -236,6 +303,7 @@ namespace Abp.Configuration
             }
 
             //Get for application if defined
+            //如果设置范围为应用程序
             if (settingDefinition.Scopes.HasFlag(SettingScopes.Application))
             {
                 var settingValue = await GetSettingValueForApplicationOrNullAsync(name);
@@ -246,9 +314,18 @@ namespace Abp.Configuration
             }
 
             //Not defined, get default value
+            //未定义，返回摩恩之
             return settingDefinition.DefaultValue;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <param name="value"></param>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         private async Task<SettingInfo> InsertOrUpdateOrDeleteSettingValueAsync(string name, string value, int? tenantId, long? userId)
         {
             if (tenantId.HasValue && userId.HasValue)
@@ -413,10 +490,19 @@ namespace Abp.Configuration
 
         #region Nested classes
 
+        /// <summary>
+        /// 设置值对象
+        /// </summary>
         private class SettingValueObject : ISettingValue
         {
+            /// <summary>
+            /// 设置名称
+            /// </summary>
             public string Name { get; private set; }
 
+            /// <summary>
+            /// 设置值
+            /// </summary>
             public string Value { get; private set; }
 
             public SettingValueObject(string name, string value)

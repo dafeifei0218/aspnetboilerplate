@@ -71,16 +71,17 @@ namespace Abp.Configuration
 
         /// <summary>
         /// Creates a new <see cref="SettingDefinition"/> object.
+        /// 构造函数
         /// </summary>
-        /// <param name="name">Unique name of the setting</param>
-        /// <param name="defaultValue">Default value of the setting</param>
-        /// <param name="displayName">Display name of the permission</param>
-        /// <param name="group">Group of this setting</param>
-        /// <param name="description">A brief description for this setting</param>
-        /// <param name="scopes">Scopes of this setting. Default value: <see cref="SettingScopes.Application"/>.</param>
-        /// <param name="isVisibleToClients">Can clients see this setting and it's value. Default: false</param>
-        /// <param name="isInherited">Is this setting inherited from parent scopes. Default: True.</param>
-        /// <param name="customData">Can be used to store a custom object related to this setting</param>
+        /// <param name="name">Unique name of the setting 设置名称</param>
+        /// <param name="defaultValue">Default value of the setting 默认设置值</param>
+        /// <param name="displayName">Display name of the permission 显示名称</param>
+        /// <param name="group">Group of this setting 设置组</param>
+        /// <param name="description">A brief description for this setting 设置描述</param>
+        /// <param name="scopes">Scopes of this setting. Default value: <see cref="SettingScopes.Application"/>. 设置作用域</param>
+        /// <param name="isVisibleToClients">Can clients see this setting and it's value. Default: false 客户端是否可见，默认值：false</param>
+        /// <param name="isInherited">Is this setting inherited from parent scopes. Default: True. 是否从父域继承，默认值：tue</param>
+        /// <param name="customData">Can be used to store a custom object related to this setting 自定义数据</param>
         public SettingDefinition(
             string name, 
             string defaultValue, 
