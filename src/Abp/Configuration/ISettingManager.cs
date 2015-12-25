@@ -31,7 +31,7 @@ namespace Abp.Configuration
         /// <summary>
         /// Gets current value of a setting for a tenant level.
         /// It gets the setting value, overwritten by given tenant.
-        /// 获取租户级别的这只的当前值-异步，
+        /// 获取租户级别的设置的当前值-异步，
         /// 获取设置值，重写租户
         /// </summary>
         /// <param name="name">Unique name of the setting 设置名称</param>
@@ -54,7 +54,7 @@ namespace Abp.Configuration
         /// <summary>
         /// Gets current values of all settings.
         /// It gets all setting values, overwritten by application, current tenant (if exists) and the current user (if exists).
-        /// 获取全部设置值-异步，
+        /// 获取全部的设置值-异步，
         /// 获取全部设置值，覆盖的应用，当前的租户（如果存在）和当前用户（如果存在）
         /// </summary>
         /// <returns>List of setting values 设置列表</returns>

@@ -80,10 +80,10 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取租户级别的设置的当前值-异步
         /// </summary>
         /// <param name="name">设置名称</param>
-        /// <param name="tenantId"></param>
+        /// <param name="tenantId">租户Id</param>
         /// <returns></returns>
         public Task<string> GetSettingValueForTenantAsync(string name, int tenantId)
         {
@@ -91,11 +91,11 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取用户级别的设置值-异步
         /// </summary>
         /// <param name="name">设置名称</param>
-        /// <param name="tenantId"></param>
-        /// <param name="userId"></param>
+        /// <param name="tenantId">租户Id<</param>
+        /// <param name="userId">用户Id</param>
         /// <returns></returns>
         public Task<string> GetSettingValueForUserAsync(string name, int? tenantId, long userId)
         {
@@ -103,7 +103,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取全部设置值-异步，
         /// </summary>
         /// <returns></returns>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesAsync()
@@ -112,7 +112,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取全部的设置值-异步
         /// </summary>
         /// <param name="scopes">设置范围</param>
         /// <inheritdoc/>
@@ -122,6 +122,7 @@ namespace Abp.Configuration
             var settingValues = new Dictionary<string, ISettingValue>();
 
             //Fill all setting with default values.
+            //用默认值填充所有设置
             foreach (var setting in _settingDefinitionManager.GetAllSettingDefinitions())
             {
                 settingDefinitions[setting.Name] = setting;
@@ -129,6 +130,7 @@ namespace Abp.Configuration
             }
 
             //Overwrite application settings
+            //重写应用程序设置
             if (scopes.HasFlag(SettingScopes.Application))
             {
                 foreach (var settingValue in await GetAllSettingValuesForApplicationAsync())
@@ -152,6 +154,7 @@ namespace Abp.Configuration
             }
 
             //Overwrite tenant settings
+            //重写租户设置
             if (scopes.HasFlag(SettingScopes.Tenant) && AbpSession.TenantId.HasValue)
             {
                 foreach (var settingValue in await GetAllSettingValuesForTenantAsync(AbpSession.TenantId.Value))
@@ -175,6 +178,7 @@ namespace Abp.Configuration
             }
 
             //Overwrite user settings
+            //重写用户设置
             if (scopes.HasFlag(SettingScopes.User) && AbpSession.UserId.HasValue)
             {
                 foreach (var settingValue in await GetAllSettingValuesForUserAsync(AbpSession.UserId.Value))
@@ -191,7 +195,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取应用程序的全部设置值列表-异步
         /// </summary>
         /// <inheritdoc/>
         public async Task<IReadOnlyList<ISettingValue>> GetAllSettingValuesForApplicationAsync()
@@ -202,7 +206,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取给定租户的全部设置值列表-异步，
         /// </summary>
         /// <param name="tenantId">租户Id</param>
         /// <inheritdoc/>
@@ -214,7 +218,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 获取给定用户的全部设置值列表-异步
         /// </summary>
         /// <param name="userId">用户Id</param>
         /// <inheritdoc/>
@@ -226,8 +230,10 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 应用程序级别更改设置值
         /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <param name="value">设置值</param>
         /// <inheritdoc/>
         [UnitOfWork]
         public virtual async Task ChangeSettingForApplicationAsync(string name, string value)
@@ -237,8 +243,11 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 租户更改设置值
         /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="name">设置名称</param>
+        /// <param name="value">设置值</param>
         /// <inheritdoc/>
         [UnitOfWork]
         public virtual async Task ChangeSettingForTenantAsync(int tenantId, string name, string value)
@@ -247,6 +256,12 @@ namespace Abp.Configuration
             await _tenantSettingCache.RemoveAsync(tenantId);
         }
 
+        /// <summary> 
+        /// 用户更改设置值
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <param name="name">设置名称</param>
+        /// <param name="value">设置值</param>
         /// <inheritdoc/>
         [UnitOfWork]
         public virtual async Task ChangeSettingForUserAsync(long userId, string name, string value)
@@ -260,7 +275,7 @@ namespace Abp.Configuration
         #region Private methods
 
         /// <summary>
-        /// 获取程序集设置值
+        /// 获取程序集设置值-异步
         /// </summary>
         /// <param name="name">设置名称</param>
         /// <param name="tenantId">租户Id</param>
@@ -319,7 +334,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 插入或更新或删除设置值-异步
         /// </summary>
         /// <param name="name">设置名称</param>
         /// <param name="value"></param>
@@ -330,6 +345,7 @@ namespace Abp.Configuration
         {
             if (tenantId.HasValue && userId.HasValue)
             {
+                //租户Id和用户Id不能同时设置
                 throw new ApplicationException("Both of tenantId and userId can not be set!");
             }
 
@@ -337,6 +353,7 @@ namespace Abp.Configuration
             var settingValue = await SettingStore.GetSettingOrNullAsync(tenantId, userId, name);
 
             //Determine defaultValue
+            //确定默认值
             var defaultValue = settingDefinition.DefaultValue;
 
             if (settingDefinition.IsInherited)
@@ -401,21 +418,42 @@ namespace Abp.Configuration
             return settingValue;
         }
 
+        /// <summary>
+        /// 获取给定设置名称的应用程序的设置值-异步
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         private async Task<SettingInfo> GetSettingValueForApplicationOrNullAsync(string name)
         {
             return (await GetApplicationSettingsAsync()).GetOrDefault(name);
         }
 
+        /// <summary>
+        /// 获取租户的设置值-异步
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         private async Task<SettingInfo> GetSettingValueForTenantOrNullAsync(int tenantId, string name)
         {
             return (await GetReadOnlyTenantSettings(tenantId)).GetOrDefault(name);
         }
 
+        /// <summary>
+        /// 获取用户的设置值-异步
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         private async Task<SettingInfo> GetSettingValueForUserOrNullAsync(long userId, string name)
         {
             return (await GetReadOnlyUserSettings(userId)).GetOrDefault(name);
         }
 
+        /// <summary>
+        /// 获取应用程序设置-异步
+        /// </summary>
+        /// <returns></returns>
         private async Task<Dictionary<string, SettingInfo>> GetApplicationSettingsAsync()
         {
             return await _applicationSettingCache.GetAsync(ApplicationSettingsCacheKey, async () =>
@@ -432,6 +470,11 @@ namespace Abp.Configuration
             });
         }
 
+        /// <summary>
+        /// 获取给定租户的设置
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <returns></returns>
         private async Task<ImmutableDictionary<string, SettingInfo>> GetReadOnlyTenantSettings(int tenantId)
         {
             var cachedDictionary = await GetTenantSettingsFromCache(tenantId);
@@ -441,6 +484,11 @@ namespace Abp.Configuration
             }
         }
 
+        /// <summary>
+        /// 获取给定用户的设置
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         private async Task<ImmutableDictionary<string, SettingInfo>> GetReadOnlyUserSettings(long userId)
         {
             var cachedDictionary = await GetUserSettingsFromCache(userId);
@@ -450,6 +498,11 @@ namespace Abp.Configuration
             }
         }
 
+        /// <summary>
+        /// 获取给定租户的设置
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <returns></returns>
         private async Task<Dictionary<string, SettingInfo>> GetTenantSettingsFromCache(int tenantId)
         {
             return await _tenantSettingCache.GetAsync(
@@ -468,6 +521,11 @@ namespace Abp.Configuration
                 });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         private async Task<Dictionary<string, SettingInfo>> GetUserSettingsFromCache(long userId)
         {
             return await _userSettingCache.GetAsync(
@@ -505,6 +563,11 @@ namespace Abp.Configuration
             /// </summary>
             public string Value { get; private set; }
 
+            /// <summary>
+            /// 设置值对象
+            /// </summary>
+            /// <param name="name">设置名称</param>
+            /// <param name="value">设置值</param>
             public SettingValueObject(string name, string value)
             {
                 Value = value;
