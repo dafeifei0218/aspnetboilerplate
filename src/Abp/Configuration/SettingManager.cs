@@ -359,6 +359,7 @@ namespace Abp.Configuration
             if (settingDefinition.IsInherited)
             {
                 //For Tenant and User, Application's value overrides Setting Definition's default value.
+                //租户和用户，应用程序的值会重写设置定义的默认值。
                 if (tenantId.HasValue || userId.HasValue)
                 {
                     var applicationValue = await GetSettingValueForApplicationOrNullAsync(name);
@@ -369,6 +370,7 @@ namespace Abp.Configuration
                 }
 
                 //For User, Tenants's value overrides Application's default value.
+                //用户、租户的值会重写应用程序的默认值。
                 if (userId.HasValue && AbpSession.TenantId.HasValue)
                 {
                     var tenantValue = await GetSettingValueForTenantOrNullAsync(AbpSession.TenantId.Value, name);
@@ -380,6 +382,7 @@ namespace Abp.Configuration
             }
 
             //No need to store on database if the value is the default value
+            //如果值是默认值，则不需要再数据库中存储
             if (value == defaultValue)
             {
                 if (settingValue != null)
@@ -391,6 +394,7 @@ namespace Abp.Configuration
             }
 
             //If it's not default value and not stored on database, then insert it
+            //如果不是默认值并且不存储在数据库中，然后插入它
             if (settingValue == null)
             {
                 settingValue = new SettingInfo
@@ -406,12 +410,14 @@ namespace Abp.Configuration
             }
 
             //It's same value in database, no need to update
+            //在数据库中同样的值，不需要更新
             if (settingValue.Value == value)
             {
                 return settingValue;
             }
 
             //Update the setting on database.
+            //更新数据库的设置。
             settingValue.Value = value;
             await SettingStore.UpdateAsync(settingValue);
 
@@ -522,7 +528,7 @@ namespace Abp.Configuration
         }
 
         /// <summary>
-        /// 
+        /// 从缓存中获取用户设置
         /// </summary>
         /// <param name="userId">用户Id</param>
         /// <returns></returns>
