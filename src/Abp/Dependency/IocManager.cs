@@ -9,24 +9,31 @@ namespace Abp.Dependency
 {
     /// <summary>
     /// This class is used to directly perform dependency injection tasks.
+    /// IOC控制反转管理类
     /// </summary>
     public class IocManager : IIocManager
     {
         /// <summary>
         /// The Singleton instance.
+        /// 单例实例
         /// </summary>
         public static IocManager Instance { get; private set; }
 
         /// <summary>
         /// Reference to the Castle Windsor Container.
+        /// IOC容器
         /// </summary>
         public IWindsorContainer IocContainer { get; private set; }
 
         /// <summary>
         /// List of all registered conventional registrars.
+        /// 常规依赖注册列表
         /// </summary>
         private readonly List<IConventionalDependencyRegistrar> _conventionalRegistrars;
 
+        /// <summary>
+        /// 
+        /// </summary>
         static IocManager()
         {
             Instance = new IocManager();
@@ -36,6 +43,7 @@ namespace Abp.Dependency
         /// Creates a new <see cref="IocManager"/> object.
         /// Normally, you don't directly instantiate an <see cref="IocManager"/>.
         /// This may be useful for test purposes.
+        /// 构造函数
         /// </summary>
         public IocManager()
         {
@@ -50,8 +58,9 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Adds a dependency registrar for conventional registration.
+        /// 添加常规注册
         /// </summary>
-        /// <param name="registrar">dependency registrar</param>
+        /// <param name="registrar">dependency registrar 常规依赖注册</param>
         public void AddConventionalRegistrar(IConventionalDependencyRegistrar registrar)
         {
             _conventionalRegistrars.Add(registrar);
@@ -59,8 +68,10 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Registers types of given assembly by all conventional registrars. See <see cref="AddConventionalRegistrar"/> method.
+        /// 根据常规方式注册程序集，
+        /// 通过所有常规的注册，指定的组件类型。
         /// </summary>
-        /// <param name="assembly">Assembly to register</param>
+        /// <param name="assembly">Assembly to register 注册程序集</param>
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
             RegisterAssemblyByConvention(assembly, new ConventionalRegistrationConfig());
@@ -68,8 +79,9 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Registers types of given assembly by all conventional registrars. See <see cref="AddConventionalRegistrar"/> method.
+        /// 根据常规方式注册程序集
         /// </summary>
-        /// <param name="assembly">Assembly to register</param>
+        /// <param name="assembly">Assembly to register 注册程序集</param>
         /// <param name="config">Additional configuration</param>
         public void RegisterAssemblyByConvention(Assembly assembly, ConventionalRegistrationConfig config)
         {
@@ -88,6 +100,7 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Registers a type as self registration.
+        /// 
         /// </summary>
         /// <typeparam name="TType">Type of the class</typeparam>
         /// <param name="lifeStyle">Lifestyle of the objects of this type</param>
