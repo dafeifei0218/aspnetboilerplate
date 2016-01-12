@@ -12,13 +12,14 @@ namespace Abp.Dependency
     {
         /// <summary>
         /// Gets the instance.
+        /// 实例，获取实例
         /// </summary>
         /// <value>
         /// The instance.
         /// </value>
         public static T Instance { get { return LazyInstance.Value; } }
         /// <summary>
-        /// 
+        /// 懒加载的实例
         /// </summary>
         private static readonly Lazy<T> LazyInstance;
 
