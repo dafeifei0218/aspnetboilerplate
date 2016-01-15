@@ -54,7 +54,7 @@ namespace Abp.Dependency
         /// Releases a pre-resolved object. See Resolve methods.
         /// 释放预处理对象，见Resolve方法
         /// </summary>
-        /// <param name="obj">Object to be released </param>
+        /// <param name="obj">Object to be released 发布对象</param>
         void Release(object obj);
 
         /// <summary>

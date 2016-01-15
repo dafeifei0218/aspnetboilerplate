@@ -6,6 +6,7 @@ namespace Abp.Domain.Uow
 {
     /// <summary>
     /// This interceptor is used to manage database connection and transactions.
+    /// 工作单元拦截器
     /// </summary>
     internal class UnitOfWorkInterceptor : IInterceptor
     {
@@ -18,8 +19,9 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Intercepts a method.
+        /// 拦截方法
         /// </summary>
-        /// <param name="invocation">Method invocation arguments</param>
+        /// <param name="invocation">Method invocation arguments </param>
         public void Intercept(IInvocation invocation)
         {
             if (_unitOfWorkManager.Current != null)

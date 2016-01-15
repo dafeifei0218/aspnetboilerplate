@@ -11,6 +11,7 @@ namespace Abp.Domain.Uow
 {
     /// <summary>
     /// Base for all Unit Of Work classes.
+    /// 工作单元基类
     /// </summary>
     public abstract class UnitOfWorkBase : IUnitOfWork
     {
@@ -24,32 +25,53 @@ namespace Abp.Domain.Uow
         /// </summary>
         public IUnitOfWork Outer { get; set; }
 
+        /// <summary>
+        /// 完成
+        /// </summary>
         /// <inheritdoc/>
         public event EventHandler Completed;
 
+        /// <summary>
+        /// 失败
+        /// </summary>
         /// <inheritdoc/>
         public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
 
+        /// <summary>
+        /// 处理
+        /// </summary>
         /// <inheritdoc/>
         public event EventHandler Disposed;
 
+        /// <summary>
+        /// 工作单元选项
+        /// </summary>
         /// <inheritdoc/>
         public UnitOfWorkOptions Options { get; private set; }
 
+        /// <summary>
+        /// 筛选器集合
+        /// </summary>
         /// <inheritdoc/>
         public IReadOnlyList<DataFilterConfiguration> Filters
         {
             get { return _filters.ToImmutableList(); }
         }
+
+        /// <summary>
+        /// 筛选器
+        /// </summary>
         private readonly List<DataFilterConfiguration> _filters;
 
         /// <summary>
         /// Gets default UOW options.
+        /// 获取工作单元选项
         /// </summary>
         protected IUnitOfWorkDefaultOptions DefaultOptions { get; private set; }
 
         /// <summary>
         /// Gets a value indicates that this unit of work is disposed or not.
+        /// 
         /// </summary>
         public bool IsDisposed { get; private set; }
 
@@ -80,6 +102,7 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         protected UnitOfWorkBase(IUnitOfWorkDefaultOptions defaultOptions)
         {
@@ -112,12 +135,21 @@ namespace Abp.Domain.Uow
             BeginUow();
         }
 
+        /// <summary>
+        /// 保存变更
+        /// </summary>
         /// <inheritdoc/>
         public abstract void SaveChanges();
 
+        /// <summary>
+        /// 保存变更-异步
+        /// </summary>
         /// <inheritdoc/>
         public abstract Task SaveChangesAsync();
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public IDisposable DisableFilter(params string[] filterNames)
         {
@@ -140,6 +172,9 @@ namespace Abp.Domain.Uow
             return new DisposeAction(() => EnableFilter(disabledFilters.ToArray()));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public IDisposable EnableFilter(params string[] filterNames)
         {
@@ -162,12 +197,18 @@ namespace Abp.Domain.Uow
             return new DisposeAction(() => DisableFilter(enabledFilters.ToArray()));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public bool IsFilterEnabled(string filterName)
         {
             return GetFilter(filterName).IsEnabled;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public IDisposable SetFilterParameter(string filterName, string parameterName, object value)
         {
@@ -199,6 +240,9 @@ namespace Abp.Domain.Uow
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public void Complete()
         {
@@ -218,6 +262,9 @@ namespace Abp.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public async Task CompleteAsync()
         {
@@ -235,6 +282,9 @@ namespace Abp.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public void Dispose()
         {
@@ -343,6 +393,9 @@ namespace Abp.Domain.Uow
             _isBeginCalledBefore = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void PreventMultipleComplete()
         {
             if (_isCompleteCalledBefore)
@@ -353,6 +406,9 @@ namespace Abp.Domain.Uow
             _isCompleteCalledBefore = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void SetFilters(List<DataFilterConfiguration> filterOverrides)
         {
             for (var i = 0; i < _filters.Count; i++)
@@ -370,6 +426,9 @@ namespace Abp.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ChangeFilterIsEnabledIfNotOverrided(List<DataFilterConfiguration> filterOverrides, string filterName, bool isEnabled)
         {
             if (filterOverrides.Any(f => f.FilterName == filterName))
@@ -391,6 +450,9 @@ namespace Abp.Domain.Uow
             _filters[index] = new DataFilterConfiguration(filterName, isEnabled);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private DataFilterConfiguration GetFilter(string filterName)
         {
             var filter = _filters.FirstOrDefault(f => f.FilterName == filterName);
@@ -402,6 +464,9 @@ namespace Abp.Domain.Uow
             return filter;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private int GetFilterIndex(string filterName)
         {
             var filterIndex = _filters.FindIndex(f => f.FilterName == filterName);

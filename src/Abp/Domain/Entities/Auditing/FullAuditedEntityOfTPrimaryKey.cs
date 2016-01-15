@@ -18,13 +18,13 @@ namespace Abp.Domain.Entities.Auditing
         
         /// <summary>
         /// Which user deleted this entity?
-        /// 删除实体的用户Id
+        /// 该实体的删除用户Id，哪个用户删除了该实体
         /// </summary>
         public virtual long? DeleterUserId { get; set; }
         
         /// <summary>
         /// Deletion time of this entity.
-        /// 删除实体的时间
+        /// 该实体的删除时间
         /// </summary>
         public virtual DateTime? DeletionTime { get; set; }
     }

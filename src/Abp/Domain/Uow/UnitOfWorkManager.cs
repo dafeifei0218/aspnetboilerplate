@@ -6,6 +6,7 @@ namespace Abp.Domain.Uow
 {
     /// <summary>
     /// Unit of work manager.
+    /// 工作单元管理类
     /// </summary>
     internal class UnitOfWorkManager : IUnitOfWorkManager, ITransientDependency
     {
@@ -13,11 +14,20 @@ namespace Abp.Domain.Uow
         private readonly ICurrentUnitOfWorkProvider _currentUnitOfWorkProvider;
         private readonly IUnitOfWorkDefaultOptions _defaultOptions;
 
+        /// <summary>
+        /// 当前工作单元
+        /// </summary>
         public IActiveUnitOfWork Current
         {
             get { return _currentUnitOfWorkProvider.Current; }
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocResolver">IOC控制反转解析器</param>
+        /// <param name="currentUnitOfWorkProvider"></param>
+        /// <param name="defaultOptions"></param>
         public UnitOfWorkManager(
             IIocResolver iocResolver,
             ICurrentUnitOfWorkProvider currentUnitOfWorkProvider,
@@ -28,16 +38,30 @@ namespace Abp.Domain.Uow
             _defaultOptions = defaultOptions;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin()
         {
             return Begin(new UnitOfWorkOptions());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scope"></param>
+        /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin(TransactionScopeOption scope)
         {
             return Begin(new UnitOfWorkOptions { Scope = scope });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin(UnitOfWorkOptions options)
         {
             //为未赋值的参数设置默认值

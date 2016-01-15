@@ -9,21 +9,35 @@ namespace Abp.Domain.Uow
     /// <summary>
     /// CallContext implementation of <see cref="ICurrentUnitOfWorkProvider"/>. 
     /// This is the default implementation.
+    /// 调用上下文当前工作单元提供者
     /// </summary>
     public class CallContextCurrentUnitOfWorkProvider : ICurrentUnitOfWorkProvider, ITransientDependency
     {
+        /// <summary>
+        /// 日志
+        /// </summary>
         public ILogger Logger { get; set; }
 
+        //上下文键
         private const string ContextKey = "Abp.UnitOfWork.Current";
 
         //TODO: Clear periodically..?
+        //定期清理？
         private static readonly ConcurrentDictionary<string, IUnitOfWork> UnitOfWorkDictionary = new ConcurrentDictionary<string, IUnitOfWork>();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CallContextCurrentUnitOfWorkProvider()
         {
             Logger = NullLogger.Instance;
         }
 
+        /// <summary>
+        /// 获取当前工作单元
+        /// </summary>
+        /// <param name="logger">日志</param>
+        /// <returns></returns>
         private static IUnitOfWork GetCurrentUow(ILogger logger)
         {
             //获取当前工作单元key
@@ -54,6 +68,11 @@ namespace Abp.Domain.Uow
             return unitOfWork;
         }
 
+        /// <summary>
+        /// 设置当前工作单元
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <param name="logger">日志</param>
         private static void SetCurrentUow(IUnitOfWork value, ILogger logger)
         {
             if (value == null)
@@ -96,6 +115,10 @@ namespace Abp.Domain.Uow
             CallContext.LogicalSetData(ContextKey, unitOfWorkKey);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
         private static void ExitFromCurrentUowScope(ILogger logger)
         {
             var unitOfWorkKey = CallContext.LogicalGetData(ContextKey) as string;
@@ -134,7 +157,10 @@ namespace Abp.Domain.Uow
             CallContext.LogicalSetData(ContextKey, outerUnitOfWorkKey);
         }
 
-        //DoNotWire是为了不让Ioc进行属性注入
+        /// <summary>
+        /// 当前工作单元，
+        /// DoNotWire是为了不让Ioc进行属性注入
+        /// </summary>
         /// <inheritdoc />
         [DoNotWire]
         public IUnitOfWork Current

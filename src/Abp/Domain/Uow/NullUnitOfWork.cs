@@ -40,6 +40,10 @@ namespace Abp.Domain.Uow
 
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="defaultOptions">工作单元默认选项</param>
         public NullUnitOfWork(IUnitOfWorkDefaultOptions defaultOptions)
             : base(defaultOptions)
         {

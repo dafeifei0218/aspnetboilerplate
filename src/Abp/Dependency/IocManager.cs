@@ -173,6 +173,7 @@ namespace Abp.Dependency
         /// Gets an object from IOC container.
         /// Returning object must be Released (see <see cref="IIocResolver.Release"/>) after usage.
         /// 从容器获取对象。
+        /// 返回对象必须被释放（见IIocResolver.Release）
         /// </summary> 
         /// <typeparam name="T">Type of the object to get 获取对象类型</typeparam>
         /// <returns>The instance object</returns>
@@ -185,6 +186,7 @@ namespace Abp.Dependency
         /// Gets an object from IOC container.
         /// Returning object must be Released (see <see cref="IIocResolver.Release"/>) after usage.
         /// 从容器获取对象。
+        /// 返回对象必须被释放（见IIocResolver.Release）
         /// </summary> 
         /// <typeparam name="T">Type of the object to get 获取对象类型</typeparam>
         /// <param name="argumentsAsAnonymousType">Constructor arguments</param>
@@ -198,9 +200,10 @@ namespace Abp.Dependency
         /// Gets an object from IOC container.
         /// Returning object must be Released (see <see cref="IIocResolver.Release"/>) after usage.
         /// 从容器获取对象。
+        /// 返回对象必须被释放（见IIocResolver.Release）
         /// </summary> 
-        /// <param name="type">Type of the object to get</param>
-        /// <returns>The instance object</returns>
+        /// <param name="type">Type of the object to get 获取对象类型</param>
+        /// <returns>The instance object 实例对象</returns>
         public object Resolve(Type type)
         {
             return IocContainer.Resolve(type);
@@ -210,10 +213,11 @@ namespace Abp.Dependency
         /// Gets an object from IOC container.
         /// Returning object must be Released (see <see cref="IIocResolver.Release"/>) after usage.
         /// 从容器获取对象。
+        /// 返回对象必须被释放（见IIocResolver.Release）
         /// </summary> 
-        /// <param name="type">Type of the object to get</param>
-        /// <param name="argumentsAsAnonymousType">Constructor arguments</param>
-        /// <returns>The instance object</returns>
+        /// <param name="type">Type of the object to get 获取对象类型</param>
+        /// <param name="argumentsAsAnonymousType">Constructor arguments 构造函数参数</param>
+        /// <returns>The instance object 实例对象</returns>
         public object Resolve(Type type, object argumentsAsAnonymousType)
         {
             return IocContainer.Resolve(type, argumentsAsAnonymousType);

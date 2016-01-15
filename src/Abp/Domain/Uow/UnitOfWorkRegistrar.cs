@@ -8,6 +8,7 @@ namespace Abp.Domain.Uow
 {
     /// <summary>
     /// This class is used to register interceptor for needed classes for Unit Of Work mechanism.
+    /// 工作单元注册类
     /// </summary>
     internal static class UnitOfWorkRegistrar
     {
@@ -25,7 +26,7 @@ namespace Abp.Domain.Uow
         /// <summary>
         /// 拦截注册事件
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="key">键</param>
         /// <param name="handler"></param>
         private static void ComponentRegistered(string key, IHandler handler)
         {

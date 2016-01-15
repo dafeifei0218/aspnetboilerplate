@@ -19,8 +19,7 @@ namespace Abp.Domain.Uow
         /// Begins a new unit of work.
         /// 开始工作单元
         /// </summary>
-        /// <returns>A handle to be able to complete the unit of work
-        /// 工作单元完成操作</returns>
+        /// <returns>A handle to be able to complete the unit of work 工作单元完成操作</returns>
         IUnitOfWorkCompleteHandle Begin();
 
         /// <summary>
@@ -28,8 +27,7 @@ namespace Abp.Domain.Uow
         /// 开始工作单元
         /// </summary>
         /// <param name="scope">事务范围</param>
-        /// <returns>A handle to be able to complete the unit of work
-        /// 工作单元完成操作</returns>
+        /// <returns>A handle to be able to complete the unit of work 工作单元完成操作</returns>
         IUnitOfWorkCompleteHandle Begin(TransactionScopeOption scope);
 
         /// <summary>
@@ -37,8 +35,7 @@ namespace Abp.Domain.Uow
         /// 开始工作单元
         /// </summary>
         /// <param name="options">工作单元选项</param>
-        /// <returns>A handle to be able to complete the unit of work
-        /// 工作单元完成操作</returns>
+        /// <returns>A handle to be able to complete the unit of work 工作单元完成操作</returns>
         IUnitOfWorkCompleteHandle Begin(UnitOfWorkOptions options);
     }
 }
