@@ -26,8 +26,8 @@ namespace Abp.Domain.Uow
         /// 构造函数
         /// </summary>
         /// <param name="iocResolver">IOC控制反转解析器</param>
-        /// <param name="currentUnitOfWorkProvider"></param>
-        /// <param name="defaultOptions"></param>
+        /// <param name="currentUnitOfWorkProvider">当前工作单元提供者</param>
+        /// <param name="defaultOptions">工作单元默认选项</param>
         public UnitOfWorkManager(
             IIocResolver iocResolver,
             ICurrentUnitOfWorkProvider currentUnitOfWorkProvider,
@@ -39,7 +39,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 开始工作单元
         /// </summary>
         /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin()
@@ -48,9 +48,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 开始工作单元
         /// </summary>
-        /// <param name="scope"></param>
+        /// <param name="scope">事务范围</param>
         /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin(TransactionScopeOption scope)
         {
@@ -58,9 +58,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 开始工作单元
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">工作单元选项</param>
         /// <returns></returns>
         public IUnitOfWorkCompleteHandle Begin(UnitOfWorkOptions options)
         {

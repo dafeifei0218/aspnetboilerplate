@@ -12,6 +12,10 @@ namespace Abp.Domain.Uow
     {
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="unitOfWorkManager">工作单元管理类</param>
         public UnitOfWorkInterceptor(IUnitOfWorkManager unitOfWorkManager)
         {
             _unitOfWorkManager = unitOfWorkManager;
@@ -47,6 +51,11 @@ namespace Abp.Domain.Uow
             PerformUow(invocation, unitOfWorkAttr.CreateOptions());
         }
 
+        /// <summary>
+        /// 执行工作单元
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <param name="options">工作单元选项</param>
         private void PerformUow(IInvocation invocation, UnitOfWorkOptions options)
         {
             if (AsyncHelper.IsAsyncMethod(invocation.Method))
@@ -59,6 +68,11 @@ namespace Abp.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 同步执行工作单元
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <param name="options">工作单元选项</param>
         private void PerformSyncUow(IInvocation invocation, UnitOfWorkOptions options)
         {
             using (var uow = _unitOfWorkManager.Begin(options))
@@ -68,6 +82,11 @@ namespace Abp.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 异步执行工作单元
+        /// </summary>
+        /// <param name="invocation">调用</param>
+        /// <param name="options">工作单元选项</param>
         private void PerformAsyncUow(IInvocation invocation, UnitOfWorkOptions options)
         {
             var uow = _unitOfWorkManager.Begin(options);

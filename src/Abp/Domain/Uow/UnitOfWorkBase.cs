@@ -71,32 +71,37 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Gets a value indicates that this unit of work is disposed or not.
-        /// 
+        /// 是否释放，获取一个值，该值指示该工作单元是否释放
         /// </summary>
         public bool IsDisposed { get; private set; }
 
         /// <summary>
         /// Reference to current ABP session.
+        /// Abp会话
         /// </summary>
         public IAbpSession AbpSession { private get; set; }
 
         /// <summary>
         /// Is <see cref="Begin"/> method called before?
+        /// 是否开始之前
         /// </summary>
         private bool _isBeginCalledBefore;
 
         /// <summary>
         /// Is <see cref="Complete"/> method called before?
+        /// 是否完成之前
         /// </summary>
         private bool _isCompleteCalledBefore;
 
         /// <summary>
         /// Is this unit of work successfully completed.
+        /// 成功
         /// </summary>
         private bool _succeed;
 
         /// <summary>
         /// A reference to the exception if this unit of work failed.
+        /// 异常
         /// </summary>
         private Exception _exception;
 
@@ -148,8 +153,9 @@ namespace Abp.Domain.Uow
         public abstract Task SaveChangesAsync();
 
         /// <summary>
-        /// 
+        /// 禁用筛选器
         /// </summary>
+        /// <param name="filterNames">过滤器名称集合</param>
         /// <inheritdoc/>
         public IDisposable DisableFilter(params string[] filterNames)
         {
@@ -173,8 +179,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 启用过滤器
         /// </summary>
+        /// <param name="filterNames">过滤器名称集合</param>
         /// <inheritdoc/>
         public IDisposable EnableFilter(params string[] filterNames)
         {
@@ -198,8 +205,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 是否启用过滤器
         /// </summary>
+        /// <param name="filterName">过滤器名称</param>
         /// <inheritdoc/>
         public bool IsFilterEnabled(string filterName)
         {
@@ -207,8 +215,11 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 设置过滤器参数
         /// </summary>
+        /// <param name="filterName">过滤器名称</param>
+        /// <param name="parameterName">参数名称</param>
+        /// <param name="value">值</param>
         /// <inheritdoc/>
         public IDisposable SetFilterParameter(string filterName, string parameterName, object value)
         {
@@ -241,7 +252,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 成功
         /// </summary>
         /// <inheritdoc/>
         public void Complete()
@@ -263,7 +274,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 成功-异步
         /// </summary>
         /// <inheritdoc/>
         public async Task CompleteAsync()
@@ -283,7 +294,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 释放
         /// </summary>
         /// <inheritdoc/>
         public void Dispose()
@@ -306,21 +317,25 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Should be implemented by derived classes to start UOW.
+        /// 开始工作单元
         /// </summary>
         protected abstract void BeginUow();
 
         /// <summary>
         /// Should be implemented by derived classes to complete UOW.
+        /// 完成工作单元
         /// </summary>
         protected abstract void CompleteUow();
 
         /// <summary>
         /// Should be implemented by derived classes to complete UOW.
+        /// 异步完成工作单元
         /// </summary>
         protected abstract Task CompleteUowAsync();
 
         /// <summary>
         /// Should be implemented by derived classes to dispose UOW.
+        /// 释放工作单元
         /// </summary>
         protected abstract void DisposeUow();
 
@@ -328,8 +343,9 @@ namespace Abp.Domain.Uow
         /// Concrete Unit of work classes should implement this
         /// method in order to disable a filter.
         /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        /// 应用禁用过滤器
         /// </summary>
-        /// <param name="filterName">Filter name</param>
+        /// <param name="filterName">Filter name 过滤器名称</param>
         protected virtual void ApplyDisableFilter(string filterName)
         {
             throw new NotImplementedException("DisableFilter is not implemented for " + GetType().FullName);
@@ -339,8 +355,9 @@ namespace Abp.Domain.Uow
         /// Concrete Unit of work classes should implement this
         /// method in order to enable a filter.
         /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        /// 应用启用过滤器
         /// </summary>
-        /// <param name="filterName">Filter name</param>
+        /// <param name="filterName">Filter name 过滤器名称</param>
         protected virtual void ApplyEnableFilter(string filterName)
         {
             throw new NotImplementedException("EnableFilter is not implemented for " + GetType().FullName);
@@ -351,8 +368,11 @@ namespace Abp.Domain.Uow
         /// Concrete Unit of work classes should implement this
         /// method in order to set a parameter's value.
         /// Should not call base method since it throws <see cref="NotImplementedException"/>.
+        /// 应用过滤器参数值
         /// </summary>
-        /// <param name="filterName">Filter name</param>
+        /// <param name="filterName">Filter name 过滤器名称</param>
+        /// <param name="parameterName">参数名称</param>
+        /// <param name="value">值</param>
         protected virtual void ApplyFilterParameterValue(string filterName, string parameterName, object value)
         {
             throw new NotImplementedException("SetFilterParameterValue is not implemented for " + GetType().FullName);
@@ -360,6 +380,7 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Called to trigger <see cref="Completed"/> event.
+        /// 调用触发完成事件
         /// </summary>
         protected virtual void OnCompleted()
         {
@@ -368,8 +389,9 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Called to trigger <see cref="Failed"/> event.
+        /// 调用触发失败事件
         /// </summary>
-        /// <param name="exception">Exception that cause failure</param>
+        /// <param name="exception">Exception that cause failure 异常</param>
         protected virtual void OnFailed(Exception exception)
         {
             Failed.InvokeSafely(this, new UnitOfWorkFailedEventArgs(exception));
@@ -377,16 +399,21 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Called to trigger <see cref="Disposed"/> event.
+        /// 调用触发释放事件
         /// </summary>
         protected virtual void OnDisposed()
         {
             Disposed.InvokeSafely(this);
         }
 
+        /// <summary>
+        /// 防止多次开始工作单元
+        /// </summary>
         private void PreventMultipleBegin()
         {
             if (_isBeginCalledBefore)
             {
+                //这一工作单元已经开始。不能调用启动方法不止一次。
                 throw new AbpException("This unit of work has started before. Can not call Start method more than once.");
             }
 
@@ -394,7 +421,7 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 防止多次完成工作单元
         /// </summary>
         private void PreventMultipleComplete()
         {
@@ -407,8 +434,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 设置过滤器
         /// </summary>
+        /// <param name="filterOverrides">数据过滤器配置</param>
         private void SetFilters(List<DataFilterConfiguration> filterOverrides)
         {
             for (var i = 0; i < _filters.Count; i++)
@@ -427,8 +455,11 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 如果没有重写，更改过滤器是否启用
         /// </summary>
+        /// <param name="filterOverrides">数据过滤器配置</param>
+        /// <param name="filterName">过滤器名称</param>
+        /// <param name="isEnabled">是否启用</param>
         private void ChangeFilterIsEnabledIfNotOverrided(List<DataFilterConfiguration> filterOverrides, string filterName, bool isEnabled)
         {
             if (filterOverrides.Any(f => f.FilterName == filterName))
@@ -451,8 +482,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 获取过滤器
         /// </summary>
+        /// <param name="filterName">过滤器名称</param>
         private DataFilterConfiguration GetFilter(string filterName)
         {
             var filter = _filters.FirstOrDefault(f => f.FilterName == filterName);
@@ -465,8 +497,9 @@ namespace Abp.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 获取过滤器索引
         /// </summary>
+        /// <param name="filterName">过滤器名称</param>
         private int GetFilterIndex(string filterName)
         {
             var filterIndex = _filters.FindIndex(f => f.FilterName == filterName);
@@ -477,7 +510,5 @@ namespace Abp.Domain.Uow
 
             return filterIndex;
         }
-
-
     }
 }
