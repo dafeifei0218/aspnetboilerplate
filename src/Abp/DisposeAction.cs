@@ -26,6 +26,9 @@ namespace Abp
             _action = action;
         }
 
+        /// <summary>
+        /// 释放
+        /// </summary>
         public void Dispose()
         {
             _action();
