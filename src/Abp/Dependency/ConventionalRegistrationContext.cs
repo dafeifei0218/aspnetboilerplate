@@ -26,6 +26,12 @@ namespace Abp.Dependency
         /// </summary>
         public ConventionalRegistrationConfig Config { get; private set; }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="assembly">程序集</param>
+        /// <param name="iocManager">IOC管理</param>
+        /// <param name="config">常规注册配置</param>
         internal ConventionalRegistrationContext(Assembly assembly, IIocManager iocManager, ConventionalRegistrationConfig config)
         {
             Assembly = assembly;

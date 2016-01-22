@@ -9,6 +9,10 @@ namespace Abp.Dependency
     /// </summary>
     public class BasicConventionalRegistrar : IConventionalDependencyRegistrar
     {
+        /// <summary>
+        /// 注册程序集
+        /// </summary>
+        /// <param name="context">常规注册上下文</param>
         public void RegisterAssembly(IConventionalRegistrationContext context)
         {
             //Transient

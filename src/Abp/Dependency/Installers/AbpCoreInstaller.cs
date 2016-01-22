@@ -17,6 +17,11 @@ namespace Abp.Dependency.Installers
     /// </summary>
     internal class AbpCoreInstaller : IWindsorInstaller
     {
+        /// <summary>
+        /// 安装，安装Abp的相关配置
+        /// </summary>
+        /// <param name="container">容器</param>
+        /// <param name="store">配置存储</param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(

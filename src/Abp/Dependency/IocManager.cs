@@ -32,7 +32,7 @@ namespace Abp.Dependency
         private readonly List<IConventionalDependencyRegistrar> _conventionalRegistrars;
 
         /// <summary>
-        /// 
+        /// ¹¹Ôìº¯Êý
         /// </summary>
         static IocManager()
         {
