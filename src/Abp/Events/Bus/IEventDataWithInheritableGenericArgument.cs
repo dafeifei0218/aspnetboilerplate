@@ -8,6 +8,7 @@ namespace Abp.Events.Bus
     /// Assume that Student inherits From Person. When trigger an EntityCreatedEventData{Student},
     /// EntityCreatedEventData{Person} is also triggered if EntityCreatedEventData implements
     /// this interface.
+    /// 
     /// </summary>
     public interface IEventDataWithInheritableGenericArgument
     {
