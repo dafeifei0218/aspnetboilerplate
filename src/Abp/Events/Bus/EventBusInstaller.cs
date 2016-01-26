@@ -11,6 +11,7 @@ namespace Abp.Events.Bus
 {
     /// <summary>
     /// Installs event bus system and registers all handlers automatically.
+    /// 事件总线注册类
     /// </summary>
     internal class EventBusInstaller : IWindsorInstaller
     {
@@ -18,12 +19,21 @@ namespace Abp.Events.Bus
         private readonly IEventBusConfiguration _eventBusConfiguration;
         private IEventBus _eventBus;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocResolver">IOC解析器</param>
         public EventBusInstaller(IIocResolver iocResolver)
         {
             _iocResolver = iocResolver;
             _eventBusConfiguration = iocResolver.Resolve<IEventBusConfiguration>();
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="container">容器</param>
+        /// <param name="store">配置存储</param>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             if (_eventBusConfiguration.UseDefaultEventBus)
@@ -44,6 +54,11 @@ namespace Abp.Events.Bus
             container.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
         }
 
+        /// <summary>
+        /// 内核组件注册
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="handler">处理程序</param>
         private void Kernel_ComponentRegistered(string key, IHandler handler)
         {
             /* This code checks if registering component implements any IEventHandler<TEventData> interface, if yes,

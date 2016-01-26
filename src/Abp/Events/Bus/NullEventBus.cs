@@ -8,15 +8,20 @@ namespace Abp.Events.Bus
 {
     /// <summary>
     /// An event bus that implements Null object pattern.
+    /// 空事件总线类，实现空对象模式的事件总线
     /// </summary>
     public sealed class NullEventBus : IEventBus
     {
         /// <summary>
         /// Gets single instance of <see cref="NullEventBus"/> class.
+        /// 单例实例，获取单例的空事件总线类
         /// </summary>
         public static NullEventBus Instance { get { return SingletonInstance; } }
         private static readonly NullEventBus SingletonInstance = new NullEventBus();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         private NullEventBus()
         {
         }

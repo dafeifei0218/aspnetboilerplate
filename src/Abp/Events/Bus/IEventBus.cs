@@ -28,7 +28,7 @@ namespace Abp.Events.Bus
         /// 注册一个事件
         /// </summary>
         /// <typeparam name="TEventData">Event type 事件类型</typeparam>
-        /// <param name="handler">Object to handle the event</param>
+        /// <param name="handler">Object to handle the event 事件处理程序</param>
         IDisposable Register<TEventData>(IEventHandler<TEventData> handler) where TEventData : IEventData;
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Abp.Events.Bus
         /// 注册一个事件
         /// </summary>
         /// <param name="eventType">Event type 事件类型</param>
-        /// <param name="handler">Object to handle the event 时间处理程序</param>
+        /// <param name="handler">Object to handle the event 事件处理程序</param>
         IDisposable Register(Type eventType, IEventHandler handler);
 
         /// <summary>
