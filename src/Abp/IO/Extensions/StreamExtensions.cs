@@ -10,8 +10,8 @@ namespace Abp.IO.Extensions
         /// <summary>
         /// 获取全部字节
         /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
+        /// <param name="stream">流</param>
+        /// <returns>字节数组</returns>
         public static byte[] GetAllBytes(this Stream stream)
         {
             using (var memoryStream = new MemoryStream())
