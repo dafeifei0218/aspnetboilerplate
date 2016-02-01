@@ -10,12 +10,19 @@ using Castle.Core.Logging;
 
 namespace Abp.Localization
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class LocalizationManager : ILocalizationManager
     {
+        /// <summary>
+        /// 日志
+        /// </summary>
         public ILogger Logger { get; set; }
 
         /// <summary>
         /// Gets current language for the application.
+        /// 当前语言
         /// </summary>
         [Obsolete("Inject ILanguageManager and use ILanguageManager.CurrentLanguage.")]
         public LanguageInfo CurrentLanguage { get { return _languageManager.CurrentLanguage; } }
@@ -27,6 +34,7 @@ namespace Abp.Localization
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         public LocalizationManager(
             ILanguageManager languageManager,
@@ -40,17 +48,27 @@ namespace Abp.Localization
             _sources = new Dictionary<string, ILocalizationSource>();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             InitializeSources();
         }
 
+        /// <summary>
+        /// 获取全部语言信息
+        /// </summary>
+        /// <returns></returns>
         [Obsolete("Inject ILanguageManager and use ILanguageManager.GetLanguages().")]
         public IReadOnlyList<LanguageInfo> GetAllLanguages()
         {
             return _languageManager.GetLanguages();
         }
 
+        /// <summary>
+        /// 初始化源
+        /// </summary>
         private void InitializeSources()
         {
             if (!_configuration.IsEnabled)
@@ -71,6 +89,7 @@ namespace Abp.Localization
                 source.Initialize(_configuration, _iocResolver);
 
                 //Extending dictionaries
+                //扩展信息字典
                 if (source is IDictionaryBasedLocalizationSource)
                 {
                     var dictionaryBasedSource = source as IDictionaryBasedLocalizationSource;
@@ -91,16 +110,19 @@ namespace Abp.Localization
 
         /// <summary>
         /// Gets a localization source with name.
+        /// 根据名称获取本地化资源
         /// </summary>
-        /// <param name="name">Unique name of the localization source</param>
-        /// <returns>The localization source</returns>
+        /// <param name="name">Unique name of the localization source 本地化资源名称</param>
+        /// <returns>The localization source 本地化资源</returns>
         public ILocalizationSource GetSource(string name)
         {
+            // 如果未启用，则初始化空本地化源
             if (!_configuration.IsEnabled)
             {
                 return NullLocalizationSource.Instance;
             }
 
+            // 如果本地化名称为空，则抛出异常
             if (name == null)
             {
                 throw new ArgumentNullException("name");
@@ -117,6 +139,7 @@ namespace Abp.Localization
 
         /// <summary>
         /// Gets all registered localization sources.
+        /// 获取全部注册的本地化资源
         /// </summary>
         /// <returns>List of sources</returns>
         public IReadOnlyList<ILocalizationSource> GetAllSources()

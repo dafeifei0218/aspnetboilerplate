@@ -7,24 +7,29 @@ namespace Abp.Localization.Sources
 {
     /// <summary>
     /// A Localization Source is used to obtain localized strings.
+    /// 本地化源接口，本地化源是用来获得本地化字符串
     /// </summary>
     public interface ILocalizationSource
     {
         /// <summary>
         /// Unique Name of the source.
+        /// 本地化源的名称
         /// </summary>
         string Name { get; }
 
         /// <summary>
         /// This method is called by ABP before first usage.
+        /// 初始化
         /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="iocResolver"></param>
         void Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver);
 
         /// <summary>
         /// Gets localized string for given name in current language.
         /// Fallbacks to default language if not found in current culture.
         /// </summary>
-        /// <param name="name">Key name</param>
+        /// <param name="name">Key name 键名称</param>
         /// <returns>Localized string</returns>
         string GetString(string name);
 
@@ -32,7 +37,7 @@ namespace Abp.Localization.Sources
         /// Gets localized string for given name and specified culture.
         /// Fallbacks to default language if not found in given culture.
         /// </summary>
-        /// <param name="name">Key name</param>
+        /// <param name="name">Key name 键名称</param>
         /// <param name="culture">culture information</param>
         /// <returns>Localized string</returns>
         string GetString(string name, CultureInfo culture);
@@ -41,7 +46,7 @@ namespace Abp.Localization.Sources
         /// Gets localized string for given name in current language.
         /// Returns null if not found.
         /// </summary>
-        /// <param name="name">Key name</param>
+        /// <param name="name">Key name 键名称</param>
         /// <param name="tryDefaults">
         /// True: Fallbacks to default language if not found in current culture.
         /// </param>
@@ -52,7 +57,7 @@ namespace Abp.Localization.Sources
         /// Gets localized string for given name and specified culture.
         /// Returns null if not found.
         /// </summary>
-        /// <param name="name">Key name</param>
+        /// <param name="name">Key name 键名称</param>
         /// <param name="culture">culture information</param>
         /// <param name="tryDefaults">
         /// True: Fallbacks to default language if not found in current culture.

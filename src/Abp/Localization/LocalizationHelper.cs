@@ -7,6 +7,7 @@ namespace Abp.Localization
 {
     /// <summary>
     /// This static class is used to simplify getting localized strings.
+    /// 本地化帮助类
     /// </summary>
     public static class LocalizationHelper
     {
@@ -14,11 +15,15 @@ namespace Abp.Localization
         /// Gets a reference to the localization manager.
         /// Inject and use <see cref="ILocalizationManager"/>
         /// wherever it's possible, instead of this shortcut.
+        /// 本地化管理类
         /// </summary>
         public static ILocalizationManager Manager { get { return LocalizationManager.Value; } }
 
         private static readonly Lazy<ILocalizationManager> LocalizationManager;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         static LocalizationHelper()
         {
             LocalizationManager = new Lazy<ILocalizationManager>(
@@ -30,7 +35,9 @@ namespace Abp.Localization
 
         /// <summary>
         /// Gets a pre-registered localization source.
+        /// 获取本地化源，获取预先注册的本地化源
         /// </summary>
+        /// <param name="name">本地化源名称</param>
         public static ILocalizationSource GetSource(string name)
         {
             return LocalizationManager.Value.GetSource(name);
@@ -38,10 +45,11 @@ namespace Abp.Localization
 
         /// <summary>
         /// Gets a localized string in current language.
+        /// 获取当前语言的本地化字符串
         /// </summary>
-        /// <param name="sourceName">Name of the localization source</param>
-        /// <param name="name">Key name to get localized string</param>
-        /// <returns>Localized string</returns>
+        /// <param name="sourceName">Name of the localization source 源名称</param>
+        /// <param name="name">Key name to get localized string 本地化字符串键名称</param>
+        /// <returns>Localized string 本地化字符串</returns>
         public static string GetString(string sourceName, string name)
         {
             return LocalizationManager.Value.GetString(sourceName, name);
@@ -49,11 +57,12 @@ namespace Abp.Localization
 
         /// <summary>
         /// Gets a localized string in specified language.
+        /// 获取当前语言的本地化字符串
         /// </summary>
-        /// <param name="sourceName">Name of the localization source</param>
-        /// <param name="name">Key name to get localized string</param>
-        /// <param name="culture">culture</param>
-        /// <returns>Localized string</returns>
+        /// <param name="sourceName">Name of the localization source 源名称</param>
+        /// <param name="name">Key name to get localized string 本地化字符串键名称</param>
+        /// <param name="culture">culture 有关特定区域性信息</param>
+        /// <returns>Localized string 本地化字符串</returns>
         public static string GetString(string sourceName, string name, CultureInfo culture)
         {
             return LocalizationManager.Value.GetString(sourceName, name, culture);

@@ -5,21 +5,27 @@ namespace Abp.Localization
 {
     /// <summary>
     /// Represents a string that can be localized.
+    /// 本地化字符串
     /// </summary>
     public class LocalizableString : ILocalizableString
     {
         /// <summary>
         /// Unique name of the localization source.
+        /// 本地化源名称
         /// </summary>
         public virtual string SourceName { get; private set; }
 
         /// <summary>
         /// Unique Name of the string to be localized.
+        /// 本地化名称
         /// </summary>
         public virtual string Name { get; private set; }
 
-        /// <param name="name">Unique name of the localization source</param>
-        /// <param name="sourceName">Unique Name of the string to be localized</param>
+        /// <summary>
+        ///  构造函数
+        /// </summary>
+        /// <param name="name">Unique name of the localization source 本地化源名称</param>
+        /// <param name="sourceName">Unique Name of the string to be localized 本地化名称</param>
         public LocalizableString(string name, string sourceName)
         {
             if (name == null)
@@ -38,8 +44,9 @@ namespace Abp.Localization
 
         /// <summary>
         /// Localizes the string in current language.
+        /// 当前语言的本地化字符串
         /// </summary>
-        /// <returns>Localized string</returns>
+        /// <returns>Localized string 本地化字符串</returns>
         public virtual string Localize()
         {
             return LocalizationHelper.GetString(SourceName, Name);
@@ -47,9 +54,10 @@ namespace Abp.Localization
 
         /// <summary>
         /// Localizes the string in current language.
+        /// 本地化字符串
         /// </summary>
-        /// <param name="culture">culture</param>
-        /// <returns>Localized string</returns>
+        /// <param name="culture">culture 提供有关特定区域性的信息</param>
+        /// <returns>Localized string 本地化字符串</returns>
         public virtual string Localize(CultureInfo culture)
         {
             return LocalizationHelper.GetString(SourceName, Name, culture);

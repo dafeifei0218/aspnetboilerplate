@@ -5,22 +5,37 @@ using Abp.Dependency;
 
 namespace Abp.Localization
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LanguageManager : ILanguageManager, ITransientDependency
     {
         public LanguageInfo CurrentLanguage { get { return GetCurrentLanguage(); } }
 
         private readonly ILanguageProvider _languageProvider;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="languageProvider"></param>
         public LanguageManager(ILanguageProvider languageProvider)
         {
             _languageProvider = languageProvider;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<LanguageInfo> GetLanguages()
         {
             return _languageProvider.GetLanguages();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private LanguageInfo GetCurrentLanguage()
         {
             var languages = _languageProvider.GetLanguages();
