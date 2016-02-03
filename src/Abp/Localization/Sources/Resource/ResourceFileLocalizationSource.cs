@@ -13,22 +13,28 @@ namespace Abp.Localization.Sources.Resource
     /// <summary>
     /// This class is used to simplify to create a localization source that
     /// uses resource a file.
+    /// 资源文件本地化源
     /// </summary>
     public class ResourceFileLocalizationSource : ILocalizationSource, ISingletonDependency
     {
         /// <summary>
         /// Unique Name of the source.
+        /// 本地化源名称
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
         /// Reference to the <see cref="ResourceManager"/> object related to this localization source.
+        /// 资源文件管理类
         /// </summary>
         public ResourceManager ResourceManager { get; private set; }
 
         private ILocalizationConfiguration _configuration;
 
-        /// <param name="name">Unique Name of the source</param>
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">Unique Name of the source 本地化源名称</param>
         /// <param name="resourceManager">Reference to the <see cref="ResourceManager"/> object related to this localization source</param>
         public ResourceFileLocalizationSource(string name, ResourceManager resourceManager)
         {
@@ -38,12 +44,18 @@ namespace Abp.Localization.Sources.Resource
 
         /// <summary>
         /// This method is called by ABP before first usage.
+        /// 初始化
         /// </summary>
         public virtual void Initialize(ILocalizationConfiguration configuration, IIocResolver iocResolver)
         {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public virtual string GetString(string name)
         {
             var value = GetStringOrNull(name);
@@ -55,6 +67,12 @@ namespace Abp.Localization.Sources.Resource
             return value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public virtual string GetString(string name, CultureInfo culture)
         {
             var value = GetStringOrNull(name, culture);
@@ -66,12 +84,25 @@ namespace Abp.Localization.Sources.Resource
             return value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="tryDefaults"></param>
+        /// <returns></returns>
         public string GetStringOrNull(string name, bool tryDefaults = true)
         {
             //WARN: tryDefaults is not implemented!
             return ResourceManager.GetString(name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="culture"></param>
+        /// <param name="tryDefaults"></param>
+        /// <returns></returns>
         public string GetStringOrNull(string name, CultureInfo culture, bool tryDefaults = true)
         {
             //WARN: tryDefaults is not implemented!

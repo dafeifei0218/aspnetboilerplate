@@ -25,7 +25,7 @@ namespace Abp.Localization
         /// 获取本地化支付穿
         /// </summary>
         /// <param name="name">本地化字符串键名称</param>
-        /// <returns></returns>
+        /// <returns>本地化字符串</returns>
         private static LocalizableString L(string name)
         {
             return new LocalizableString(name, AbpConsts.LocalizationSourceName);

@@ -20,9 +20,11 @@ namespace Abp.Localization
         /// 当前语言
         /// </summary>
         public LanguageInfo CurrentLanguage { get { return new LanguageInfo(Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.DisplayName); } }
-
+        
+        //空语言信息列表
         private readonly IReadOnlyList<LanguageInfo> _emptyLanguageArray = new LanguageInfo[0];
 
+        //空本地化源列表
         private readonly IReadOnlyList<ILocalizationSource> _emptyLocalizationSourceArray = new ILocalizationSource[0];
 
         /// <summary>

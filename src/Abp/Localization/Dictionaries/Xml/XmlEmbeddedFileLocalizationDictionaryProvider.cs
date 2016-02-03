@@ -6,6 +6,7 @@ namespace Abp.Localization.Dictionaries.Xml
 {
     /// <summary>
     /// Provides localization dictionaries from XML files embedded into an <see cref="Assembly"/>.
+    /// Xml嵌入文件本地化字典提供者
     /// </summary>
     public class XmlEmbeddedFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
@@ -14,8 +15,9 @@ namespace Abp.Localization.Dictionaries.Xml
         
         /// <summary>
         /// Creates a new <see cref="XmlEmbeddedFileLocalizationDictionaryProvider"/> object.
+        /// 构造函数
         /// </summary>
-        /// <param name="assembly">Assembly that contains embedded xml files</param>
+        /// <param name="assembly">Assembly that contains embedded xml files </param>
         /// <param name="rootNamespace">Namespace of the embedded xml dictionary files</param>
         public XmlEmbeddedFileLocalizationDictionaryProvider(Assembly assembly, string rootNamespace)
         {
@@ -23,6 +25,10 @@ namespace Abp.Localization.Dictionaries.Xml
             _rootNamespace = rootNamespace;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="sourceName">源名称</param>
         public override void Initialize(string sourceName)
         {
             var resourceNames = _assembly.GetManifestResourceNames();
@@ -57,6 +63,11 @@ namespace Abp.Localization.Dictionaries.Xml
             }
         }
 
+        /// <summary>
+        /// 创建Xml本地化字典
+        /// </summary>
+        /// <param name="xmlString">xml字符串</param>
+        /// <returns></returns>
         protected virtual XmlLocalizationDictionary CreateXmlLocalizationDictionary(string xmlString)
         {
             return XmlLocalizationDictionary.BuildFomXmlString(xmlString);

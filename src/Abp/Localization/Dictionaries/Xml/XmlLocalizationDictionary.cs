@@ -11,6 +11,7 @@ namespace Abp.Localization.Dictionaries.Xml
 {
     /// <summary>
     /// This class is used to build a localization dictionary from XML.
+    /// Xml本地化字典
     /// </summary>
     /// <remarks>
     /// Use static Build methods to create instance of this class.
@@ -19,6 +20,7 @@ namespace Abp.Localization.Dictionaries.Xml
     {
         /// <summary>
         /// Private constructor.
+        /// 私有构造函数
         /// </summary>
         /// <param name="cultureInfo">Culture of the dictionary</param>
         private XmlLocalizationDictionary(CultureInfo cultureInfo)
@@ -29,8 +31,9 @@ namespace Abp.Localization.Dictionaries.Xml
 
         /// <summary>
         /// Builds an <see cref="XmlLocalizationDictionary"/> from given file.
+        /// 根据给定的文件，建造xml本地化字典
         /// </summary>
-        /// <param name="filePath">Path of the file</param>
+        /// <param name="filePath">Path of the file 文件路径</param>
         public static XmlLocalizationDictionary BuildFomFile(string filePath)
         {
             try
@@ -45,8 +48,9 @@ namespace Abp.Localization.Dictionaries.Xml
 
         /// <summary>
         /// Builds an <see cref="XmlLocalizationDictionary"/> from given xml string.
+        /// 根据给定的xml字符串，建造xml本地化字典
         /// </summary>
-        /// <param name="xmlString">XML string</param>
+        /// <param name="xmlString">XML string XML字符串</param>
         public static XmlLocalizationDictionary BuildFomXmlString(string xmlString)
         {
             var xmlDocument = new XmlDocument();

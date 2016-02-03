@@ -12,18 +12,29 @@ namespace Abp.Localization.Dictionaries
     /// <summary>
     /// This class is used to build a localization source
     /// which works on memory based dictionaries to find strings.
+    /// 
     /// </summary>
     public class DictionaryBasedLocalizationSource : IDictionaryBasedLocalizationSource
     {
         /// <summary>
         /// Unique Name of the source.
+        /// 
         /// </summary>
         public string Name { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ILocalizationDictionaryProvider DictionaryProvider { get { return _dictionaryProvider; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected ILocalizationConfiguration LocalizationConfiguration { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ILocalizationDictionaryProvider _dictionaryProvider;
 
         /// <summary>

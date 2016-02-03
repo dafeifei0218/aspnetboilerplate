@@ -11,7 +11,7 @@ using Castle.Core.Logging;
 namespace Abp.Localization
 {
     /// <summary>
-    /// 
+    /// 本地化管理类
     /// </summary>
     internal class LocalizationManager : ILocalizationManager
     {
@@ -141,7 +141,7 @@ namespace Abp.Localization
         /// Gets all registered localization sources.
         /// 获取全部注册的本地化资源
         /// </summary>
-        /// <returns>List of sources</returns>
+        /// <returns>List of sources 本地化源列表</returns>
         public IReadOnlyList<ILocalizationSource> GetAllSources()
         {
             return _sources.Values.ToImmutableList();

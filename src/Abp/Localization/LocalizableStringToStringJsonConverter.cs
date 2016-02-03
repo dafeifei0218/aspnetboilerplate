@@ -6,7 +6,7 @@ namespace Abp.Localization
     /// <summary>
     /// This class can be used to serialize <see cref="ILocalizableString"/> to <see cref="string"/> during serialization.
     /// It does not work for deserialization.
-    /// 
+    /// 本地化字符串转换为Json字符串转换器
     /// </summary>
     public class LocalizableStringToStringJsonConverter : JsonConverter
     {
@@ -31,10 +31,10 @@ namespace Abp.Localization
         /// <summary>
         /// 读取Json
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="objectType"></param>
-        /// <param name="existingValue"></param>
-        /// <param name="serializer"></param>
+        /// <param name="reader">读</param>
+        /// <param name="objectType">对象类型</param>
+        /// <param name="existingValue">现存值</param>
+        /// <param name="serializer">Json序列化</param>
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {

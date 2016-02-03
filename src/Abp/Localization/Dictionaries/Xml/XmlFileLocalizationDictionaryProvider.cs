@@ -5,6 +5,7 @@ namespace Abp.Localization.Dictionaries.Xml
 {
     /// <summary>
     /// Provides localization dictionaries from XML files in a directory.
+    /// Xml文件本地化字典提供者
     /// </summary>
     public class XmlFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
@@ -12,6 +13,7 @@ namespace Abp.Localization.Dictionaries.Xml
 
         /// <summary>
         /// Creates a new <see cref="XmlFileLocalizationDictionaryProvider"/>.
+        /// 构造函数
         /// </summary>
         /// <param name="directoryPath">Path of the dictionary that contains all related XML files</param>
         public XmlFileLocalizationDictionaryProvider(string directoryPath)
@@ -24,6 +26,10 @@ namespace Abp.Localization.Dictionaries.Xml
             _directoryPath = directoryPath;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="sourceName">源名称</param>
         public override void Initialize(string sourceName)
         {
             var fileNames = Directory.GetFiles(_directoryPath, "*.xml", SearchOption.TopDirectoryOnly);
@@ -50,6 +56,11 @@ namespace Abp.Localization.Dictionaries.Xml
             }
         }
 
+        /// <summary>
+        /// 创建Xml本地化字典
+        /// </summary>
+        /// <param name="fileName">文件名</param>
+        /// <returns></returns>
         protected virtual XmlLocalizationDictionary CreateXmlLocalizationDictionary(string fileName)
         {
             return XmlLocalizationDictionary.BuildFomFile(fileName);

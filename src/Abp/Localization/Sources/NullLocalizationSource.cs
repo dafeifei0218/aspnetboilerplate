@@ -7,11 +7,13 @@ namespace Abp.Localization.Sources
 {
     /// <summary>
     /// Null object pattern for <see cref="ILocalizationSource"/>.
+    /// 空本地化源
     /// </summary>
     internal class NullLocalizationSource : ILocalizationSource
     {
         /// <summary>
         /// Singleton instance.
+        /// 单例实例
         /// </summary>
         public static NullLocalizationSource Instance { get { return SingletonInstance; } }
         private static readonly NullLocalizationSource SingletonInstance = new NullLocalizationSource();
@@ -20,6 +22,9 @@ namespace Abp.Localization.Sources
 
         private readonly IReadOnlyList<LocalizedString> _emptyStringArray = new LocalizedString[0];
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         private NullLocalizationSource()
         {
             

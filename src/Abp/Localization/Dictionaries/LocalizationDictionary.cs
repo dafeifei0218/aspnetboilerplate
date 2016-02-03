@@ -7,6 +7,7 @@ namespace Abp.Localization.Dictionaries
 {
     /// <summary>
     /// Represents a simple implementation of <see cref="ILocalizationDictionary"/> interface.
+    /// 本地化字典
     /// </summary>
     public class LocalizationDictionary : ILocalizationDictionary, IEnumerable<LocalizedString>
     {
@@ -31,8 +32,9 @@ namespace Abp.Localization.Dictionaries
 
         /// <summary>
         /// Creates a new <see cref="LocalizationDictionary"/> object.
+        /// 构造函数
         /// </summary>
-        /// <param name="cultureInfo">Culture of the dictionary</param>
+        /// <param name="cultureInfo">Culture of the dictionary 提供有关特定区域性的信息</param>
         public LocalizationDictionary(CultureInfo cultureInfo)
         {
             CultureInfo = cultureInfo;
@@ -52,17 +54,30 @@ namespace Abp.Localization.Dictionaries
             return _dictionary.Values.ToImmutableList();
         }
 
+        /// <summary>
+        /// 返回一个循环访问集合的枚举器。
+        /// </summary>
+        /// <returns></returns>
         /// <inheritdoc/>
         public virtual IEnumerator<LocalizedString> GetEnumerator()
         {
             return GetAllStrings().GetEnumerator();
         }
 
+        /// <summary>
+        /// 返回一个循环访问集合的枚举器。
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetAllStrings().GetEnumerator();
         }
 
+        /// <summary>
+        /// 是否包含指定的键
+        /// </summary>
+        /// <param name="name">键名称</param>
+        /// <returns></returns>
         protected bool Contains(string name)
         {
             return _dictionary.ContainsKey(name);
