@@ -7,6 +7,7 @@ namespace Abp.Net.Mail
 {
     /// <summary>
     /// This class can be used as base to implement <see cref="IEmailSender"/>.
+    /// 邮件发送基类
     /// </summary>
     public abstract class EmailSenderBase : IEmailSender
     {
@@ -14,8 +15,9 @@ namespace Abp.Net.Mail
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
-        /// <param name="configuration">Configuration</param>
+        /// <param name="configuration">Configuration 配置</param>
         protected EmailSenderBase(IEmailSenderConfiguration configuration)
         {
             _configuration = configuration;

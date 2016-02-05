@@ -10,9 +10,13 @@ namespace Abp.Modules
 {
     /// <summary>
     /// This class is used to manage modules.
+    /// Abp模块管理类
     /// </summary>
     internal class AbpModuleManager : IAbpModuleManager
     {
+        /// <summary>
+        /// 日志
+        /// </summary>
         public ILogger Logger { get; set; }
 
         private readonly AbpModuleCollection _modules;
@@ -20,6 +24,11 @@ namespace Abp.Modules
         private readonly IIocManager _iocManager;
         private readonly IModuleFinder _moduleFinder;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocManager">IOC管理类</param>
+        /// <param name="moduleFinder">模块查找器</param>
         public AbpModuleManager(IIocManager iocManager, IModuleFinder moduleFinder)
         {
             _modules = new AbpModuleCollection();
@@ -28,10 +37,14 @@ namespace Abp.Modules
             Logger = NullLogger.Instance;
         }
 
+        /// <summary>
+        /// 初始化模块
+        /// </summary>
         public virtual void InitializeModules()
         {
             LoadAll();
 
+            //根据依赖关系，获取排序后的模块
             var sortedModules = _modules.GetSortedModuleListByDependency();
 
             sortedModules.ForEach(module => module.Instance.PreInitialize());
@@ -39,6 +52,9 @@ namespace Abp.Modules
             sortedModules.ForEach(module => module.Instance.PostInitialize());
         }
 
+        /// <summary>
+        /// 关闭模块
+        /// </summary>
         public virtual void ShutdownModules()
         {
             var sortedModules = _modules.GetSortedModuleListByDependency();
@@ -46,6 +62,9 @@ namespace Abp.Modules
             sortedModules.ForEach(sm => sm.Instance.Shutdown());
         }
 
+        /// <summary>
+        /// 加载全部
+        /// </summary>
         private void LoadAll()
         {
             Logger.Debug("Loading Abp modules...");
@@ -54,6 +73,7 @@ namespace Abp.Modules
             Logger.Debug("Found " + moduleTypes.Count + " ABP modules in total.");
 
             //Register to IOC container.
+            //注册IOC容器
             foreach (var moduleType in moduleTypes)
             {
                 if (!AbpModule.IsAbpModule(moduleType))
@@ -68,6 +88,7 @@ namespace Abp.Modules
             }
 
             //Add to module collection
+            //添加到模块集合
             foreach (var moduleType in moduleTypes)
             {
                 var moduleObject = (AbpModule)_iocManager.Resolve(moduleType);
@@ -87,6 +108,9 @@ namespace Abp.Modules
             Logger.DebugFormat("{0} modules loaded.", _modules.Count);
         }
 
+        /// <summary>
+        /// 确保核心模块在第一个
+        /// </summary>
         private void EnsureKernelModuleToBeFirst()
         {
             var kernelModuleIndex = _modules.FindIndex(m => m.Type == typeof (AbpKernelModule));
@@ -98,11 +122,15 @@ namespace Abp.Modules
             }
         }
 
+        /// <summary>
+        /// 设置依赖
+        /// </summary>
         private void SetDependencies()
         {
             foreach (var moduleInfo in _modules)
             {
                 //Set dependencies according to assembly dependency
+                //根据程序集依赖设置依赖关系
                 foreach (var referencedAssemblyName in moduleInfo.Assembly.GetReferencedAssemblies())
                 {
                     var referencedAssembly = Assembly.Load(referencedAssemblyName);
@@ -114,6 +142,7 @@ namespace Abp.Modules
                 }
 
                 //Set dependencies for defined DependsOnAttribute attribute(s).
+                //定义DependsOnAttribute属性，设置依赖
                 foreach (var dependedModuleType in AbpModule.FindDependedModuleTypes(moduleInfo.Type))
                 {
                     var dependedModuleInfo = _modules.FirstOrDefault(m => m.Type == dependedModuleType);
@@ -130,6 +159,11 @@ namespace Abp.Modules
             }
         }
 
+        /// <summary>
+        /// 添加缺失的模块
+        /// </summary>
+        /// <param name="allModules">全部模块</param>
+        /// <returns></returns>
         private static ICollection<Type> AddMissingDependedModules(ICollection<Type> allModules)
         {
             var initialModules = allModules.ToList();
@@ -141,6 +175,11 @@ namespace Abp.Modules
             return allModules;
         }
 
+        /// <summary>
+        /// 查找依赖模块
+        /// </summary>
+        /// <param name="module">模块</param>
+        /// <param name="allModules">全部模块</param>
         private static void FillDependedModules(Type module, ICollection<Type> allModules)
         {
             foreach (var dependedModule in AbpModule.FindDependedModuleTypes(module))

@@ -23,14 +23,14 @@ namespace Abp.EntityFramework
         public ILogger Logger { get; set; }
 
         /// <summary>
-        /// 类型过滤器
+        /// 类型查找器
         /// </summary>
         private readonly ITypeFinder _typeFinder;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="typeFinder">类型过滤器</param>
+        /// <param name="typeFinder">类型查找器</param>
         public AbpEntityFrameworkModule(ITypeFinder typeFinder)
         {
             _typeFinder = typeFinder;
