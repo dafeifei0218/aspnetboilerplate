@@ -5,7 +5,7 @@ namespace Abp.Modules
     /// <summary>
     /// Used to define dependencies of an ABP module to other modules.
     /// It should be used for a class derived from <see cref="AbpModule"/>.
-    /// 依赖属性，用于定义一个Abp模块依赖的其他模块。
+    /// 依赖自定义属性，用于定义一个Abp模块依赖的其他模块。
     /// 用应该用于一个类
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
