@@ -11,7 +11,7 @@ namespace Abp.Net.Mail
     {
         /// <summary>
         /// Sends an email.
-        /// 发送Email
+        /// 发送Email-异步
         /// </summary>
         /// <param name="to">发送到</param>
         /// <param name="subject">主题</param>
@@ -31,7 +31,7 @@ namespace Abp.Net.Mail
 
         /// <summary>
         /// Sends an email.
-        /// 发送Email
+        /// 发送Email-异步
         /// </summary>
         /// <param name="from">从哪个邮箱发送</param>
         /// <param name="to">发送到</param>
@@ -65,7 +65,7 @@ namespace Abp.Net.Mail
 
         /// <summary>
         /// Sends an email.
-        /// 发送Email
+        /// 发送Email-异步
         /// </summary>
         /// <param name="mail">Mail to be sent 发送邮件</param>
         /// <param name="normalize">

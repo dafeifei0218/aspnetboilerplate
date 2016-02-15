@@ -17,7 +17,7 @@ namespace Abp.Net.Mail
         /// Constructor.
         /// 构造函数
         /// </summary>
-        /// <param name="configuration">Configuration 配置</param>
+        /// <param name="configuration">Configuration 邮件发送配置</param>
         protected EmailSenderBase(IEmailSenderConfiguration configuration)
         {
             _configuration = configuration;

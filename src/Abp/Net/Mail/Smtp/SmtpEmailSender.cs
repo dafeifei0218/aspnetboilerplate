@@ -8,6 +8,7 @@ namespace Abp.Net.Mail.Smtp
 {
     /// <summary>
     /// Used to send emails over SMTP.
+    /// SMTP邮件发送
     /// </summary>
     public class SmtpEmailSender : EmailSenderBase, ISmtpEmailSender, ITransientDependency
     {
@@ -15,14 +16,19 @@ namespace Abp.Net.Mail.Smtp
 
         /// <summary>
         /// Creates a new <see cref="SmtpEmailSender"/>.
+        /// 构造函数
         /// </summary>
-        /// <param name="configuration">Configuration</param>
+        /// <param name="configuration">Configuration SMTP邮件发送配置</param>
         public SmtpEmailSender(ISmtpEmailSenderConfiguration configuration)
             : base(configuration)
         {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// 创建和配置SMTPClient对象发送电子邮件
+        /// </summary>
+        /// <returns></returns>
         public SmtpClient BuildClient()
         {
             var host = _configuration.Host;
@@ -31,11 +37,13 @@ namespace Abp.Net.Mail.Smtp
             var smtpClient = new SmtpClient(host, port);
             try
             {
+                //是否启用SSL安全套接字层加密链接
                 if (_configuration.EnableSsl)
                 {
                     smtpClient.EnableSsl = true;
                 }
 
+                //是否随请求一起发送
                 if (_configuration.UseDefaultCredentials)
                 {
                     smtpClient.UseDefaultCredentials = true;
@@ -64,6 +72,11 @@ namespace Abp.Net.Mail.Smtp
             }
         }
 
+        /// <summary>
+        /// 发送邮件-异步
+        /// </summary>
+        /// <param name="mail">邮件消息，电子邮件</param>
+        /// <returns></returns>
         protected override async Task SendEmailAsync(MailMessage mail)
         {
             using (var smtpClient = BuildClient())
@@ -72,6 +85,10 @@ namespace Abp.Net.Mail.Smtp
             }
         }
 
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="mail">邮件消息，电子邮件</param>
         protected override void SendEmail(MailMessage mail)
         {
             using (var smtpClient = BuildClient())

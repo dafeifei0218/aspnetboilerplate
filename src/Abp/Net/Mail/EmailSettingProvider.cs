@@ -7,9 +7,15 @@ namespace Abp.Net.Mail
     /// <summary>
     /// Defines settings to send emails.
     /// <see cref="EmailSettingNames"/> for all available configurations.
+    /// 邮件设置提供者
     /// </summary>
     internal class EmailSettingProvider : SettingProvider
     {
+        /// <summary>
+        /// 获取设置定义
+        /// </summary>
+        /// <param name="context">设置定义提供者上下文</param>
+        /// <returns></returns>
         public override IEnumerable<SettingDefinition> GetSettingDefinitions(SettingDefinitionProviderContext context)
         {
             return new[]
@@ -26,6 +32,11 @@ namespace Abp.Net.Mail
                    };
         }
 
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        /// <param name="name">设置名称</param>
+        /// <returns></returns>
         private static LocalizableString L(string name)
         {
             return new LocalizableString(name, AbpConsts.LocalizationSourceName);
