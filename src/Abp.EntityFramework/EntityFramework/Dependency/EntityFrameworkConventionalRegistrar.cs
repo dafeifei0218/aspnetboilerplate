@@ -9,7 +9,7 @@ namespace Abp.EntityFramework.Dependency
     /// Registers classes derived from AbpDbContext with configurations.
     /// EF常规注册类，从AbpDbContext（ABP数据上下文）配置继承
     /// </summary>
-    public class EntityFrameworkConventionalRegisterer : IConventionalDependencyRegistrar
+    public class EntityFrameworkConventionalRegistrar : IConventionalDependencyRegistrar
     {
         /// <summary>
         /// 注册程序集

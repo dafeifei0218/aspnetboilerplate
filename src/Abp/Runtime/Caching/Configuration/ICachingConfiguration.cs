@@ -5,11 +5,13 @@ namespace Abp.Runtime.Caching.Configuration
 {
     /// <summary>
     /// Used to configure caching system.
+    /// 缓存配置，用于配置缓存系统
     /// </summary>
     public interface ICachingConfiguration
     {
         /// <summary>
         /// List of all registered configurators.
+        /// 缓存配置列表
         /// </summary>
         IReadOnlyList<ICacheConfigurator> Configurators { get; }
 
@@ -24,6 +26,7 @@ namespace Abp.Runtime.Caching.Configuration
 
         /// <summary>
         /// Used to configure a specific cache. 
+        /// 
         /// </summary>
         /// <param name="cacheName">Cache name</param>
         /// <param name="initAction">

@@ -7,7 +7,7 @@ namespace Abp.Application.Services.Dto
     /// 全部审计实体数据传输对象，主键为int
     /// </summary>
     [Serializable]
-    public class FullAuditedEntityDto : FullAuditedEntityDto<int>
+    public abstract class FullAuditedEntityDto : FullAuditedEntityDto<int>
     {
 
     }

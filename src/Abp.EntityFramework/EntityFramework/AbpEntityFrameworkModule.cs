@@ -42,7 +42,7 @@ namespace Abp.EntityFramework
         /// </summary>
         public override void PreInitialize()
         {
-            IocManager.AddConventionalRegistrar(new EntityFrameworkConventionalRegisterer());
+            IocManager.AddConventionalRegistrar(new EntityFrameworkConventionalRegistrar());
         }
 
         /// <summary>

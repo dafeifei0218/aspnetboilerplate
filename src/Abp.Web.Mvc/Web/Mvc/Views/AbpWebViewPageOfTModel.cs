@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Abp.Application.Features;
 using Abp.Authorization;
+using Abp.Configuration;
 using Abp.Dependency;
 using Abp.Extensions;
 using Abp.Localization;
@@ -34,6 +35,11 @@ namespace Abp.Web.Mvc.Views
                 return appPath;
             }
         }
+
+        /// <summary>
+        /// Reference to the setting manager.
+        /// </summary>
+        public ISettingManager SettingManager { get; set; }
         
         /// <summary>
         /// Gets/sets name of the localization source that is used in this controller.
@@ -44,7 +50,6 @@ namespace Abp.Web.Mvc.Views
             get { return _localizationSource.Name; }
             set { _localizationSource = LocalizationHelper.GetSource(value); }
         }
-
         private ILocalizationSource _localizationSource;
 
         /// <summary>
@@ -53,6 +58,8 @@ namespace Abp.Web.Mvc.Views
         protected AbpWebViewPage()
         {
             _localizationSource = NullLocalizationSource.Instance;
+
+            SettingManager = IocManager.Instance.Resolve<ISettingManager>();
         }
 
         /// <summary>

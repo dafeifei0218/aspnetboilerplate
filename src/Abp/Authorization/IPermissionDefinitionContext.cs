@@ -23,7 +23,7 @@ namespace Abp.Authorization
         /// <returns>New created permission 新创建的权限</returns>
         Permission CreatePermission(
             string name, 
-            ILocalizableString displayName, 
+            ILocalizableString displayName = null, 
             bool isGrantedByDefault = false, 
             ILocalizableString description = null, 
             MultiTenancySides multiTenancySides = MultiTenancySides.Host | MultiTenancySides.Tenant,

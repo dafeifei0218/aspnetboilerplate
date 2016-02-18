@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Abp.Localization;
 
 namespace Abp.Application.Navigation
 {
@@ -46,10 +47,10 @@ namespace Abp.Application.Navigation
         /// 构造函数
         /// <param name="menuDefinition"></param>
         /// </summary>
-        internal UserMenu(MenuDefinition menuDefinition)
+        internal UserMenu(MenuDefinition menuDefinition, ILocalizationContext localizationContext)
         {
             Name = menuDefinition.Name;
-            DisplayName = menuDefinition.DisplayName.Localize();
+            DisplayName = menuDefinition.DisplayName.Localize(localizationContext);
             CustomData = menuDefinition.CustomData;
             Items = new List<UserMenuItem>();
         }

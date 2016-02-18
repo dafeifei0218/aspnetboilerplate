@@ -1,8 +1,10 @@
 ﻿using Abp.Application.Features;
 using Abp.Auditing;
+using Abp.BackgroundJobs;
 using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Events.Bus;
+using Abp.Notifications;
 using Abp.Runtime.Caching.Configuration;
 
 namespace Abp.Configuration.Startup
@@ -92,5 +94,15 @@ namespace Abp.Configuration.Startup
         /// 特征配置
         /// </summary>
         IFeatureConfiguration Features { get; }
+
+        /// <summary>
+        /// Used to configure background job system.
+        /// </summary>
+        IBackgroundJobConfiguration BackgroundJobs { get; }
+
+        /// <summary>
+        /// Used to configure notification system.
+        /// </summary>
+        INotificationConfiguration Notifications { get; }
     }
 }
