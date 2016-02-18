@@ -5,28 +5,31 @@ using System.Text;
 namespace Abp.Resources.Embedded
 {
     /// <summary>
-    /// 
+    /// 嵌入式资源路径信息
     /// </summary>
     internal class EmbeddedResourcePathInfo
     {
+        /// <summary>
+        /// 路劲
+        /// </summary>
         public string Path { get; private set; }
 
         /// <summary>
-        /// 
+        /// 程序集
         /// </summary>
         public Assembly Assembly { get; private set; }
 
         /// <summary>
-        /// 
+        /// 资源命名空间
         /// </summary>
         public string ResourceNamespace { get; private set; }
 
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="assembly"></param>
-        /// <param name="resourceNamespace"></param>
+        /// <param name="path">路径</param>
+        /// <param name="assembly">程序集</param>
+        /// <param name="resourceNamespace">资源命名空间</param>
         public EmbeddedResourcePathInfo(string path, Assembly assembly, string resourceNamespace)
         {
             Path = path;
@@ -34,6 +37,11 @@ namespace Abp.Resources.Embedded
             ResourceNamespace = resourceNamespace;
         }
 
+        /// <summary>
+        /// 查找清单名称
+        /// </summary>
+        /// <param name="fullPath">全路径</param>
+        /// <returns></returns>
         public string FindManifestName(string fullPath)
         {
             var relativeResourcePath = fullPath.Substring(Path.Length + 1);
@@ -41,6 +49,11 @@ namespace Abp.Resources.Embedded
             return string.Format("{0}.{1}", ResourceNamespace, relativeResourcePath.Replace("/", "."));
         }
 
+        /// <summary>
+        /// 规范化资源路径
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <returns></returns>
         private static string NormalizeResourcePath(string path)
         {
             var pathFolders = path.Split('/');
@@ -61,6 +74,11 @@ namespace Abp.Resources.Embedded
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 规范化文件夹名称
+        /// </summary>
+        /// <param name="pathPart">部分路径</param>
+        /// <returns></returns>
         private static string NormalizeFolderName(string pathPart)
         {
             //TODO: Implement all rules of .NET

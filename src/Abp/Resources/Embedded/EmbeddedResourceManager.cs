@@ -7,7 +7,7 @@ using Abp.IO.Extensions;
 namespace Abp.Resources.Embedded
 {
     /// <summary>
-    /// 
+    /// 嵌入资源管理类
     /// </summary>
     public class EmbeddedResourceManager : IEmbeddedResourceManager, ISingletonDependency
     {
@@ -16,6 +16,7 @@ namespace Abp.Resources.Embedded
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         public EmbeddedResourceManager()
         {
@@ -23,6 +24,9 @@ namespace Abp.Resources.Embedded
             _resourceCache = new ConcurrentDictionary<string, EmbeddedResourceInfo>();
         }
 
+        /// <summary>
+        /// 暴露资源
+        /// </summary>
         /// <inheritdoc/>
         public void ExposeResources(string rootPath, Assembly assembly, string resourceNamespace)
         {
@@ -34,6 +38,9 @@ namespace Abp.Resources.Embedded
             _resourcePaths[rootPath] = new EmbeddedResourcePathInfo(rootPath, assembly, resourceNamespace);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         /// <inheritdoc/>
         public EmbeddedResourceInfo GetResource(string fullPath)
         {
@@ -56,6 +63,10 @@ namespace Abp.Resources.Embedded
             }
         }
 
+        /// <summary>
+        /// 从全路径获取路径信息
+        /// </summary>
+        /// <param name="fullPath">全路径</param>
         private EmbeddedResourcePathInfo GetPathInfoForFullPath(string fullPath)
         {
             foreach (var resourcePathInfo in _resourcePaths.Values.ToImmutableList()) //TODO@hikalkan: Test for multi-threading (possible multiple enumeration problem).
