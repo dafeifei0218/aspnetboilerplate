@@ -17,15 +17,17 @@ namespace Abp.Dependency
         /// <typeparam name="T">Type of the class 类的类型</typeparam>
         /// <param name="iocRegistrar">Registrar Ioc注册</param>
         /// <param name="lifeStyle">Lifestyle of the objects of this type 对象的生命周期</param>
-        public static void RegisterIfNot<T>(this IIocRegistrar iocRegistrar, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
+        /// <returns>True, if registered for given implementation.</returns>
+        public static bool RegisterIfNot<T>(this IIocRegistrar iocRegistrar, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
             where T : class
         {
             if (iocRegistrar.IsRegistered<T>())
             {
-                return;
+                return false;
             }
 
             iocRegistrar.Register<T>(lifeStyle);
+            return true;
         }
 
         /// <summary>
@@ -35,14 +37,16 @@ namespace Abp.Dependency
         /// <param name="iocRegistrar">Registrar Ioc注册</param>
         /// <param name="type">Type of the class 类的类型</param>
         /// <param name="lifeStyle">Lifestyle of the objects of this type 对象的生命周期</param>
-        public static void RegisterIfNot(this IIocRegistrar iocRegistrar, Type type, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
+        /// <returns>True, if registered for given implementation.</returns>
+        public static bool RegisterIfNot(this IIocRegistrar iocRegistrar, Type type, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
         {
             if (iocRegistrar.IsRegistered(type))
             {
-                return;
+                return false;
             }
 
-            iocRegistrar.Register(type, lifeStyle);
+            iocRegistrar.Register(type, lifeStyle); 
+            return true;
         }
 
         /// <summary>
@@ -53,16 +57,18 @@ namespace Abp.Dependency
         /// <typeparam name="TImpl">The type that implements <see cref="TType"/> 实现的类型</typeparam>
         /// <param name="iocRegistrar">Registrar Ioc注册</param>
         /// <param name="lifeStyle">Lifestyle of the objects of this type 对象的生命周期</param>
-        public static void RegisterIfNot<TType, TImpl>(this IIocRegistrar iocRegistrar, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
+        /// <returns>True, if registered for given implementation.</returns>
+        public static bool RegisterIfNot<TType, TImpl>(this IIocRegistrar iocRegistrar, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
             where TType : class
             where TImpl : class, TType
         {
             if (iocRegistrar.IsRegistered<TType>())
             {
-                return;
+                return false;
             }
 
             iocRegistrar.Register<TType, TImpl>(lifeStyle);
+            return true;
         }
 
 
@@ -74,14 +80,16 @@ namespace Abp.Dependency
         /// <param name="type">Type of the class 类的类型</param>
         /// <param name="impl">The type that implements <paramref name="type"/> 实现的类型</param>
         /// <param name="lifeStyle">Lifestyle of the objects of this type 对象的生命周期</param>
-        public static void RegisterIfNot(this IIocRegistrar iocRegistrar, Type type, Type impl, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
+        /// <returns>True, if registered for given implementation.</returns>
+        public static bool RegisterIfNot(this IIocRegistrar iocRegistrar, Type type, Type impl, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
         {
             if (iocRegistrar.IsRegistered(type))
             {
-                return;
+                return false;
             }
 
             iocRegistrar.Register(type, impl, lifeStyle);
+            return true;
         }
 
         #endregion

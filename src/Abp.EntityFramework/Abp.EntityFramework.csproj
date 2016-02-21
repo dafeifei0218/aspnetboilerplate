@@ -77,6 +77,8 @@
     <Compile Include="EntityFramework\Repositories\EfRepositoryBaseOfTEntityAndTPrimaryKey.cs" />
     <Compile Include="EntityFramework\IDbContextProvider.cs" />
     <Compile Include="EntityFramework\SimpleDbContextProvider.cs" />
+    <Compile Include="EntityFramework\SoftDeleting\SoftDeleteInterceptor.cs" />
+    <Compile Include="EntityFramework\SoftDeleting\SoftDeleteQueryVisitor.cs" />
     <Compile Include="EntityFramework\Uow\UnitOfWorkDbContextProvider.cs" />
     <Compile Include="EntityFramework\Uow\EfUnitOfWork.cs" />
     <Compile Include="EntityFramework\Uow\UnitOfWorkExtensions.cs" />

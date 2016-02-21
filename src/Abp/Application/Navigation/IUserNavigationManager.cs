@@ -15,13 +15,15 @@ namespace Abp.Application.Navigation
         /// </summary>
         /// <param name="menuName">Unique name of the menu 菜单名</param>
         /// <param name="userId">User id or null for anonymous users 用户Id</param>
-        Task<UserMenu> GetMenuAsync(string menuName, long? userId);
+        /// <param name="tenantId"></param>
+        Task<UserMenu> GetMenuAsync(string menuName, long? userId, int? tenantId = null);
 
         /// <summary>
         /// Gets all menus specialized for given user.
         /// 获取菜单
         /// </summary>
         /// <param name="userId">User id or null for anonymous users  用户Id</param>
-        Task<IReadOnlyList<UserMenu>> GetMenusAsync(long? userId);
+        /// <param name="tenantId"></param>
+        Task<IReadOnlyList<UserMenu>> GetMenusAsync(long? userId, int? tenantId = null);
     }
 }

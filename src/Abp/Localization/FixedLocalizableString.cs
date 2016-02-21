@@ -33,7 +33,7 @@ namespace Abp.Localization
         /// Gets the <see cref="FixedString"/> always.
         /// 获取固定字符串
         /// </summary>
-        public virtual string Localize()
+        public virtual string Localize(ILocalizationContext context)
         {
             return FixedString;
         }
@@ -42,8 +42,9 @@ namespace Abp.Localization
         /// Gets the <see cref="FixedString"/> always.
         /// 获取固定字符串
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="culture">提供有关特定区域性的信息</param>
-        public virtual string Localize(CultureInfo culture)
+        public virtual string Localize(ILocalizationContext context, CultureInfo culture)
         {
             return FixedString;
         }

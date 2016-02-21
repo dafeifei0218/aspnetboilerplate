@@ -47,7 +47,7 @@ namespace Abp.Localization
         /// 当前语言的本地化字符串
         /// </summary>
         /// <returns>Localized string 本地化字符串</returns>
-        public virtual string Localize()
+        public virtual string Localize(ILocalizationContext context)
         {
             return LocalizationHelper.GetString(SourceName, Name);
         }
@@ -56,9 +56,10 @@ namespace Abp.Localization
         /// Localizes the string in current language.
         /// 本地化字符串
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="culture">culture 提供有关特定区域性的信息</param>
         /// <returns>Localized string 本地化字符串</returns>
-        public virtual string Localize(CultureInfo culture)
+        public virtual string Localize(ILocalizationContext context,CultureInfo culture)
         {
             return LocalizationHelper.GetString(SourceName, Name, culture);
         }

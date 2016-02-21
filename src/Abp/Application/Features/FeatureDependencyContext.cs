@@ -8,6 +8,8 @@ namespace Abp.Application.Features
     /// </summary>
     public class FeatureDependencyContext : IFeatureDependencyContext, ITransientDependency
     {
+        public int? TenantId { get; set; }
+
         /// <summary>
         /// IOC控制反转解析器
         /// </summary>
@@ -31,5 +33,6 @@ namespace Abp.Application.Features
             IocResolver = iocResolver;
             FeatureChecker = featureChecker;
         }
+
     }
 }

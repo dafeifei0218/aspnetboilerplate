@@ -8,19 +8,28 @@ namespace Abp.Localization
     /// </summary>
     public interface ILocalizableString
     {
+        ///// <summary>
+        ///// Localizes the string in current culture.
+        ///// 当前语言的本地化字符串
+        ///// </summary>
+        ///// <returns>Localized string 本地化字符串</returns>
+        //string Localize();
+
         /// <summary>
         /// Localizes the string in current culture.
-        /// 当前语言的本地化字符串
         /// </summary>
-        /// <returns>Localized string 本地化字符串</returns>
-        string Localize();
+        /// <param name="context">Localization context</param>
+        /// <returns>Localized string</returns>
+        string Localize(ILocalizationContext context);
+
 
         /// <summary>
         /// Localizes the string in given culture.
         /// 本地化字符串
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="culture">culture 提供有关特定区域性的信息</param>
         /// <returns>Localized string 本地化字符串</returns>
-        string Localize(CultureInfo culture);
+        string Localize(ILocalizationContext context, CultureInfo culture);
     }
 }

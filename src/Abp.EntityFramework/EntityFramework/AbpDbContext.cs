@@ -35,7 +35,7 @@ namespace Abp.EntityFramework
         /// Used to trigger entity change events.
         /// 实体更改事件帮助类
         /// </summary>
-        public IEntityChangedEventHelper EntityChangedEventHelper { get; set; }
+        public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
 
         /// <summary>
         /// Reference to the logger.
@@ -52,7 +52,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Abp.EntityFramework
         {
             Logger = NullLogger.Instance;
             AbpSession = NullAbpSession.Instance;
-            EntityChangedEventHelper = NullEntityChangedEventHelper.Instance;
+            EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
         }
 
         /// <summary>
@@ -203,7 +203,10 @@ namespace Abp.EntityFramework
                     case EntityState.Added:
                         SetCreationAuditProperties(entry);
                         CheckAndSetTenantIdProperty(entry);
-                        EntityChangedEventHelper.TriggerEntityCreatedEvent(entry.Entity);
+                        //EntityChangeEventHelper.TriggerEntityCreatedEvent(entry.Entity);
+
+                        EntityChangeEventHelper.TriggerEntityCreatingEvent(entry.Entity);
+                        EntityChangeEventHelper.TriggerEntityCreatedEventOnUowCompleted(entry.Entity);
                         break;
                     case EntityState.Modified:
                         PreventSettingCreationAuditProperties(entry);
@@ -212,23 +215,32 @@ namespace Abp.EntityFramework
 
                         if (entry.Entity is ISoftDelete && entry.Entity.As<ISoftDelete>().IsDeleted)
                         {
-                            if (entry.Entity is IDeletionAudited)
-                            {
-                                SetDeletionAuditProperties(entry.Entity.As<IDeletionAudited>());
-                            }
+                            //if (entry.Entity is IDeletionAudited)
+                            //{
+                            //    SetDeletionAuditProperties(entry.Entity.As<IDeletionAudited>());
+                            //}
 
-                            EntityChangedEventHelper.TriggerEntityDeletedEvent(entry.Entity);
+                            //EntityChangeEventHelper.TriggerEntityDeletedEvent(entry.Entity);
+
+                            EntityChangeEventHelper.TriggerEntityDeletingEvent(entry.Entity);
+                            EntityChangeEventHelper.TriggerEntityDeletedEventOnUowCompleted(entry.Entity);
                         }
                         else
                         {
-                            EntityChangedEventHelper.TriggerEntityUpdatedEvent(entry.Entity);
+                            //EntityChangeEventHelper.TriggerEntityUpdatedEvent(entry.Entity);
+
+                            EntityChangeEventHelper.TriggerEntityUpdatingEvent(entry.Entity);
+                            EntityChangeEventHelper.TriggerEntityUpdatedEventOnUowCompleted(entry.Entity);
                         }
 
                         break;
                     case EntityState.Deleted:
                         PreventSettingCreationAuditProperties(entry);
                         HandleSoftDelete(entry);
-                        EntityChangedEventHelper.TriggerEntityDeletedEvent(entry.Entity);
+                        //EntityChangeEventHelper.TriggerEntityDeletedEvent(entry.Entity);
+
+                        EntityChangeEventHelper.TriggerEntityDeletingEvent(entry.Entity);
+                        EntityChangeEventHelper.TriggerEntityDeletedEventOnUowCompleted(entry.Entity);
                         break;
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Abp.Localization;
 
 namespace Abp.Application.Navigation
 {
@@ -63,12 +64,13 @@ namespace Abp.Application.Navigation
         /// Creates a new <see cref="UserMenuItem"/> object from given <see cref="MenuItemDefinition"/>.
         /// 构造函数
         /// </summary>
-        /// <param name="menuItemDefinition"></param>
-        internal UserMenuItem(MenuItemDefinition menuItemDefinition)
+        /// <param name="menuItemDefinition">菜单项定义</param>
+        /// <param name="localizationContext">本地化上下文</param>
+        internal UserMenuItem(MenuItemDefinition menuItemDefinition,ILocalizationContext localizationContext)
         {
             Name = menuItemDefinition.Name;
             Icon = menuItemDefinition.Icon;
-            DisplayName = menuItemDefinition.DisplayName.Localize();
+            DisplayName = menuItemDefinition.DisplayName.Localize(localizationContext);
             Order = menuItemDefinition.Order;
             Url = menuItemDefinition.Url;
             CustomData = menuItemDefinition.CustomData;

@@ -26,6 +26,7 @@ namespace Abp
         /// </summary>
         protected bool IsDisposed;
 
+        //Abp模块管理类
         private IAbpModuleManager _moduleManager;
 
         /// <summary>

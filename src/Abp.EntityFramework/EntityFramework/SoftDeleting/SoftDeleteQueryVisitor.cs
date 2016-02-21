@@ -8,7 +8,8 @@ namespace Abp.EntityFramework.SoftDeleting
     {
         public override DbExpression Visit(DbScanExpression expression)
         {
-            if (!expression.Target.ElementType.MetadataProperties.Any(mp => mp.Name.EndsWith("customannotation:" + AbpEfConsts.SoftDeleteCustomAnnotationName)))
+            //if (!expression.Target.ElementType.MetadataProperties.Any(mp => mp.Name.EndsWith("customannotation:" + AbpEfConsts.SoftDeleteCustomAnnotationName)))
+            if (!expression.Target.ElementType.MetadataProperties.Any(mp => mp.Name.EndsWith("customannotation:" + "暂时修改为此字符串，由于没有AbpEfConsts类")))
             {
                 return base.Visit(expression);
             }

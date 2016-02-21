@@ -7,13 +7,13 @@ namespace Abp.Domain.Entities.Auditing
     /// Properties are automatically set when updating the <see cref="IEntity"/>.
     /// 修改审计接口。
     /// </summary>
-    public interface IModificationAudited
+    public interface IModificationAudited : IHasModificationTime
     {
-        /// <summary>
-        /// The last time of modification.
-        /// 最后修改实体的时间。
-        /// </summary>
-        DateTime? LastModificationTime { get; set; }
+        ///// <summary>
+        ///// The last time of modification.
+        ///// 最后修改实体的时间。
+        ///// </summary>
+        //DateTime? LastModificationTime { get; set; }
 
         /// <summary>
         /// Last modifier user for this entity.
