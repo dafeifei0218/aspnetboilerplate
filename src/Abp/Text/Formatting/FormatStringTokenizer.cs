@@ -4,8 +4,17 @@ using System.Text;
 
 namespace Abp.Text.Formatting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class FormatStringTokenizer
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="includeBracketsForDynamicValues"></param>
+        /// <returns></returns>
         public List<FormatStringToken> Tokenize(string format, bool includeBracketsForDynamicValues = false)
         {
             var tokens = new List<FormatStringToken>();

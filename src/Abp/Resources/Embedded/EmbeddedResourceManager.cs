@@ -39,12 +39,14 @@ namespace Abp.Resources.Embedded
         }
 
         /// <summary>
-        /// 
+        /// 获取资源
         /// </summary>
+        /// <param name="fullPath">全路径</param>
         /// <inheritdoc/>
         public EmbeddedResourceInfo GetResource(string fullPath)
         {
             //Get from cache if exists!
+            //如果缓存中有，从缓存中获得
             if (_resourceCache.ContainsKey(fullPath))
             {
                 return _resourceCache[fullPath];
