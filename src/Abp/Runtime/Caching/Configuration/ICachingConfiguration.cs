@@ -22,7 +22,8 @@ namespace Abp.Runtime.Caching.Configuration
         /// <param name="initAction">
         /// An action to configure caches
         /// This action is called for each cache just after created.
-        /// 初始化动作
+        /// 初始化动作，
+        /// 配置缓存操作，这个动作在缓存刚刚创建时调用
         /// </param>
         void ConfigureAll(Action<ICache> initAction);
 
@@ -34,7 +35,8 @@ namespace Abp.Runtime.Caching.Configuration
         /// <param name="initAction">
         /// An action to configure the cache.
         /// This action is called just after the cache is created.
-        /// 初始化动作
+        /// 初始化动作，
+        /// 配置缓存操作，这个动作在缓存刚刚创建时调用
         /// </param>
         void Configure(string cacheName, Action<ICache> initAction);
     }

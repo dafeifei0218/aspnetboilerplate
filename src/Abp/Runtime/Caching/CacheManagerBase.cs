@@ -9,6 +9,7 @@ namespace Abp.Runtime.Caching
 {
     /// <summary>
     /// Base class for cache managers.
+    /// 缓存管理基类
     /// </summary>
     public abstract class CacheManagerBase : ICacheManager, ISingletonDependency
     {
@@ -20,9 +21,10 @@ namespace Abp.Runtime.Caching
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
-        /// <param name="iocManager"></param>
-        /// <param name="configuration"></param>
+        /// <param name="iocManager">Ioc管理类</param>
+        /// <param name="configuration">缓存配置</param>
         protected CacheManagerBase(IIocManager iocManager, ICachingConfiguration configuration)
         {
             IocManager = iocManager;
@@ -30,11 +32,20 @@ namespace Abp.Runtime.Caching
             Caches = new ConcurrentDictionary<string, ICache>();
         }
 
+        /// <summary>
+        /// 获取全部缓存
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<ICache> GetAllCaches()
         {
             return Caches.Values.ToImmutableList();
         }
         
+        /// <summary>
+        /// 获取缓存
+        /// </summary>
+        /// <param name="name">缓存名称</param>
+        /// <returns></returns>
         public virtual ICache GetCache(string name)
         {
             return Caches.GetOrAdd(name, (cacheName) =>
@@ -55,6 +66,9 @@ namespace Abp.Runtime.Caching
             });
         }
 
+        /// <summary>
+        /// 销毁
+        /// </summary>
         public virtual void Dispose()
         {
             foreach (var cache in Caches)
@@ -67,9 +81,10 @@ namespace Abp.Runtime.Caching
 
         /// <summary>
         /// Used to create actual cache implementation.
+        /// 创建缓存实现
         /// </summary>
-        /// <param name="name">Name of the cache</param>
-        /// <returns>Cache object</returns>
+        /// <param name="name">Name of the cache 缓存名称</param>
+        /// <returns>Cache object 缓存对象</returns>
         protected abstract ICache CreateCacheImplementation(string name);
     }
 }
