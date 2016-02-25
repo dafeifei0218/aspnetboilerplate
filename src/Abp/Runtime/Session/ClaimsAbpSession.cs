@@ -10,11 +10,15 @@ namespace Abp.Runtime.Session
 {
     /// <summary>
     /// Implements <see cref="IAbpSession"/> to get session properties from claims of <see cref="Thread.CurrentPrincipal"/>.
+    /// 声明Abp会话
     /// </summary>
     public class ClaimsAbpSession : IAbpSession
     {
         private const int DefaultTenantId = 1;
 
+        /// <summary>
+        /// 用户Id
+        /// </summary>
         public virtual long? UserId
         {
             get
@@ -47,10 +51,14 @@ namespace Abp.Runtime.Session
             }
         }
 
+        /// <summary>
+        /// 租户Id
+        /// </summary>
         public virtual int? TenantId
         {
             get
             {
+                //如果未启用
                 if (!_multiTenancy.IsEnabled)
                 {
                     return DefaultTenantId;
@@ -72,6 +80,9 @@ namespace Abp.Runtime.Session
             }
         }
 
+        /// <summary>
+        /// 多租户双方
+        /// </summary>
         public virtual MultiTenancySides MultiTenancySide
         {
             get
@@ -82,6 +93,9 @@ namespace Abp.Runtime.Session
             }
         }
 
+        /// <summary>
+        /// 模拟用户Id
+        /// </summary>
         public virtual long? ImpersonatorUserId
         {
             get
@@ -102,6 +116,9 @@ namespace Abp.Runtime.Session
             }
         }
 
+        /// <summary>
+        /// 模拟租户Id
+        /// </summary>
         public virtual int? ImpersonatorTenantId
         {
             get
@@ -131,7 +148,9 @@ namespace Abp.Runtime.Session
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
+        /// <param name="multiTenancy">多租户配置</param>
         public ClaimsAbpSession(IMultiTenancyConfig multiTenancy)
         {
             _multiTenancy = multiTenancy;

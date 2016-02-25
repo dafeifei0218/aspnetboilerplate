@@ -2,15 +2,17 @@
 {
     /// <summary>
     /// Extension methods for <see cref="IAbpSession"/>.
+    /// Abp会话扩展类
     /// </summary>
     public static class AbpSessionExtensions
     {
         /// <summary>
         /// Gets current User's Id.
         /// Throws <see cref="AbpException"/> if <see cref="IAbpSession.UserId"/> is null.
+        /// 获取当前用户Id，如果为空，抛出AbpException异常
         /// </summary>
-        /// <param name="session">Session object.</param>
-        /// <returns>Current User's Id.</returns>
+        /// <param name="session">Session object. 会话对象</param>
+        /// <returns>Current User's Id. 当前用户Id</returns>
         public static long GetUserId(this IAbpSession session)
         {
             if (!session.UserId.HasValue)
@@ -24,9 +26,10 @@
         /// <summary>
         /// Gets current Tenant's Id.
         /// Throws <see cref="AbpException"/> if <see cref="IAbpSession.TenantId"/> is null.
+        /// 获取当前用户Id，如果为空，抛出AbpException异常
         /// </summary>
-        /// <param name="session">Session object.</param>
-        /// <returns>Current Tenant's Id.</returns>
+        /// <param name="session">Session object. 会话对象</param>
+        /// <returns>Current Tenant's Id. 当前用户Id</returns>
         /// <exception cref="AbpException"></exception>
         public static int GetTenantId(this IAbpSession session)
         {

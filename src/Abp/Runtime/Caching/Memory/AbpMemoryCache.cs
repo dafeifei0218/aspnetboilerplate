@@ -40,12 +40,14 @@ namespace Abp.Runtime.Caching.Memory
         /// <param name="slidingExpireTime">过期时间</param>
         public override void Set(string key, object value, TimeSpan? slidingExpireTime = null)
         {
+            //缓存不能插入null值
             if (value == null)
             {
                 throw new AbpException("Can not insert null values to the cache!");
             }
 
             //TODO: Optimize by using a default CacheItemPolicy?
+            //通过使用默认CacheItemPolicy优化？
             _memoryCache.Set(
                 key,
                 value,

@@ -6,6 +6,7 @@ namespace Abp.Runtime.Validation
     /// <summary>
     /// Defines interface that must be implemented by classes those must be validated with custom rules.
     /// So, implementing class can define it's own validation logic.
+    /// 自定义验证器
     /// </summary>
     public interface ICustomValidate : IValidate
     {

@@ -5,39 +5,64 @@ using Abp.Extensions;
 
 namespace Abp.Runtime.Validation
 {
+    /// <summary>
+    /// 字符串值验证器
+    /// </summary>
     [Serializable]
     [Validator("STRING")]
     public class StringValueValidator : ValueValidatorBase
     {
+        /// <summary>
+        /// 允许为空
+        /// </summary>
         public bool AllowNull
         {
             get { return (this["AllowNull"] ?? "false").To<bool>(); }
             set { this["AllowNull"] = value.ToString().ToLower(CultureInfo.InvariantCulture); }
         }
 
+        /// <summary>
+        /// 最小长度
+        /// </summary>
         public int MinLength
         {
             get { return (this["MinLength"] ?? "0").To<int>(); }
             set { this["MinLength"] = value; }
         }
 
+        /// <summary>
+        /// 最大长度
+        /// </summary>
         public int MaxLength
         {
             get { return (this["MaxLength"] ?? "0").To<int>(); }
             set { this["MaxLength"] = value; }
         }
 
+        /// <summary>
+        /// 正则表达式
+        /// </summary>
         public string RegularExpression
         {
             get { return this["RegularExpression"] as string; }
             set { this["RegularExpression"] = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public StringValueValidator()
         {
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="minLength"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="regularExpression"></param>
+        /// <param name="allowNull"></param>
         public StringValueValidator(int minLength = 0, int maxLength = 0, string regularExpression = null, bool allowNull = false)
         {
             MinLength = minLength;
@@ -46,6 +71,11 @@ namespace Abp.Runtime.Validation
             AllowNull = allowNull;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public override bool IsValid(object value)
         {
             if (value == null)

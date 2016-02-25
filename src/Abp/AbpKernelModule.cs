@@ -29,9 +29,15 @@ namespace Abp
     /// <summary>
     /// Kernel (core) module of the ABP system.
     /// No need to depend on this, it's automatically the first module always.
+    /// Abp内核模块。
+    /// 内核（核心）的ABP系统模块。
+    /// 不需要依赖于此，它总是自动的第一个模块。
     /// </summary>
     public sealed class AbpKernelModule : AbpModule
     {
+        /// <summary>
+        /// 预初始化方法
+        /// </summary>
         public override void PreInitialize()
         {
             IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());

@@ -32,7 +32,7 @@ namespace Abp.Modules
         /// <summary>
         /// This is the first event called on application startup. 
         /// Codes can be placed here to run before dependency injection registrations.
-        /// 预初始化之方法，
+        /// 预初始化方法，
         /// 这是第一个在应用程序启动时调用的事件。
         /// 代码可以放置在这里，在运行依赖注入注册之前执行。
         /// </summary>
