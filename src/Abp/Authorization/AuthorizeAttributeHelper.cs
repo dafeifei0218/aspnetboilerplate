@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Dependency;
+using Abp.Localization;
 using Abp.Runtime.Session;
 using Abp.Threading;
 
@@ -21,6 +22,8 @@ namespace Abp.Authorization
         /// </summary>
         public IPermissionChecker PermissionChecker { get; set; }
 
+        public ILocalizationManager LocalizationManager { get; set; }
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -28,6 +31,7 @@ namespace Abp.Authorization
         {
             AbpSession = NullAbpSession.Instance;
             PermissionChecker = NullPermissionChecker.Instance;
+            LocalizationManager = NullLocalizationManager.Instance;
         }
 
         /// <summary>
@@ -40,7 +44,7 @@ namespace Abp.Authorization
             //如果UserId没有值，返回异常
             if (!AbpSession.UserId.HasValue)
             {
-                throw new AbpAuthorizationException("No user logged in!");
+                throw new AbpAuthorizationException(LocalizationManager.GetString(AbpConsts.LocalizationSourceName, "CurrentUserDidNotLoginToTheApplication"));
             }
 
             foreach (var authorizeAttribute in authorizeAttributes)
@@ -48,7 +52,7 @@ namespace Abp.Authorization
                 await PermissionChecker.AuthorizeAsync(authorizeAttribute.RequireAllPermissions, authorizeAttribute.Permissions);
             }
         }
-        
+
         /// <summary>
         /// 授权-异步
         /// </summary>

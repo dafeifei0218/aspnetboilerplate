@@ -25,7 +25,7 @@ namespace Abp.Logging
         /// </summary>
         static LogHelper()
         {
-            Logger = IocManager.Instance.IsRegistered(typeof (ILoggerFactory))
+            Logger = IocManager.Instance.IsRegistered(typeof(ILoggerFactory))
                 ? IocManager.Instance.Resolve<ILoggerFactory>().Create(typeof(LogHelper))
                 : NullLogger.Instance;
         }
@@ -46,16 +46,22 @@ namespace Abp.Logging
         /// <param name="ex">异常</param>
         public static void LogException(ILogger logger, Exception ex)
         {
-            logger.Error(ex.ToString(), ex);
-            LogValidationErrors(ex);
+            var severity = (ex is IHasLogSeverity)
+                    ? (ex as IHasLogSeverity).Severity
+                    : LogSeverity.Error;
+
+            logger.Log(severity, ex.Message, ex);
+
+            LogValidationErrors(logger, ex);
         }
 
         /// <summary>
         /// 验证错误日志
         /// </summary>
         /// <param name="exception">异常</param>
-        private static void LogValidationErrors(Exception exception)
+        private static void LogValidationErrors(ILogger logger, Exception exception)
         {
+            //Try to find inner validation exception
             if (exception is AggregateException && exception.InnerException != null)
             {
                 var aggException = exception as AggregateException;
@@ -76,7 +82,7 @@ namespace Abp.Logging
                 return;
             }
 
-            Logger.Warn("There are " + validationException.ValidationErrors.Count + " validation errors:");
+            logger.Log(validationException.Severity, "There are " + validationException.ValidationErrors.Count + " validation errors:");
             foreach (var validationResult in validationException.ValidationErrors)
             {
                 var memberNames = "";
@@ -85,7 +91,7 @@ namespace Abp.Logging
                     memberNames = " (" + string.Join(", ", validationResult.MemberNames) + ")";
                 }
 
-                Logger.Warn(validationResult.ErrorMessage + memberNames);
+                logger.Log(validationException.Severity, validationResult.ErrorMessage + memberNames);
             }
         }
     }
