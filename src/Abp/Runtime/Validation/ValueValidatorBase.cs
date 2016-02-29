@@ -6,9 +6,15 @@ using Abp.Collections.Extensions;
 
 namespace Abp.Runtime.Validation
 {
+    /// <summary>
+    /// 值验证基类
+    /// </summary>
     [Serializable]
     public abstract class ValueValidatorBase : IValueValidator
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public virtual string Name
         {
             get
@@ -26,8 +32,10 @@ namespace Abp.Runtime.Validation
         /// <summary>
         /// Gets/sets arbitrary objects related to this object.
         /// Gets null if given key does not exists.
+        /// 获取/设置与此对象相关的任意对象。
+        /// 如果给定键不存在，返回空。
         /// </summary>
-        /// <param name="key">Key</param>
+        /// <param name="key">Key 键</param>
         public object this[string key]
         {
             get { return Attributes.GetOrDefault(key); }
@@ -36,11 +44,20 @@ namespace Abp.Runtime.Validation
 
         /// <summary>
         /// Arbitrary objects related to this object.
+        /// 属性，与此对象相关的任意对象。
         /// </summary>
         public IDictionary<string, object> Attributes { get; private set; }
 
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <returns></returns>
         public abstract bool IsValid(object value);
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         protected ValueValidatorBase()
         {
             Attributes = new Dictionary<string, object>();

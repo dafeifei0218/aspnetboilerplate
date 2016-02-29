@@ -12,8 +12,9 @@ namespace Abp.Runtime.Validation
     {
         /// <summary>
         /// This method is used to validate the object.
+        /// 添加验证错误，此方法用于验证对象
         /// </summary>
-        /// <param name="results">List of validation results (errors). Add validation errors to this list.</param>
+        /// <param name="results">List of validation results (errors). Add validation errors to this list. 验证结果列表（错误）。将验证错误添加到该列表中</param>
         void AddValidationErrors(List<ValidationResult> results);
     }
 }

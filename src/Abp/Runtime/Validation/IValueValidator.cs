@@ -28,7 +28,7 @@ namespace Abp.Runtime.Validation
         /// 是否有效
         /// </summary>
         /// <param name="value">值</param>
-        /// <returns></returns>
+        /// <returns>true：有效，false：无效</returns>
         bool IsValid(object value);
     }
 }

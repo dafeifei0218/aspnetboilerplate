@@ -5,15 +5,15 @@ using System.Text;
 namespace Abp.Text.Formatting
 {
     /// <summary>
-    /// 
+    /// 格式化字符串标记
     /// </summary>
     internal class FormatStringTokenizer
     {
         /// <summary>
-        /// 
+        /// 标记
         /// </summary>
-        /// <param name="format"></param>
-        /// <param name="includeBracketsForDynamicValues"></param>
+        /// <param name="format">格式化字符串</param>
+        /// <param name="includeBracketsForDynamicValues">包括动态值是否括号，默认false</param>
         /// <returns></returns>
         public List<FormatStringToken> Tokenize(string format, bool includeBracketsForDynamicValues = false)
         {

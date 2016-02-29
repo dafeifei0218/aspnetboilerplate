@@ -49,7 +49,7 @@ namespace Abp.Runtime.Validation
         }
 
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
         public StringValueValidator()
         {
@@ -59,10 +59,10 @@ namespace Abp.Runtime.Validation
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="minLength"></param>
-        /// <param name="maxLength"></param>
-        /// <param name="regularExpression"></param>
-        /// <param name="allowNull"></param>
+        /// <param name="minLength">最小长度</param>
+        /// <param name="maxLength">最大长度</param>
+        /// <param name="regularExpression">正则表达式，默认为null</param>
+        /// <param name="allowNull">允许为空，默认false</param>
         public StringValueValidator(int minLength = 0, int maxLength = 0, string regularExpression = null, bool allowNull = false)
         {
             MinLength = minLength;
@@ -72,9 +72,9 @@ namespace Abp.Runtime.Validation
         }
 
         /// <summary>
-        /// 
+        /// 是否有效
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">值</param>
         /// <returns></returns>
         public override bool IsValid(object value)
         {
