@@ -4,7 +4,7 @@ namespace Abp.Application.Navigation
 {
     /// <summary>
     /// Manages navigation in the application.
-    /// 导航管理类
+    /// 导航管理接口
     /// </summary>
     public interface INavigationManager
     {

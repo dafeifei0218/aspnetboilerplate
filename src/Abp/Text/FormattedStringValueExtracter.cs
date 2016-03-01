@@ -10,19 +10,23 @@ namespace Abp.Text
     /// <summary>
     /// This class is used to extract dynamic values from a formatted string.
     /// It works as reverse of <see cref="string.Format(string,object)"/>
+    /// 格式化字符串提取
     /// </summary>
     /// <example>
     /// Say that str is "My name is Neo." and format is "My name is {name}.".
     /// Then Extract method gets "Neo" as "name".  
+    /// 假设字符串是"My name is Neo.",格式化后为"My name is {name}." 
+    /// 然后，提取方法获取"Neo" 作为 "name"
     /// </example>
     public class FormattedStringValueExtracter
     {
         /// <summary>
         /// Extracts dynamic values from a formatted string.
+        /// 提取，从格式化的字符串从提取动态值对象.
         /// </summary>
-        /// <param name="str">String including dynamic values</param>
-        /// <param name="format">Format of the string</param>
-        /// <param name="ignoreCase">True, to search case-insensitive.</param>
+        /// <param name="str">String including dynamic values 包含动态值的对象</param>
+        /// <param name="format">Format of the string 格式化后的字符串</param>
+        /// <param name="ignoreCase">True, to search case-insensitive. true,搜索时，忽略大小写。</param>
         public ExtractionResult Extract(string str, string format, bool ignoreCase = false)
         {
             var stringComparison = ignoreCase
@@ -88,12 +92,15 @@ namespace Abp.Text
         /// <summary>
         /// Checks if given <see cref="str"/> fits to given <see cref="format"/>.
         /// Also gets extracted values.
+        /// 是否匹配，
+        /// 检查给定的<see cref="str"/> 是否符合给定的<see cref="format"/>.
+        /// 同时，提取值。
         /// </summary>
-        /// <param name="str">String including dynamic values</param>
-        /// <param name="format">Format of the string</param>
-        /// <param name="values">Array of extracted values if matched</param>
-        /// <param name="ignoreCase">True, to search case-insensitive</param>
-        /// <returns>True, if matched.</returns>
+        /// <param name="str">String including dynamic values 包含动态时的字符串</param>
+        /// <param name="format">Format of the string 字符串格式</param>
+        /// <param name="values">Array of extracted values if matched 提取值的数组（如果匹配）</param>
+        /// <param name="ignoreCase">True, to search case-insensitive. true,忽略大小写</param>
+        /// <returns>True, if matched. true,如果匹配</returns>
         public static bool IsMatch(string str, string format, out string[] values, bool ignoreCase = false)
         {
             var result = new FormattedStringValueExtracter().Extract(str, format, ignoreCase);
@@ -109,19 +116,26 @@ namespace Abp.Text
 
         /// <summary>
         /// Used as return value of <see cref="Extract"/> method.
+        /// 提取结果，用作方法<see cref="Extract"/>的返回值类型.
         /// </summary>
         public class ExtractionResult
         {
             /// <summary>
             /// Is fully matched.
+            /// 是否匹配
             /// </summary>
             public bool IsMatch { get; set; }
 
             /// <summary>
             /// List of matched dynamic values.
+            /// 匹配的动态值列表
             /// </summary>
             public List<NameValue> Matches { get; private set; }
 
+            /// <summary>
+            /// 构造函数
+            /// </summary>
+            /// <param name="isMatch"></param>
             internal ExtractionResult(bool isMatch)
             {
                 IsMatch = isMatch;

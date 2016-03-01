@@ -11,19 +11,19 @@ namespace Abp.Application.Navigation
     {
         /// <summary>
         /// Gets a menu specialized for given user.
-        /// 获取菜单
+        /// 获取给定用户和菜单项名称的导航（菜单）
         /// </summary>
-        /// <param name="menuName">Unique name of the menu 菜单名</param>
-        /// <param name="userId">User id or null for anonymous users 用户Id</param>
-        /// <param name="tenantId"></param>
+        /// <param name="menuName">Unique name of the menu 菜单名称</param>
+        /// <param name="userId">User id or null for anonymous users 用户Id或null（表示匿名用户）</param>
+        /// <param name="tenantId">租户Id</param>
         Task<UserMenu> GetMenuAsync(string menuName, long? userId, int? tenantId = null);
 
         /// <summary>
         /// Gets all menus specialized for given user.
-        /// 获取菜单
+        /// 获取给用户的所有菜单项
         /// </summary>
-        /// <param name="userId">User id or null for anonymous users  用户Id</param>
-        /// <param name="tenantId"></param>
+        /// <param name="userId">User id or null for anonymous users  用户Id或null（表示匿名用户）</param>
+        /// <param name="tenantId">租户Id</param>
         Task<IReadOnlyList<UserMenu>> GetMenusAsync(long? userId, int? tenantId = null);
     }
 }

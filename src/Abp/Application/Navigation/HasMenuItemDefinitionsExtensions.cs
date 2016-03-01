@@ -12,10 +12,11 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// Searches and gets a <see cref="MenuItemDefinition"/> by it's unique name.
         /// Throws exception if can not find.
-        /// 根据菜单名称获取项目，如果未找到返回异常
+        /// 根据菜单名称获取项目。
+        /// 如果未找到，返回异常
         /// </summary>
         /// <param name="source">Source object 数据源</param>
-        /// <param name="name">Unique name of the source 菜单项</param>
+        /// <param name="name">Unique name of the source 菜单项名称</param>
         public static MenuItemDefinition GetItemByName(this IHasMenuItemDefinitions source, string name)
         {
             var item = GetItemByNameOrNull(source, name);
@@ -30,10 +31,11 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// Searches all menu items (recursively) in the source and gets a <see cref="MenuItemDefinition"/> by it's unique name.
         /// Returns null if can not find.
-        /// 根据菜单名称获取项目，如果未找到返回null
+        /// 使用递归方式根据菜单名称获取项目。
+        /// 如果未找到，返回null
         /// </summary>
         /// <param name="source">Source object 数据源</param>
-        /// <param name="name">Unique name of the source 菜单项</param>
+        /// <param name="name">Unique name of the source 菜单项名称</param>
         public static MenuItemDefinition GetItemByNameOrNull(this IHasMenuItemDefinitions source, string name)
         {
             if (source == null)

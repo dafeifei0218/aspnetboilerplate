@@ -10,14 +10,32 @@ using Abp.Runtime.Session;
 
 namespace Abp.Application.Navigation
 {
+    /// <summary>
+    /// 用户导航管理类
+    /// </summary>
     internal class UserNavigationManager : IUserNavigationManager, ITransientDependency
     {
+        /// <summary>
+        /// 权限检查器
+        /// </summary>
         public IPermissionChecker PermissionChecker { get; set; }
 
+        /// <summary>
+        /// Abp会话
+        /// </summary>
         public IAbpSession AbpSession { get; set; }
 
+        /// <summary>
+        /// 导航管理器
+        /// </summary>
         private readonly INavigationManager _navigationManager;
+        /// <summary>
+        /// 本地化上下文
+        /// </summary>
         private readonly ILocalizationContext _localizationContext;
+        /// <summary>
+        /// Ioc解析器
+        /// </summary>
         private readonly IIocResolver _iocResolver;
 
         //private readonly IFeatureDependencyContext _featureDependencyContext;
@@ -35,9 +53,9 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="navigationManager"></param>
-        /// <param name="localizationContext"></param>
-        /// <param name="iocResolver"></param>
+        /// <param name="navigationManager">导航管理器</param>
+        /// <param name="localizationContext">本地化上下文</param>
+        /// <param name="iocResolver">Ioc解析</param>
         public UserNavigationManager(
             INavigationManager navigationManager,
             ILocalizationContext localizationContext,
@@ -51,10 +69,10 @@ namespace Abp.Application.Navigation
         }
 
         /// <summary>
-        /// 获取菜单
+        /// 获取给定用户和菜单项名称的菜单-异步
         /// </summary>
         /// <param name="menuName">菜单名称</param>
-        /// <param name="userId">用户Id</param>
+        /// <param name="userId">用户Id或null(表示匿名用户）</param>
         /// <param name="tenantId">租户Id</param>
         /// <returns></returns>
         public async Task<UserMenu> GetMenuAsync(string menuName, long? userId, int? tenantId = null)
@@ -71,9 +89,9 @@ namespace Abp.Application.Navigation
         }
 
         /// <summary>
-        /// 获取菜单
+        ///  获取给用户的所有菜单项-异步
         /// </summary>
-        /// <param name="userId">用户Id</param>
+        /// <param name="userId">用户Id或null(表示匿名用户）</param>
         /// <param name="tenantId">租户Id</param>
         /// <returns></returns>
         public async Task<IReadOnlyList<UserMenu>> GetMenusAsync(long? userId, int? tenantId = null)
@@ -88,6 +106,14 @@ namespace Abp.Application.Navigation
             return userMenus;
         }
 
+        /// <summary>
+        /// 填充用户菜单项
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id或null(表示匿名用户）</param>
+        /// <param name="menuItemDefinitions">菜单项定义集合</param>
+        /// <param name="userMenuItems">用户菜单项集合</param>
+        /// <returns></returns>
         private async Task<int> FillUserMenuItems(int? tenantId, long? userId, IList<MenuItemDefinition> menuItemDefinitions, IList<UserMenuItem> userMenuItems)
         {
             var addedMenuItemCount = 0;

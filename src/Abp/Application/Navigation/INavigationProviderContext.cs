@@ -8,7 +8,7 @@
     {
         /// <summary>
         /// Gets a reference to the menu manager.
-        /// 导航管理
+        /// 获取一个菜单（导航）管理引用
         /// </summary>
         INavigationManager Manager { get; }
     }

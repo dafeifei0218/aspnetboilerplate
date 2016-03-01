@@ -8,14 +8,15 @@ namespace Abp.Application.Navigation
 {
     /// <summary>
     /// Represents an item in a <see cref="MenuDefinition"/>.
-    /// 菜单项定义
+    /// 菜单项定义，表示<see cref="MenuDefinition"/>中的一项
     /// </summary>
     public class MenuItemDefinition : IHasMenuItemDefinitions
     {
         /// <summary>
         /// Unique name of the menu item in the application. 
         /// Can be used to find this menu item later.
-        /// 菜单名称
+        /// 菜单名称。
+        /// 可用于查找该菜单项
         /// </summary>
         public string Name { get; private set; }
 
@@ -33,20 +34,20 @@ namespace Abp.Application.Navigation
         
         /// <summary>
         /// Icon of the menu item if exists. Optional.
-        /// 菜单图标，可选
+        /// 菜单图标（如果存在），可选
         /// </summary>
         public string Icon { get; set; }
         
         /// <summary>
         /// The URL to navigate when this menu item is selected. Optional.
-        /// 菜单链接，可选
+        /// 当菜单被选中时，导航的链接，可选
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
         /// A permission name. Only users that has this permission can see this menu item.
         /// Optional.
-        /// 权限名称，只有这个权限的用户才能看到这个菜单项，可选。
+        /// 权限名称，只有当用户拥有此权限时，才能看到这个菜单项，可选。
         /// </summary>
         public string RequiredPermissionName { get; set; }
 
@@ -59,13 +60,13 @@ namespace Abp.Application.Navigation
 
         /// <summary>
         /// This can be set to true if only authenticated users should see this menu item.
-        /// 必须认证，如果只有经过身份验证的用户应该看到这个菜单项，该设置为真。
+        /// 必须认证，只有授权用户才能看到该菜单项，将其设置为true。
         /// </summary>
         public bool RequiresAuthentication { get; set; }
 
         /// <summary>
         /// Returns true if this menu item has no child <see cref="Items"/>.
-        /// 是否末节点，如果这个菜单项没有子菜单项，则返回true
+        /// 是否末节点，如果该菜单项没有<see cref="Items"/>子菜单项，则返回true
         /// </summary>
         public bool IsLeaf
         {
@@ -74,7 +75,7 @@ namespace Abp.Application.Navigation
 
         /// <summary>
         /// Can be used to store a custom object related to this menu item. Optional.
-        /// 自定义数据
+        /// 自定义数据，可用于存储与该菜单项关联的自字义数据[可选]
         /// </summary>
         public object CustomData { get; set; }
 
@@ -126,8 +127,8 @@ namespace Abp.Application.Navigation
         /// Adds a <see cref="MenuItemDefinition"/> to <see cref="Items"/>.
         /// 添加菜单
         /// </summary>
-        /// <param name="menuItem"><see cref="MenuItemDefinition"/> to be added 菜单项定义</param>
-        /// <returns>This <see cref="MenuItemDefinition"/> object</returns>
+        /// <param name="menuItem"><see cref="MenuItemDefinition"/> to be added. 菜单项定义</param>
+        /// <returns>This <see cref="MenuItemDefinition"/> object. 返回菜单项</returns>
         public MenuItemDefinition AddItem(MenuItemDefinition menuItem)
         {
             Items.Add(menuItem);

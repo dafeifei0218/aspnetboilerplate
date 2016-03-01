@@ -1,7 +1,7 @@
 namespace Abp.Application.Navigation
 {
     /// <summary>
-    /// 导航提供者上下文接口
+    /// 导航提供者上下文
     /// </summary>
     internal class NavigationProviderContext : INavigationProviderContext
     {
@@ -13,7 +13,7 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="manager"></param>
+        /// <param name="manager">导航管理</param>
         public NavigationProviderContext(INavigationManager manager)
         {
             Manager = manager;

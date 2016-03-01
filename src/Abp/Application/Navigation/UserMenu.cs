@@ -5,7 +5,7 @@ namespace Abp.Application.Navigation
 {
     /// <summary>
     /// Represents a menu shown to the user.
-    /// 代表用户显示的菜单
+    /// 表示一个用户显示的菜单
     /// </summary>
     public class UserMenu
     {
@@ -29,7 +29,7 @@ namespace Abp.Application.Navigation
 
         /// <summary>
         /// Menu items (first level).
-        /// 菜单项
+        /// 菜单项（第一级）
         /// </summary>
         public IList<UserMenuItem> Items { get; set; }
 
@@ -45,7 +45,8 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// Creates a new <see cref="UserMenu"/> object from given <see cref="MenuDefinition"/>.
         /// 构造函数
-        /// <param name="menuDefinition"></param>
+        /// <param name="menuDefinition">菜单定义</param>
+        /// <param name="localizationContext">本地化上下文</param>
         /// </summary>
         internal UserMenu(MenuDefinition menuDefinition, ILocalizationContext localizationContext)
         {

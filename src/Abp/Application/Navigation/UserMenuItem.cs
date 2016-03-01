@@ -5,7 +5,7 @@ namespace Abp.Application.Navigation
 {
     /// <summary>
     /// Represents an item in a <see cref="UserMenu"/>.
-    /// 用户菜单的项
+    /// 用户菜单的项，表示<see cref="UserMenu"/>中的一个菜单项
     /// </summary>
     public class UserMenuItem
     {
@@ -17,37 +17,37 @@ namespace Abp.Application.Navigation
 
         /// <summary>
         /// Icon of the menu item if exists.
-        /// 菜单图标
+        /// 菜单图标（如果存在）
         /// </summary>
         public string Icon { get; set; }
 
         /// <summary>
         /// Display name of the menu item.
-        /// 菜单显示名称
+        /// 菜单项显示名称
         /// </summary>
         public string DisplayName { get; private set; }
 
         /// <summary>
         /// The Display order of the menu. Optional.
-        /// 菜单的显示顺序，可选
+        /// 菜单项的显示顺序，可选
         /// </summary>
         public int Order { get; set; }
 
         /// <summary>
         /// The URL to navigate when this menu item is selected.
-        /// 菜单链接
+        /// 如果菜单项被选中，导航的链接
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
         /// A custom object related to this menu item.
-        /// 自定义数据
+        /// 自定义数据，与菜单项关联的自定义对象。
         /// </summary>
         public object CustomData { get; set; }
 
         /// <summary>
         /// Sub items of this menu item.
-        /// 该菜单项的子项
+        /// 该菜单项的子项集合
         /// </summary>
         public IList<UserMenuItem> Items { get; private set; }
 

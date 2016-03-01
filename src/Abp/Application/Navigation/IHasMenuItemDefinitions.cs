@@ -4,7 +4,7 @@ namespace Abp.Application.Navigation
 {
     /// <summary>
     /// Declares common interface for classes those have menu items.
-    /// 菜单项定义
+    /// 菜单项定义接口
     /// </summary>
     public interface IHasMenuItemDefinitions
     {
