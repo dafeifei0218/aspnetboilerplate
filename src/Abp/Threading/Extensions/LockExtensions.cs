@@ -4,11 +4,13 @@ namespace Abp.Threading.Extensions
 {
     /// <summary>
     /// Extension methods to make locking easier.
+    /// 
     /// </summary>
     public static class LockExtensions
     {
         /// <summary>
         /// Executes given <see cref="action"/> by locking given <see cref="source"/> object.
+        /// 
         /// </summary>
         /// <param name="source">Source object (to be locked)</param>
         /// <param name="action">Action (to be executed)</param>
@@ -22,6 +24,7 @@ namespace Abp.Threading.Extensions
 
         /// <summary>
         /// Executes given <see cref="action"/> by locking given <see cref="source"/> object.
+        /// 
         /// </summary>
         /// <typeparam name="T">Type of the object (to be locked)</typeparam>
         /// <param name="source">Source object (to be locked)</param>
@@ -36,6 +39,7 @@ namespace Abp.Threading.Extensions
 
         /// <summary>
         /// Executes given <see cref="func"/> and returns it's value by locking given <see cref="source"/> object.
+        /// 
         /// </summary>
         /// <typeparam name="T">Type of the object (to be locked)</typeparam>
         /// <typeparam name="TResult">Return type</typeparam>
@@ -52,6 +56,7 @@ namespace Abp.Threading.Extensions
 
         /// <summary>
         /// Executes given <see cref="func"/> and returns it's value by locking given <see cref="source"/> object.
+        /// 
         /// </summary>
         /// <typeparam name="T">Type of the object (to be locked)</typeparam>
         /// <typeparam name="TResult">Return type</typeparam>

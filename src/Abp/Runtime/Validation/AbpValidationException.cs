@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Abp.Logging;
 
 namespace Abp.Runtime.Validation
 {
@@ -18,6 +19,13 @@ namespace Abp.Runtime.Validation
         /// </summary>
         public List<ValidationResult> ValidationErrors { get; set; }
 
+
+        /// <summary>
+        /// Exception severity.
+        /// Default: Warn.
+        /// </summary>
+        public LogSeverity Severity { get; set; }
+
         /// <summary>
         /// Constructor.
         /// 构造函数
@@ -25,6 +33,7 @@ namespace Abp.Runtime.Validation
         public AbpValidationException()
         {
             ValidationErrors = new List<ValidationResult>();
+            Severity = LogSeverity.Warn;
         }
 
         /// <summary>

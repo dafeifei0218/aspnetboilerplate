@@ -10,7 +10,10 @@ namespace Abp
     /// This is the main class that is responsible to start entire ABP system.
     /// Prepares dependency injection and registers core components needed for startup.
     /// It must be instantiated and initialized (see <see cref="Initialize"/>) first in an application.
-    /// Abp系统启动类，准备依赖注入和启动所需的核心组件
+    /// Abp系统启动类，
+    /// 这是一个主要的类，它负责启动整个Abp系统。
+    /// 在启动中准备依赖注入和核心组件注册。
+    /// 在一个应用中，他必须最先实例化（查看<see cref="Initialize"/>）。
     /// </summary>
     public class AbpBootstrapper : IDisposable
     {
@@ -22,11 +25,13 @@ namespace Abp
 
         /// <summary>
         /// Is this object disposed before?
-        /// 是否释放资源
+        /// 对象是否释放资源
         /// </summary>
         protected bool IsDisposed;
 
-        //Abp模块管理类
+        /// <summary>
+        /// Abp模块管理类
+        /// </summary>
         private IAbpModuleManager _moduleManager;
 
         /// <summary>
@@ -43,7 +48,7 @@ namespace Abp
         /// Creates a new <see cref="AbpBootstrapper"/> instance.
         /// 构造函数
         /// </summary>
-        /// <param name="iocManager">IIocManager that is used to bootstrap the ABP system. IOC管理类</param>
+        /// <param name="iocManager">IIocManager that is used to bootstrap the ABP system. IOC管理类，启动ABP系统使用的IIocManager。</param>
         public AbpBootstrapper(IIocManager iocManager)
         {
             IocManager = iocManager;
@@ -51,21 +56,24 @@ namespace Abp
 
         /// <summary>
         /// Initializes the ABP system.
-        /// ABP系统初始化
+        /// 初始化ABP系统
         /// </summary>
         public virtual void Initialize()
         {
+            //Abp核心安装程序
             IocManager.IocContainer.Install(new AbpCoreInstaller());
 
+            //abp启动配置初始化
             IocManager.Resolve<AbpStartupConfiguration>().Initialize();
 
+            //解析abp模块
             _moduleManager = IocManager.Resolve<IAbpModuleManager>();
             _moduleManager.InitializeModules();
         }
 
         /// <summary>
         /// Disposes the ABP system.
-        /// ABP系统销毁
+        /// 销毁ABP系统
         /// </summary>
         public virtual void Dispose()
         {

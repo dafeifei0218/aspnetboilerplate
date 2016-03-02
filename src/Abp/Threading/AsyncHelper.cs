@@ -7,13 +7,15 @@ namespace Abp.Threading
 {
     /// <summary>
     /// Provides some helper methods to work with async methods.
+    /// 异步帮助类，为异步方法调用提供一些辅助方法。
     /// </summary>
     public static class AsyncHelper
     {
         /// <summary>
         /// Checks if given method is an async method.
+        /// 检查给定的方法是否是一个异步方法。
         /// </summary>
-        /// <param name="method">A method to check</param>
+        /// <param name="method">A method to check 需要检测的方法</param>
         public static bool IsAsyncMethod(MethodInfo method)
         {
             return (
@@ -24,10 +26,11 @@ namespace Abp.Threading
 
         /// <summary>
         /// Runs a async method synchronously.
+        /// 同步地运行一个异步方法
         /// </summary>
-        /// <param name="func">A function that returns a result</param>
-        /// <typeparam name="TResult">Result type</typeparam>
-        /// <returns>Result of the async operation</returns>
+        /// <param name="func">A function that returns a result 返回一个结果的方法委托</param>
+        /// <typeparam name="TResult">Result type 返回类型</typeparam>
+        /// <returns>Result of the async operation 返回异步操作的结果</returns>
         public static TResult RunSync<TResult>(Func<Task<TResult>> func)
         {
             return AsyncContext.Run(func);

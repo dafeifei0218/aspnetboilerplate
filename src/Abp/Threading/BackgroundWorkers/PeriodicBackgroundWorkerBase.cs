@@ -5,6 +5,7 @@ namespace Abp.Threading.BackgroundWorkers
 {
     /// <summary>
     /// Extends <see cref="BackgroundWorkerBase"/> to add a periodic running Timer. 
+    /// 周期后台工作基类，
     /// </summary>
     public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
     {

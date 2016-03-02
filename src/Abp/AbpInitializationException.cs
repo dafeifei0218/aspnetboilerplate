@@ -5,7 +5,7 @@ namespace Abp
 {
     /// <summary>
     /// This exception is thrown if a problem on ABP initialization progress.
-    /// Abp初始化过程中印发此异常
+    /// Abp初始化过程中引发此异常
     /// </summary>
     [Serializable]
     public class AbpInitializationException : AbpException
