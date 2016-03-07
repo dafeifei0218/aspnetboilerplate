@@ -7,9 +7,13 @@ namespace Abp.Threading
     /// This class is copied from here:
     /// http://www.zpqrtbnk.net/posts/appdomains-threads-cultureinfos-and-paracetamol
     /// It's a workaround for application startup problem.
+    /// 
     /// </summary>
     public static class ThreadCultureSanitizer
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static void Sanitize()
         {
             var currentCulture = CultureInfo.CurrentCulture;

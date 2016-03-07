@@ -4,8 +4,17 @@ using System.Threading.Tasks;
 
 namespace Abp.Threading
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal static class InternalAsyncHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task AwaitTaskWithFinally(Task actualReturnValue, Action<Exception> finalAction)
         {
             Exception exception = null;
@@ -25,6 +34,13 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="postAction"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task AwaitTaskWithPostActionAndFinally(Task actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
         {
             Exception exception = null;
@@ -45,6 +61,14 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="preAction"></param>
+        /// <param name="postAction"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task AwaitTaskWithPreActionAndPostActionAndFinally(Func<Task> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
             Exception exception = null;
@@ -77,6 +101,13 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
         {
             Exception exception = null;
@@ -96,6 +127,13 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskReturnType"></param>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static object CallAwaitTaskWithFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Action<Exception> finalAction)
         {
             return typeof(InternalAsyncHelper)
@@ -104,6 +142,14 @@ namespace Abp.Threading
                 .Invoke(null, new object[] { actualReturnValue, finalAction });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="postAction"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
         {
             Exception exception = null;
@@ -125,6 +171,14 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskReturnType"></param>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="action"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static object CallAwaitTaskWithPostActionAndFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Func<Task> action, Action<Exception> finalAction)
         {
             return typeof (InternalAsyncHelper)
@@ -133,6 +187,15 @@ namespace Abp.Threading
                 .Invoke(null, new object[] { actualReturnValue, action, finalAction });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="preAction"></param>
+        /// <param name="postAction"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static async Task<T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<Task<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
             Exception exception = null;
@@ -167,6 +230,15 @@ namespace Abp.Threading
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskReturnType"></param>
+        /// <param name="actualReturnValue"></param>
+        /// <param name="preAction"></param>
+        /// <param name="postAction"></param>
+        /// <param name="finalAction"></param>
+        /// <returns></returns>
         public static object CallAwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult(Type taskReturnType, Func<object> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
             return typeof(InternalAsyncHelper)

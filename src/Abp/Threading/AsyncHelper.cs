@@ -38,8 +38,9 @@ namespace Abp.Threading
 
         /// <summary>
         /// Runs a async method synchronously.
+        /// 同步地运行一个异步方法
         /// </summary>
-        /// <param name="action">An async action</param>
+        /// <param name="action">An async action 一个异步动作</param>
         public static void RunSync(Func<Task> action)
         {
             AsyncContext.Run(action);

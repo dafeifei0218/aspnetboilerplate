@@ -13,26 +13,36 @@ namespace Abp.Threading.BackgroundWorkers
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PeriodicBackgroundWorkerBase"/> class.
+        /// 初始化一个新的<see cref="PeriodicBackgroundWorkerBase"/>类
         /// </summary>
-        /// <param name="timer">A timer.</param>
+        /// <param name="timer">A timer. 时间</param>
         protected PeriodicBackgroundWorkerBase(AbpTimer timer)
         {
             Timer = timer;
             Timer.Elapsed += Timer_Elapsed;
         }
 
+        /// <summary>
+        /// 开始
+        /// </summary>
         public override void Start()
         {
             base.Start();
             Timer.Start();
         }
 
+        /// <summary>
+        /// 停止
+        /// </summary>
         public override void Stop()
         {
             Timer.Stop();
             base.Stop();
         }
 
+        /// <summary>
+        /// 等待停止
+        /// </summary>
         public override void WaitToStop()
         {
             Timer.WaitToStop();
@@ -41,6 +51,7 @@ namespace Abp.Threading.BackgroundWorkers
 
         /// <summary>
         /// Handles the Elapsed event of the Timer.
+        /// 处理定时器的运行事件
         /// </summary>
         private void Timer_Elapsed(object sender, System.EventArgs e)
         {
@@ -56,6 +67,7 @@ namespace Abp.Threading.BackgroundWorkers
 
         /// <summary>
         /// Periodic works should be done by implementing this method.
+        /// 定期工作应通过实施这一方法
         /// </summary>
         protected abstract void DoWork();
     }
