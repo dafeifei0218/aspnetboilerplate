@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 namespace Abp.Threading
 {
     /// <summary>
-    /// 
+    /// 内部异步帮助类
     /// </summary>
     internal static class InternalAsyncHelper
     {
         /// <summary>
-        /// 
+        /// 等待任务完成，并在Finally快中执行Action
         /// </summary>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task AwaitTaskWithFinally(Task actualReturnValue, Action<Exception> finalAction)
         {
@@ -35,11 +35,11 @@ namespace Abp.Threading
         }
 
         /// <summary>
-        /// 
+        /// 等待任务
         /// </summary>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="postAction"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="postAction">方法</param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task AwaitTaskWithPostActionAndFinally(Task actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
         {
@@ -64,10 +64,10 @@ namespace Abp.Threading
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="preAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="preAction">预先执行的方法</param>
         /// <param name="postAction"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task AwaitTaskWithPreActionAndPostActionAndFinally(Func<Task> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
@@ -105,8 +105,8 @@ namespace Abp.Threading
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
         {
@@ -131,8 +131,8 @@ namespace Abp.Threading
         /// 
         /// </summary>
         /// <param name="taskReturnType"></param>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static object CallAwaitTaskWithFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Action<Exception> finalAction)
         {
@@ -146,9 +146,9 @@ namespace Abp.Threading
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="actualReturnValue"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
         /// <param name="postAction"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
         {
@@ -175,9 +175,9 @@ namespace Abp.Threading
         /// 
         /// </summary>
         /// <param name="taskReturnType"></param>
-        /// <param name="actualReturnValue"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
         /// <param name="action"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static object CallAwaitTaskWithPostActionAndFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Func<Task> action, Action<Exception> finalAction)
         {
@@ -191,10 +191,10 @@ namespace Abp.Threading
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="preAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="preAction">预先执行的方法</param>
         /// <param name="postAction"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static async Task<T> AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult<T>(Func<Task<T>> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
@@ -231,13 +231,13 @@ namespace Abp.Threading
         }
 
         /// <summary>
-        /// 
+        /// 调用AwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult
         /// </summary>
         /// <param name="taskReturnType"></param>
-        /// <param name="actualReturnValue"></param>
-        /// <param name="preAction"></param>
+        /// <param name="actualReturnValue">实际返回值</param>
+        /// <param name="preAction">预先执行的方法</param>
         /// <param name="postAction"></param>
-        /// <param name="finalAction"></param>
+        /// <param name="finalAction">最终执行的方法</param>
         /// <returns></returns>
         public static object CallAwaitTaskWithPreActionAndPostActionAndFinallyAndGetResult(Type taskReturnType, Func<object> actualReturnValue, Func<Task> preAction = null, Func<Task> postAction = null, Action<Exception> finalAction = null)
         {
