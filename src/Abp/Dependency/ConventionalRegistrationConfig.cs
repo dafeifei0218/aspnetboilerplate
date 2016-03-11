@@ -19,7 +19,7 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Creates a new <see cref="ConventionalRegistrationConfig"/> object.
-        /// 创建一个ConventionalRegistrationConfig对象
+        /// 创建一个<see cref="ConventionalRegistrationConfig"/>常规注册配置对象
         /// </summary>
         public ConventionalRegistrationConfig()
         {

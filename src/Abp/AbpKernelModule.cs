@@ -42,15 +42,21 @@ namespace Abp
         {
             IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
 
+            //验证拦截器注册
             ValidationInterceptorRegistrar.Initialize(IocManager);
 
+            //功能拦截器注册
             FeatureInterceptorRegistrar.Initialize(IocManager);
+            //审计拦截器注册
             AuditingInterceptorRegistrar.Initialize(IocManager);
 
+            //工作单元注册
             UnitOfWorkRegistrar.Initialize(IocManager);
 
+            //授权拦截器注册
             AuthorizationInterceptorRegistrar.Initialize(IocManager);
 
+            //审计配置
             Configuration.Auditing.Selectors.Add(
                 new NamedTypeSelector(
                     "Abp.ApplicationServices",
@@ -58,6 +64,7 @@ namespace Abp
                     )
                 );
 
+            //本地化源配置
             Configuration.Localization.Sources.Add(
                 new DictionaryBasedLocalizationSource(
                     AbpConsts.LocalizationSourceName,
@@ -65,10 +72,14 @@ namespace Abp
                         Assembly.GetExecutingAssembly(), "Abp.Localization.Sources.AbpXmlSource"
                         )));
 
+            //本地化设置
             Configuration.Settings.Providers.Add<LocalizationSettingProvider>();
+            //邮件设置
             Configuration.Settings.Providers.Add<EmailSettingProvider>();
+            //通知设置
             Configuration.Settings.Providers.Add<NotificationSettingProvider>();
 
+            //工作单元注册过滤器
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.SoftDelete, true);
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MustHaveTenant, true);
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MayHaveTenant, true);
@@ -76,12 +87,17 @@ namespace Abp
             ConfigureCaches();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public override void Initialize()
         {
             base.Initialize();
 
+            //IOC容器注册事件总线
             IocManager.IocContainer.Install(new EventBusInstaller(IocManager));
 
+            //IOC容器注册常规注册配置
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly(),
                 new ConventionalRegistrationConfig
                 {
@@ -89,6 +105,9 @@ namespace Abp
                 });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void PostInitialize()
         {
             RegisterMissingComponents();
@@ -108,6 +127,9 @@ namespace Abp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Shutdown()
         {
             if (Configuration.BackgroundJobs.IsJobExecutionEnabled)
@@ -116,24 +138,33 @@ namespace Abp
             }
         }
 
+        /// <summary>
+        /// 配置缓存
+        /// </summary>
         private void ConfigureCaches()
         {
+            //应用程序设置缓存8小时
             Configuration.Caching.Configure(AbpCacheNames.ApplicationSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromHours(8);
             });
 
+            //租户设置缓存60分钟
             Configuration.Caching.Configure(AbpCacheNames.TenantSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(60);
             });
 
+            //用户设置缓存20分钟
             Configuration.Caching.Configure(AbpCacheNames.UserSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(20);
             });
         }
 
+        /// <summary>
+        /// 注册缺少的组件
+        /// </summary>
         private void RegisterMissingComponents()
         {
             IocManager.RegisterIfNot<IGuidGenerator, SequentialGuidGenerator>(DependencyLifeStyle.Transient);

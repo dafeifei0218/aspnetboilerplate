@@ -4,12 +4,14 @@ namespace Abp
 {
     /// <summary>
     /// Can be used to store Name/Value (or Key/Value) pairs.
+    /// 名称值，可用于存储名称/值（或键/值）对。
     /// </summary>
     [Serializable]
     public class NameValue : NameValue<string>
     {
         /// <summary>
         /// Creates a new <see cref="NameValue"/>.
+        /// 创建一个<see cref="NameValue"/>。
         /// </summary>
         public NameValue()
         {
@@ -18,6 +20,7 @@ namespace Abp
 
         /// <summary>
         /// Creates a new <see cref="NameValue"/>.
+        /// 创建一个<see cref="NameValue"/>。
         /// </summary>
         public NameValue(string name, string value)
         {
@@ -28,7 +31,7 @@ namespace Abp
 
     /// <summary>
     /// Can be used to store Name/Value (or Key/Value) pairs.
-    /// 名称/值，可用于存储名称/值（或键/值）对
+    /// 名称/值，可用于存储名称/值（或键/值）对。
     /// </summary>
     [Serializable]
     public class NameValue<T>

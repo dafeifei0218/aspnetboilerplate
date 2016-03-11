@@ -9,16 +9,19 @@ namespace Abp.BackgroundJobs
 {
     /// <summary>
     /// Base class that can be used to implement <see cref="IBackgroundJob{TArgs}"/>.
+    /// 后台工作
     /// </summary>
     public abstract class BackgroundJob<TArgs> : IBackgroundJob<TArgs>
     {
         /// <summary>
         /// Reference to the setting manager.
+        /// 设置管理
         /// </summary>
         public ISettingManager SettingManager { protected get; set; }
 
         /// <summary>
         /// Reference to <see cref="IUnitOfWorkManager"/>.
+        /// 工作单元管理
         /// </summary>
         public IUnitOfWorkManager UnitOfWorkManager
         {
@@ -37,11 +40,13 @@ namespace Abp.BackgroundJobs
 
         /// <summary>
         /// Gets current unit of work.
+        /// 获取当前工作单元
         /// </summary>
         protected IActiveUnitOfWork CurrentUnitOfWork { get { return UnitOfWorkManager.Current; } }
 
         /// <summary>
         /// Reference to the localization manager.
+        /// 本地化管理
         /// </summary>
         public ILocalizationManager LocalizationManager { protected get; set; }
 
