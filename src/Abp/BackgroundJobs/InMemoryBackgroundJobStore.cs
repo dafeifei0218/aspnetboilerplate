@@ -10,6 +10,7 @@ namespace Abp.BackgroundJobs
     /// In memory implementation of <see cref="IBackgroundJobStore"/>.
     /// It's used if <see cref="IBackgroundJobStore"/> is not implemented by actual persistent store
     /// and job execution is enabled (<see cref="IBackgroundJobConfiguration.IsJobExecutionEnabled"/>) for the application.
+    /// 内存后台作业存储类。
     /// </summary>
     public class InMemoryBackgroundJobStore : IBackgroundJobStore
     {
@@ -18,12 +19,18 @@ namespace Abp.BackgroundJobs
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemoryBackgroundJobStore"/> class.
+        /// 初始化<see cref="InMemoryBackgroundJobStore"/>的内存后台作业存储类的一个新实例
         /// </summary>
         public InMemoryBackgroundJobStore()
         {
             _jobs = new List<BackgroundJobInfo>();
         }
 
+        /// <summary>
+        /// 插入后台工作-异步
+        /// </summary>
+        /// <param name="jobInfo">后台工作信息</param>
+        /// <returns></returns>
         public Task InsertAsync(BackgroundJobInfo jobInfo)
         {
             jobInfo.Id = Interlocked.Increment(ref _lastId);
@@ -32,6 +39,11 @@ namespace Abp.BackgroundJobs
             return Task.FromResult(0);
         }
 
+        /// <summary>
+        /// 获取等待工作
+        /// </summary>
+        /// <param name="maxResultCount">最大结果数</param>
+        /// <returns></returns>
         public Task<List<BackgroundJobInfo>> GetWaitingJobsAsync(int maxResultCount)
         {
             var waitingJobs = _jobs
@@ -45,6 +57,11 @@ namespace Abp.BackgroundJobs
             return Task.FromResult(waitingJobs);
         }
 
+        /// <summary>
+        /// 删除工作-异步
+        /// </summary>
+        /// <param name="jobInfo">后台工作信息</param>
+        /// <returns></returns>
         public Task DeleteAsync(BackgroundJobInfo jobInfo)
         {
             _jobs.Remove(jobInfo);
@@ -52,6 +69,11 @@ namespace Abp.BackgroundJobs
             return Task.FromResult(0);
         }
 
+        /// <summary>
+        /// 更新工作-异步
+        /// </summary>
+        /// <param name="jobInfo">后台工作信息</param>
+        /// <returns></returns>
         public Task UpdateAsync(BackgroundJobInfo jobInfo)
         {
             return Task.FromResult(0);            

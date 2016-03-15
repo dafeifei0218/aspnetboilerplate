@@ -8,6 +8,7 @@ namespace Abp.BackgroundJobs
 {
     /// <summary>
     /// Represents a background job info that is used to persist jobs.
+    /// 后台工作信息
     /// </summary>
     [Table("AbpBackgroundJobs")]
     public class BackgroundJobInfo : CreationAuditedEntity<long>
@@ -15,12 +16,14 @@ namespace Abp.BackgroundJobs
         /// <summary>
         /// Maximum length of <see cref="JobType"/>.
         /// Value: 512.
+        /// 最大工作类型长度，值：512
         /// </summary>
         public const int MaxJobTypeLength = 512;
 
         /// <summary>
         /// Maximum length of <see cref="JobArgs"/>.
         /// Value: 1 MB (1,048,576 bytes).
+        /// 最大工作参数长度，值：1MB
         /// </summary>
         public const int MaxJobArgsLength = 1024 * 1024;
 
