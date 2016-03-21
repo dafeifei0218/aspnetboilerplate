@@ -24,7 +24,8 @@ namespace Abp.Notifications
         /// <summary>
         /// Subscribes to all available notifications for given user.
         /// It does not subscribe entity related notifications.
-        /// 
+        /// 订阅用户所有可用的通知。
+        /// 他不订阅实体相关的通知。
         /// </summary>
         /// <param name="tenantId">The tenant identifier. 租户Id</param>
         /// <param name="userId">The user identifier. 用户Id</param>
@@ -39,8 +40,9 @@ namespace Abp.Notifications
         /// <param name="entityIdentifier">entity identifier 实体标识符</param>
         Task UnsubscribeAsync(long userId, string notificationName, EntityIdentifier entityIdentifier = null);
 
-        /// <summary>
+        /// <summary>subscriptions
         /// Gets all subscribtions for given notification (including all tenants).
+        /// 获取给定通知所有订阅（包括租户）。
         /// </summary>
         /// <param name="notificationName">Name of the notification. 通知名称</param>
         /// <param name="entityIdentifier">entity identifier 实体标识符</param>
@@ -48,6 +50,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Gets all subscribtions for given notification.
+        /// 获取给定通知所有订阅。
         /// </summary>
         /// <param name="tenantId">Tenant id. Null for the host. 租户Id</param>
         /// <param name="notificationName">Name of the notification. 通知名称</param>
@@ -56,12 +59,14 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Gets subscribed notifications for a user.
+        /// 获取给定用户的订阅通知。
         /// </summary>
         /// <param name="userId">The user id. 用户Id</param>
         Task<List<NotificationSubscription>> GetSubscribedNotificationsAsync(long userId);
 
         /// <summary>
         /// Checks if a user subscribed for a notification.
+        /// 检查用户是否订阅通知。
         /// </summary>
         /// <param name="userId">The user id. 用户Id</param>
         /// <param name="notificationName">Name of the notification. 通知名称</param>
