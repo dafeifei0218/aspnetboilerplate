@@ -1,19 +1,19 @@
 ﻿namespace Abp.Notifications
 {
     /// <summary>
-    /// 
+    /// 通知定义上下文
     /// </summary>
     internal class NotificationDefinitionContext : INotificationDefinitionContext
     {
         /// <summary>
-        /// 
+        /// 通知定义管理类
         /// </summary>
         public INotificationDefinitionManager Manager { get; private set; }
 
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
-        /// <param name="manager"></param>
+        /// <param name="manager">通知定义管理类</param>
         public NotificationDefinitionContext(INotificationDefinitionManager manager)
         {
             Manager = manager;

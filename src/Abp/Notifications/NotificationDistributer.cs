@@ -12,11 +12,13 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Used to distribute notifications to users.
+    /// 通知分发，用于分发通知给用户
     /// </summary>
     public class NotificationDistributer : DomainService, INotificationDistributer
     {
         /// <summary>
         /// Referece to <see cref="IRealTimeNotifier"/>.
+        /// 实时通知
         /// </summary>
         public IRealTimeNotifier RealTimeNotifier { get; set; }
 
@@ -25,6 +27,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationDistributionJob"/> class.
+        /// 初始化一个新实例<see cref="NotificationDistributer"/>类
         /// </summary>
         public NotificationDistributer(
             INotificationDefinitionManager notificationDefinitionManager,
@@ -36,6 +39,11 @@ namespace Abp.Notifications
             RealTimeNotifier = NullRealTimeNotifier.Instance;
         }
 
+        /// <summary>
+        /// 分发-异步
+        /// </summary>
+        /// <param name="notificationId">分发Id</param>
+        /// <returns></returns>
         public async Task DistributeAsync(Guid notificationId)
         {
             var notificationInfo = await _notificationStore.GetNotificationOrNullAsync(notificationId);
@@ -79,6 +87,11 @@ namespace Abp.Notifications
             }
         }
 
+        /// <summary>
+        /// 获取用户Id
+        /// </summary>
+        /// <param name="notificationInfo">通知信息</param>
+        /// <returns></returns>
         [UnitOfWork]
         protected virtual async Task<long[]> GetUserIds(NotificationInfo notificationInfo)
         {
@@ -97,7 +110,7 @@ namespace Abp.Notifications
             else
             {
                 //Get subscribed users
-
+                //获取订阅用户
                 var tenantIds = GetTenantIds(notificationInfo);
 
                 List<NotificationSubscriptionInfo> subscriptions;
@@ -105,6 +118,7 @@ namespace Abp.Notifications
                 if (tenantIds.IsNullOrEmpty())
                 {
                     //Get all subscribed users of all tenants
+                    //获取全部租户的其全部订阅用户
                     subscriptions = await _notificationStore.GetSubscriptionsAsync(
                         notificationInfo.NotificationName,
                         notificationInfo.EntityTypeName,
@@ -114,6 +128,7 @@ namespace Abp.Notifications
                 else
                 {
                     //Get all subscribed users of specified tenant(s)
+                    //获取指定租户的全部订阅用户
                     subscriptions = await _notificationStore.GetSubscriptionsAsync(
                         tenantIds,
                         notificationInfo.NotificationName,
@@ -123,6 +138,7 @@ namespace Abp.Notifications
                 }
 
                 //Remove invalid subscriptions
+                //删除无效的订阅
                 var invalidSubscriptions = new Dictionary<Guid, NotificationSubscriptionInfo>();
 
                 using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
@@ -141,6 +157,7 @@ namespace Abp.Notifications
                 subscriptions.RemoveAll(s => invalidSubscriptions.ContainsKey(s.Id));
 
                 //Get user ids
+                //获取用户Id
                 userIds = subscriptions
                     .Select(s => s.UserId)
                     .ToList();
@@ -149,6 +166,7 @@ namespace Abp.Notifications
             if (!notificationInfo.ExcludedUserIds.IsNullOrEmpty())
             {
                 //Exclude specified users.
+                //排除指定的用户
                 var excludedUserIds = notificationInfo
                     .ExcludedUserIds
                     .Split(",")
@@ -161,6 +179,11 @@ namespace Abp.Notifications
             return userIds.ToArray();
         }
 
+        /// <summary>
+        /// 获取租户Id
+        /// </summary>
+        /// <param name="notificationInfo">通知信息</param>
+        /// <returns></returns>
         private static int?[] GetTenantIds(NotificationInfo notificationInfo)
         {
             if (notificationInfo.TenantIds.IsNullOrEmpty())
@@ -175,6 +198,11 @@ namespace Abp.Notifications
                 .ToArray();
         }
 
+        /// <summary>
+        /// 保存用户通知
+        /// </summary>
+        /// <param name="userNotifications">用户通知信息集合</param>
+        /// <returns></returns>
         [UnitOfWork]
         protected virtual async Task SaveUserNotifications(IEnumerable<UserNotificationInfo> userNotifications)
         {

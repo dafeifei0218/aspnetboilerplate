@@ -13,11 +13,13 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Implements <see cref="INotificationPublisher"/>.
+    /// 通知发布
     /// </summary>
     public class NotificationPublisher : AbpServiceBase, INotificationPublisher, ITransientDependency
     {
         /// <summary>
         /// Indicates all tenants.
+        /// 全部租户
         /// </summary>
         public int[] AllTenants
         {
@@ -29,6 +31,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Reference to ABP session.
+        /// ABP会话
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
@@ -38,6 +41,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationPublisher"/> class.
+        /// 初始化一个新的<see cref="NotificationPublisher"/>实例
         /// </summary>
         public NotificationPublisher(
             INotificationStore store,
@@ -51,6 +55,17 @@ namespace Abp.Notifications
         }
 
         //Create EntityIdentifier includes entityType and entityId.
+        /// <summary>
+        /// 发布-异步 
+        /// </summary>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="data">通知数据</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <param name="severity">通知严重程度</param>
+        /// <param name="userIds">用户Id</param>
+        /// <param name="excludedUserIds">排除用户Id</param>
+        /// <param name="tenantIds">租户Id</param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task PublishAsync(
             string notificationName,

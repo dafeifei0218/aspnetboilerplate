@@ -10,6 +10,7 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Implements <see cref="INotificationDefinitionManager"/>.
+    /// 通知定义管理类
     /// </summary>
     internal class NotificationDefinitionManager : INotificationDefinitionManager, ISingletonDependency
     {
@@ -18,6 +19,11 @@ namespace Abp.Notifications
 
         private readonly IDictionary<string, NotificationDefinition> _notificationDefinitions;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocManager">Ioc管理类</param>
+        /// <param name="configuration">通知配置</param>
         public NotificationDefinitionManager(
             IocManager iocManager,
             INotificationConfiguration configuration)
@@ -28,6 +34,9 @@ namespace Abp.Notifications
             _notificationDefinitions = new Dictionary<string, NotificationDefinition>();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Initialize()
         {
             var context = new NotificationDefinitionContext(this);
@@ -42,6 +51,10 @@ namespace Abp.Notifications
             }
         }
 
+        /// <summary>
+        /// 添加通知定义
+        /// </summary>
+        /// <param name="notificationDefinition">通知定义</param>
         public void Add(NotificationDefinition notificationDefinition)
         {
             if (_notificationDefinitions.ContainsKey(notificationDefinition.Name))
@@ -52,6 +65,11 @@ namespace Abp.Notifications
             _notificationDefinitions[notificationDefinition.Name] = notificationDefinition;
         }
 
+        /// <summary>
+        /// 获取通知定义
+        /// </summary>
+        /// <param name="name">通知名称</param>
+        /// <returns></returns>
         public NotificationDefinition Get(string name)
         {
             var definition = GetOrNull(name);
@@ -63,16 +81,32 @@ namespace Abp.Notifications
             return definition;
         }
 
+        /// <summary>
+        /// 获取通知定义，如果为空返回null
+        /// </summary>
+        /// <param name="name">通知名称</param>
+        /// <returns></returns>
         public NotificationDefinition GetOrNull(string name)
         {
             return _notificationDefinitions.GetOrDefault(name);
         }
 
+        /// <summary>
+        /// 获取全部通知定义
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<NotificationDefinition> GetAll()
         {
             return _notificationDefinitions.Values.ToImmutableList();
         }
 
+        /// <summary>
+        /// 是否可用-异步
+        /// </summary>
+        /// <param name="name">通知名称</param>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         public async Task<bool> IsAvailableAsync(string name, int? tenantId, long userId)
         {
             var notificationDefinition = Get(name);
@@ -106,6 +140,12 @@ namespace Abp.Notifications
             return true;
         }
 
+        /// <summary>
+        /// 获取全部可用通知定义
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         public async Task<IReadOnlyList<NotificationDefinition>> GetAllAvailableAsync(int? tenantId, long userId)
         {
             var availableDefinitions = new List<NotificationDefinition>();
