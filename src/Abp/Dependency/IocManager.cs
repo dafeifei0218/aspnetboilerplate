@@ -139,6 +139,7 @@ namespace Abp.Dependency
 
         /// <summary>
         /// Registers a class as self registration.
+        /// Registers a type with it's implementation.
         /// 注册，默认注册类型为自注册
         /// </summary>
         /// <param name="type">Type of the class 类型为class</param>

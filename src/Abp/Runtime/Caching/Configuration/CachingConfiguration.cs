@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using Abp.Configuration.Startup;
 
 namespace Abp.Runtime.Caching.Configuration
 {
@@ -12,6 +13,11 @@ namespace Abp.Runtime.Caching.Configuration
         /// <summary>
         /// 缓存配置列表
         /// </summary>
+        public IAbpStartupConfiguration AbpConfiguration { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public IReadOnlyList<ICacheConfigurator> Configurators
         {
             get { return _configurators.ToImmutableList(); }
@@ -20,11 +26,14 @@ namespace Abp.Runtime.Caching.Configuration
         //缓存配置列表
         private readonly List<ICacheConfigurator> _configurators;
 
+
         /// <summary>
         /// 构造函数
         /// </summary>
-        public CachingConfiguration()
+        public CachingConfiguration(IAbpStartupConfiguration abpConfiguration)
         {
+            AbpConfiguration = abpConfiguration;
+
             _configurators = new List<ICacheConfigurator>();
         }
 

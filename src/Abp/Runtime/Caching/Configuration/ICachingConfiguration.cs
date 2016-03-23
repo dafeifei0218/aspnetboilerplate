@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Abp.Configuration.Startup;
 
 namespace Abp.Runtime.Caching.Configuration
 {
@@ -9,6 +10,11 @@ namespace Abp.Runtime.Caching.Configuration
     /// </summary>
     public interface ICachingConfiguration
     {
+        /// <summary>
+        /// Gets the ABP configuration object.
+        /// </summary>
+        IAbpStartupConfiguration AbpConfiguration { get; }
+
         /// <summary>
         /// List of all registered configurators.
         /// 缓存配置列表

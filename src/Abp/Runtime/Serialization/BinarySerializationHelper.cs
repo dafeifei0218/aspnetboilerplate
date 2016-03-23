@@ -22,7 +22,7 @@ namespace Abp.Runtime.Serialization
         {
             using (var memoryStream = new MemoryStream())
             {
-                new BinaryFormatter().Serialize(memoryStream, obj);
+                CreateBinaryFormatter().Serialize(memoryStream, obj);
                 return memoryStream.ToArray();
             }
         }
@@ -36,7 +36,7 @@ namespace Abp.Runtime.Serialization
         /// <returns>bytes of object </returns>
         public static void Serialize(object obj, Stream stream)
         {
-            new BinaryFormatter().Serialize(stream, obj);
+            CreateBinaryFormatter().Serialize(stream, obj);
         }
 
         /// <summary>
@@ -49,12 +49,7 @@ namespace Abp.Runtime.Serialization
         {
             using (var memoryStream = new MemoryStream(bytes))
             {
-                var binaryFormatter = new BinaryFormatter
-                {
-                    AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
-                };
-
-                return binaryFormatter.Deserialize(memoryStream);
+                return CreateBinaryFormatter().Deserialize(memoryStream);
             }
         }
 
@@ -66,12 +61,7 @@ namespace Abp.Runtime.Serialization
         /// <returns>deserialized object 反序列化对象</returns> 
         public static object Deserialize(Stream stream)
         {
-            var binaryFormatter = new BinaryFormatter
-            {
-                AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
-            };
-
-            return binaryFormatter.Deserialize(stream);
+            return CreateBinaryFormatter().Deserialize(stream);
         }
 
         /// <summary>
@@ -86,13 +76,7 @@ namespace Abp.Runtime.Serialization
         {
             using (var memoryStream = new MemoryStream(bytes))
             {
-                var binaryFormatter = new BinaryFormatter
-                {
-                    AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
-                    Binder = new DeserializationAppDomainBinder()
-                };
-
-                return binaryFormatter.Deserialize(memoryStream);
+                return CreateBinaryFormatter(true).Deserialize(memoryStream);
             }
         }
 
@@ -106,13 +90,23 @@ namespace Abp.Runtime.Serialization
         /// <returns>deserialized object 反序列化对象</returns> 
         public static object DeserializeExtended(Stream stream)
         {
-            var binaryFormatter = new BinaryFormatter
-            {
-                AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
-                Binder = new DeserializationAppDomainBinder()
-            };
+            return CreateBinaryFormatter(true).Deserialize(stream);
+        }
 
-            return binaryFormatter.Deserialize(stream);
+        private static BinaryFormatter CreateBinaryFormatter(bool extended = false)
+        {
+            if (extended)
+            {
+                return new BinaryFormatter
+                {
+                    AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple,
+                    Binder = new ExtendedSerializationBinder()
+                };
+            }
+            else
+            {
+                return new BinaryFormatter();
+            }
         }
 
         /// <summary>
@@ -120,7 +114,7 @@ namespace Abp.Runtime.Serialization
         /// in assemlies that are load in runtime (like PlugIns).
         /// 反序列化应用程序域绑定器
         /// </summary>
-        private sealed class DeserializationAppDomainBinder : SerializationBinder
+        private sealed class ExtendedSerializationBinder : SerializationBinder
         {
             public override Type BindToType(string assemblyName, string typeName)
             {
@@ -133,7 +127,7 @@ namespace Abp.Runtime.Serialization
                     }
                 }
 
-                return null;
+                return Type.GetType(string.Format("{0}, {1}", typeName, assemblyName));
             }
         }
     }

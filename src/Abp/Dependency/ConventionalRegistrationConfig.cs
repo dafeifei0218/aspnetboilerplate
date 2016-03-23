@@ -8,7 +8,7 @@ namespace Abp.Dependency
     /// 常规注册配置，
     /// 这个类使用通过配置/选项，而注册类在常规的方式。
     /// </summary>
-    public class ConventionalRegistrationConfig : DictionayBasedConfig
+    public class ConventionalRegistrationConfig : DictionaryBasedConfig
     {
         /// <summary>
         /// Install all <see cref="IInterceptor"/> implementations automatically or not.
