@@ -7,11 +7,13 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Extension methods for <see cref="NotificationSubscriptionInfo"/>.
+    /// 通知订阅的信息扩展类
     /// </summary>
     public static class NotificationSubscriptionInfoExtensions
     {
         /// <summary>
         /// Converts <see cref="UserNotificationInfo"/> to <see cref="UserNotification"/>.
+        /// 转换<see cref="UserNotificationInfo"/>用户通知信息到<see cref="UserNotification"/>用户通知。
         /// </summary>
         public static NotificationSubscription ToNotificationSubscription(this NotificationSubscriptionInfo subscriptionInfo)
         {

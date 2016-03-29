@@ -9,6 +9,7 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Implements <see cref="INotificationSubscriptionManager"/>.
+    /// 通知订阅管理类
     /// </summary>
     public class NotificationSubscriptionManager : INotificationSubscriptionManager, ITransientDependency
     {
@@ -17,6 +18,7 @@ namespace Abp.Notifications
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationSubscriptionManager"/> class.
+        /// 初始化一个新实例<see cref="NotificationSubscriptionManager"/>通知订阅管理类。
         /// </summary>
         public NotificationSubscriptionManager(INotificationStore store, INotificationDefinitionManager notificationDefinitionManager)
         {
@@ -24,6 +26,14 @@ namespace Abp.Notifications
             _notificationDefinitionManager = notificationDefinitionManager;
         }
 
+        /// <summary>
+        /// 订阅-异步
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <returns></returns>
         public async Task SubscribeAsync(int? tenantId, long userId, string notificationName, EntityIdentifier entityIdentifier = null)
         {
             if (await IsSubscribedAsync(userId, notificationName, entityIdentifier))
@@ -41,6 +51,12 @@ namespace Abp.Notifications
                 );
         }
 
+        /// <summary>
+        /// 订阅所有可用的通知-异步
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         public async Task SubscribeToAllAvailableNotificationsAsync(int? tenantId, long userId)
         {
             var notificationDefinitions = (await _notificationDefinitionManager
@@ -54,6 +70,13 @@ namespace Abp.Notifications
             }
         }
 
+        /// <summary>
+        /// 取消通知-异步
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <returns></returns>
         public async Task UnsubscribeAsync(long userId, string notificationName, EntityIdentifier entityIdentifier = null)
         {
             await _store.DeleteSubscriptionAsync(
@@ -64,6 +87,12 @@ namespace Abp.Notifications
                 );
         }
 
+        /// <summary>
+        /// 获取订阅-异步
+        /// </summary>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <returns></returns>
         public async Task<List<NotificationSubscription>> GetSubscriptionsAsync(string notificationName, EntityIdentifier entityIdentifier = null)
         {
             var notificationSubscriptionInfos = await _store.GetSubscriptionsAsync(
@@ -77,6 +106,13 @@ namespace Abp.Notifications
                 .ToList();
         }
 
+        /// <summary>
+        /// 获取订阅-异步
+        /// </summary>
+        /// <param name="tenantId">租户Id</param>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <returns></returns>
         public async Task<List<NotificationSubscription>> GetSubscriptionsAsync(int? tenantId, string notificationName, EntityIdentifier entityIdentifier = null)
         {
             var notificationSubscriptionInfos = await _store.GetSubscriptionsAsync(
@@ -91,6 +127,11 @@ namespace Abp.Notifications
                 .ToList();
         }
 
+        /// <summary>
+        /// 获得订阅通知-异步
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <returns></returns>
         public async Task<List<NotificationSubscription>> GetSubscribedNotificationsAsync(long userId)
         {
             var notificationSubscriptionInfos = await _store.GetSubscriptionsAsync(userId);
@@ -100,6 +141,13 @@ namespace Abp.Notifications
                 .ToList();
         }
 
+        /// <summary>
+        /// 是否订阅-异步
+        /// </summary>
+        /// <param name="userId">用户Id</param>
+        /// <param name="notificationName">通知名称</param>
+        /// <param name="entityIdentifier">实体标识</param>
+        /// <returns></returns>
         public Task<bool> IsSubscribedAsync(long userId, string notificationName, EntityIdentifier entityIdentifier = null)
         {
             return _store.IsSubscribedAsync(

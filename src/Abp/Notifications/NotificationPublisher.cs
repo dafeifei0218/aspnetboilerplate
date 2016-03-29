@@ -107,16 +107,18 @@ namespace Abp.Notifications
 
             await _store.InsertNotificationAsync(notificationInfo);
 
-            await CurrentUnitOfWork.SaveChangesAsync(); //To get Id of the notification
+            await CurrentUnitOfWork.SaveChangesAsync(); //To get Id of the notification 获得通知的身份证
 
             if (userIds != null && userIds.Length <= 5)
             {
                 //We can directly distribute the notification since there are not much receivers
+                //我们可以直接分发通知，因为没有太多的接收器
                 await _notificationDistributer.DistributeAsync(notificationInfo.Id);
             }
             else
             {
                 //We enqueue a background job since distributing may get a long time
+                //我们将后台工作分配可能会很长一段时间以来
                 await _backgroundJobManager.EnqueueAsync<NotificationDistributionJob, NotificationDistributionJobArgs>(
                     new NotificationDistributionJobArgs(
                         notificationInfo.Id
