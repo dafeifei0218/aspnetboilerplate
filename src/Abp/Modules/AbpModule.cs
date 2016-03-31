@@ -53,7 +53,7 @@ namespace Abp.Modules
 
         /// <summary>
         /// This method is called lastly on application startup.
-        /// 初始化方法，在应用程序启动后执行
+        /// 初始化方法之后，在应用程序启动后执行
         /// </summary>
         public virtual void PostInitialize()
         {

@@ -6,6 +6,7 @@ namespace Abp.Hangfire.Configuration
 {
     /// <summary>
     /// Used to configure Hangfire.
+    /// Abp Hangfire配置接口。
     /// </summary>
     public interface IAbpHangfireConfiguration
     {
@@ -15,11 +16,14 @@ namespace Abp.Hangfire.Configuration
         /// If you don't set it, it's automatically set in <see cref="AbpModule.PreInitialize"/> by Abp.HangFire module with it's default constructor
         /// if background job execution is enabled (see <see cref="IBackgroundJobConfiguration.IsJobExecutionEnabled"/>).
         /// So, if you create it yourself, it's your responsibility to check if background job execution is enabled (see <see cref="IBackgroundJobConfiguration.IsJobExecutionEnabled"/>).
+        /// 后台工作服务，
+        /// 获取或设置Hanfgire对象
         /// </summary>
         BackgroundJobServer Server { get; set; }
 
         /// <summary>
         /// A reference to Hangfire's global configuration.
+        /// 应用Hangfire全局配置
         /// </summary>
         IGlobalConfiguration GlobalConfiguration { get; }
     }

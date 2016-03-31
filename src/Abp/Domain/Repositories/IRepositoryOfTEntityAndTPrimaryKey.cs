@@ -22,28 +22,28 @@ namespace Abp.Domain.Repositories
         /// Used to get a IQueryable that is used to retrieve entities from entire table.
         /// <see cref="UnitOfWorkAttribute"/> attribute must be used to be able to call this method since this method
         /// returns IQueryable and it requires open database connection to use it.
-        /// 获取全部实体
+        /// 获取全部实体。
         /// </summary>
         /// <returns>IQueryable to be used to select entities from database</returns>
         IQueryable<TEntity> GetAll();
 
         /// <summary>
         /// Used to get all entities.
-        /// 获取全部实体
+        /// 获取全部实体。
         /// </summary>
         /// <returns>List of all entities 全部实体列表</returns>
         List<TEntity> GetAllList();
 
         /// <summary>
         /// Used to get all entities.
-        /// 异步获取全部实体
+        /// 获取全部实体-异步。
         /// </summary>
         /// <returns>List of all entities 全部实体列表</returns>
         Task<List<TEntity>> GetAllListAsync();
 
         /// <summary>
         /// Used to get all entities based on given <paramref name="predicate"/>.
-        /// 获取全部实体
+        /// 获取全部实体。
         /// </summary>
         /// <param name="predicate">A condition to filter entities 条件</param>
         /// <returns>List of all entities 全部实体列表</returns>
@@ -51,7 +51,7 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Used to get all entities based on given <paramref name="predicate"/>.
-        /// 异步获取全部实体
+        /// 获取全部实体-异步。
         /// </summary>
         /// <param name="predicate">A condition to filter entities 条件</param>
         /// <returns>List of all entities</returns>
@@ -61,7 +61,7 @@ namespace Abp.Domain.Repositories
         /// Used to run a query over entire entities.
         /// <see cref="UnitOfWorkAttribute"/> attribute is not always necessary (as opposite to <see cref="GetAll"/>)
         /// if <paramref name="queryMethod"/> finishes IQueryable with ToList, FirstOrDefault etc..
-        /// 获取单个实体
+        /// 获取单个实体。
         /// </summary>
         /// <typeparam name="T">Type of return value of this method</typeparam>
         /// <param name="queryMethod">This method is used to query over entities</param>
@@ -122,14 +122,14 @@ namespace Abp.Domain.Repositories
         /// Gets an entity with given given predicate or null if not found.
         /// 获取一个给定条件的实体，当从没有时返回null，返回多个时会返回第一个。
         /// </summary>
-        /// <param name="predicate">Predicate to filter entities 主键</param>
+        /// <param name="predicate">Predicate to filter entities 实体过滤条件</param>
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Gets an entity with given given predicate or null if not found.
         /// 异步获取一个给定条件的实体，当从没有时返回null，返回多个时会返回第一个。
         /// </summary>
-        /// <param name="predicate">Predicate to filter entities 主键</param>
+        /// <param name="predicate">Predicate to filter entities 实体过滤条件</param>
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Abp.Domain.Repositories
         /// Inserts a new entity and gets it's Id.
         /// It may require to save current unit of work
         /// to be able to retrieve id.
-        /// 插入一个新实体并获取主键。
+        /// 插入一个新实体，并获取主键。
         /// </summary>
         /// <param name="entity">Entity 实体</param>
         /// <returns>Id of the entity 实体的主键</returns>
@@ -223,21 +223,21 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Updates an existing entity.
-        /// 更新现有的实体
+        /// 更新现有的实体。
         /// </summary>
         /// <param name="entity">Entity 实体</param>
         TEntity Update(TEntity entity);
 
         /// <summary>
         /// Updates an existing entity. 
-        /// 异步更新现有的实体
+        /// 异步更新现有的实体。
         /// </summary>
         /// <param name="entity">Entity 实体</param>
         Task<TEntity> UpdateAsync(TEntity entity);
 
         /// <summary>
         /// Updates an existing entity.
-        /// 更新现有的实体
+        /// 更新现有的实体。
         /// </summary>
         /// <param name="id">Id of the entity 实体的主键</param>
         /// <param name="updateAction">Action that can be used to change values of the entity 更新条件</param>
@@ -246,7 +246,7 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Updates an existing entity.
-        /// 异步更新现有的实体
+        /// 异步更新现有的实体。
         /// </summary>
         /// <param name="id">Id of the entity 实体的主键</param>
         /// <param name="updateAction">Action that can be used to change values of the entity 更新条件</param>
@@ -259,28 +259,28 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Deletes an entity.
-        /// 删除实体
+        /// 删除实体。
         /// </summary>
         /// <param name="entity">Entity to be deleted 被删除的实体</param>
         void Delete(TEntity entity);
 
         /// <summary>
         /// Deletes an entity.
-        /// 异步删除实体
+        /// 异步删除实体。
         /// </summary>
         /// <param name="entity">Entity to be deleted 被删除的实体</param>
         Task DeleteAsync(TEntity entity);
 
         /// <summary>
         /// Deletes an entity by primary key.
-        /// 根据主键删除实体
+        /// 根据主键删除实体。
         /// </summary>
         /// <param name="id">Primary key of the entity 主键</param>
         void Delete(TPrimaryKey id);
 
         /// <summary>
         /// Deletes an entity by primary key.
-        /// 异步根据主键删除实体
+        /// 异步根据主键删除实体。
         /// </summary>
         /// <param name="id">Primary key of the entity 主键</param>
         Task DeleteAsync(TPrimaryKey id);
@@ -290,7 +290,7 @@ namespace Abp.Domain.Repositories
         /// Notice that: All entities fits to given predicate are retrieved and deleted.
         /// This may cause major performance problems if there are too many entities with
         /// given predicate.
-        /// 删除多个实体
+        /// 删除多个实体。
         /// </summary>
         /// <param name="predicate">A condition to filter entities 条件</param>
         void Delete(Expression<Func<TEntity, bool>> predicate);
@@ -300,7 +300,7 @@ namespace Abp.Domain.Repositories
         /// Notice that: All entities fits to given predicate are retrieved and deleted.
         /// This may cause major performance problems if there are too many entities with
         /// given predicate.
-        /// 删除多个实体
+        /// 删除多个实体。
         /// </summary>
         /// <param name="predicate">A condition to filter entities 条件</param>
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
@@ -311,21 +311,21 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Gets count of all entities in this repository.
-        /// 获取所有实体的个数
+        /// 获取所有实体的个数。
         /// </summary>
         /// <returns>Count of entities 实体计数</returns>
         int Count();
 
         /// <summary>
         /// Gets count of all entities in this repository.
-        /// 异步获取所有实体的个数
+        /// 异步获取所有实体的个数。
         /// </summary>
         /// <returns>Count of entities 实体计数</returns>
         Task<int> CountAsync();
 
         /// <summary>
         /// Gets count of all entities in this repository based on given <paramref name="predicate"/>.
-        /// 根据条件获取所有实体的个数
+        /// 根据条件获取所有实体的个数。
         /// </summary>
         /// <param name="predicate">A method to filter count 条件</param>
         /// <returns>Count of entities 实体计数</returns>
@@ -333,7 +333,7 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Gets count of all entities in this repository based on given <paramref name="predicate"/>.
-        /// 异步根据条件获取所有实体的个数
+        /// 异步根据条件获取所有实体的个数。
         /// </summary>
         /// <param name="predicate">A method to filter count 条件</param>
         /// <returns>Count of entities 实体计数</returns>
@@ -341,14 +341,14 @@ namespace Abp.Domain.Repositories
 
         /// <summary>
         /// Gets count of all entities in this repository (use if expected return value is greather than <see cref="int.MaxValue"/>.
-        /// 获取所有实体的个数（如果返回值大于int.MaxValue）
+        /// 获取所有实体的个数（如果返回值大于int.MaxValue）。
         /// </summary>
         /// <returns>Count of entities 实体计数</returns>
         long LongCount();
 
         /// <summary>
         /// Gets count of all entities in this repository (use if expected return value is greather than <see cref="int.MaxValue"/>.
-        /// 异步获取所有实体的个数（如果返回值大于int.MaxValue）
+        /// 异步获取所有实体的个数（如果返回值大于int.MaxValue）。
         /// </summary>
         /// <returns>Count of entities 实体计数</returns>
         Task<long> LongCountAsync();
@@ -356,7 +356,7 @@ namespace Abp.Domain.Repositories
         /// <summary>
         /// Gets count of all entities in this repository based on given <paramref name="predicate"/>
         /// (use this overload if expected return value is greather than <see cref="int.MaxValue"/>).
-        /// 根据条件获取所有实体的个数
+        /// 根据条件获取所有实体的个数。
         /// </summary>
         /// <param name="predicate">A method to filter count 条件</param>
         /// <returns>Count of entities 实体计数</returns>
@@ -365,7 +365,7 @@ namespace Abp.Domain.Repositories
         /// <summary>
         /// Gets count of all entities in this repository based on given <paramref name="predicate"/>
         /// (use this overload if expected return value is greather than <see cref="int.MaxValue"/>).
-        /// 异步根据条件获取所有实体的个数
+        /// 异步根据条件获取所有实体的个数。
         /// </summary>
         /// <param name="predicate">A method to filter count 条件</param>
         /// <returns>Count of entities 实体计数</returns>
