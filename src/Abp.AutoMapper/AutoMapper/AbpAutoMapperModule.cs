@@ -18,9 +18,18 @@ namespace Abp.AutoMapper
         /// </summary>
         public ILogger Logger { get; set; }
 
+        /// <summary>
+        /// 类型查找
+        /// </summary>
         private readonly ITypeFinder _typeFinder;
 
+        /// <summary>
+        /// 创建映射之前判断是否已经创建
+        /// </summary>
         private static bool _createdMappingsBefore;
+        /// <summary>
+        /// 同步对象
+        /// </summary>
         private static readonly object _syncObj = new object();
 
         /// <summary>
@@ -33,6 +42,9 @@ namespace Abp.AutoMapper
             Logger = NullLogger.Instance;
         }
 
+        /// <summary>
+        /// 初始化之后执行
+        /// </summary>
         public override void PostInitialize()
         {
             CreateMappings();
@@ -46,6 +58,7 @@ namespace Abp.AutoMapper
             lock (_syncObj)
             {
                 //We should prevent duplicate mapping in an application, since AutoMapper is static.
+                //我们应该防止应用程序重复映射，由于AutoMapper是静态的。
                 if (_createdMappingsBefore)
                 {
                     return;
@@ -69,6 +82,7 @@ namespace Abp.AutoMapper
                 type.IsDefined(typeof(AutoMapToAttribute))
                 );
 
+            //找到几个类，定义的自动映射属性
             Logger.DebugFormat("Found {0} classes defines auto mapping attributes", types.Length);
             foreach (var type in types)
             {
