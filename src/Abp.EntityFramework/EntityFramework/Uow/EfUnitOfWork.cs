@@ -17,13 +17,19 @@ namespace Abp.EntityFramework.Uow
     /// </summary>
     public class EfUnitOfWork : UnitOfWorkBase, ITransientDependency
     {
-        //活动数据上下文集合
+        /// <summary>
+        /// 活动数据上下文集合
+        /// </summary>
         protected readonly IDictionary<Type, DbContext> ActiveDbContexts;
 
-        //IOC解析器
+        /// <summary>
+        /// IOC解析器
+        /// </summary>
         protected IIocResolver IocResolver { get; private set; }
 
-        //当前事务范围
+        /// <summary>
+        /// 当前事务范围
+        /// </summary>
         protected TransactionScope CurrentTransaction;
 
         /// <summary>

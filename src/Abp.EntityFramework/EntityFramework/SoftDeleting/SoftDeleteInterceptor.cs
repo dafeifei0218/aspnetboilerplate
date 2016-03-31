@@ -4,8 +4,15 @@ using System.Data.Entity.Infrastructure.Interception;
 
 namespace Abp.EntityFramework.SoftDeleting
 {
+    /// <summary>
+    /// 软删除拦截器
+    /// </summary>
     internal class SoftDeleteInterceptor : IDbCommandTreeInterceptor
     {
+        /// <summary>
+        /// 树创建
+        /// </summary>
+        /// <param name="interceptionContext">拦截器上下文</param>
         public void TreeCreated(DbCommandTreeInterceptionContext interceptionContext)
         {
             if (interceptionContext.OriginalResult.DataSpace == DataSpace.SSpace)

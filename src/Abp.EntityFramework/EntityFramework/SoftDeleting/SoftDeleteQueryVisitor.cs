@@ -4,8 +4,16 @@ using System.Linq;
 
 namespace Abp.EntityFramework.SoftDeleting
 {
+    /// <summary>
+    /// 软删除查询访问器
+    /// </summary>
     internal class SoftDeleteQueryVisitor : DefaultExpressionVisitor
     {
+        /// <summary>
+        /// 访问
+        /// </summary>
+        /// <param name="expression">表达式</param>
+        /// <returns></returns>
         public override DbExpression Visit(DbScanExpression expression)
         {
             //if (!expression.Target.ElementType.MetadataProperties.Any(mp => mp.Name.EndsWith("customannotation:" + AbpEfConsts.SoftDeleteCustomAnnotationName)))

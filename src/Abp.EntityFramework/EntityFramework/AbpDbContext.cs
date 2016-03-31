@@ -22,19 +22,19 @@ namespace Abp.EntityFramework
 {
     /// <summary>
     /// Base class for all DbContext classes in the application.
-    /// Abp数据上下文
+    /// Abp数据上下文，应用程序中的所有DbContext数据上下文类的基类。
     /// </summary>
     public abstract class AbpDbContext : DbContext, IShouldInitialize
     {
         /// <summary>
         /// Used to get current session values.
-        /// 当前会话
+        /// 当前会话，用于获取当前会话值。
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         /// <summary>
         /// Used to trigger entity change events.
-        /// 实体更改事件帮助类
+        /// 实体更改事件帮助类。
         /// </summary>
         public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
 
@@ -46,6 +46,7 @@ namespace Abp.EntityFramework
 
         /// <summary>
         /// Reference to GUID generator.
+        /// 参考GUID生成器
         /// </summary>
         public IGuidGenerator GuidGenerator { get; set; }
 
@@ -74,7 +75,7 @@ namespace Abp.EntityFramework
         /// Constructor.
         /// 构造函数
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">数据编译模型</param>
         protected AbpDbContext(DbCompiledModel model)
             : base(model)
         {
@@ -85,8 +86,8 @@ namespace Abp.EntityFramework
         /// Constructor.
         /// 构造函数
         /// </summary>
-        /// <param name="existingConnection"></param>
-        /// <param name="contextOwnsConnection"></param>
+        /// <param name="existingConnection">现有连接</param>
+        /// <param name="contextOwnsConnection">是否上下文拥有连接</param>
         protected AbpDbContext(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection)
         {
@@ -98,7 +99,7 @@ namespace Abp.EntityFramework
         /// 构造函数
         /// </summary>
         /// <param name="nameOrConnectionString">连接字符串</param>
-        /// <param name="model"></param>
+        /// <param name="model">数据编译模型</param>
         protected AbpDbContext(string nameOrConnectionString, DbCompiledModel model)
             : base(nameOrConnectionString, model)
         {
@@ -109,6 +110,8 @@ namespace Abp.EntityFramework
         /// Constructor.
         /// 构造函数
         /// </summary>
+        /// <param name="objectContext">对象上下文</param>
+        /// <param name="dbContextOwnsObjectContext">是否数据上下文拥有对象上下文</param>
         protected AbpDbContext(ObjectContext objectContext, bool dbContextOwnsObjectContext)
             : base(objectContext, dbContextOwnsObjectContext)
         {
@@ -119,12 +122,18 @@ namespace Abp.EntityFramework
         /// Constructor.
         /// 构造函数
         /// </summary>
+        /// <param name="existingConnection">现有连接</param>
+        /// <param name="model">数据编译模型</param>
+        /// <param name="contextOwnsConnection">是否上下文拥有连接</param>
         protected AbpDbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection)
         {
             SetNullsForInjectedProperties();
         }
 
+        /// <summary>
+        /// 注入属性设置为空
+        /// </summary>
         private void SetNullsForInjectedProperties()
         {
             Logger = NullLogger.Instance;
@@ -146,7 +155,7 @@ namespace Abp.EntityFramework
         /// <summary>
         /// 创建模型
         /// </summary>
-        /// <param name="modelBuilder"></param>
+        /// <param name="modelBuilder">模型建造者</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -176,6 +185,7 @@ namespace Abp.EntityFramework
         /// <summary>
         /// 保存变更-异步
         /// </summary>
+        /// <param name="cancellationToken">取消标记</param>
         /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
@@ -192,7 +202,7 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 应用Abp概念
         /// </summary>
         protected virtual void ApplyAbpConcepts()
         {
@@ -235,6 +245,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 检查和设置Id
+        /// </summary>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void CheckAndSetId(DbEntityEntry entry)
         {
             if (entry.Entity is IEntity<Guid>)
@@ -247,6 +261,10 @@ namespace Abp.EntityFramework
             }
         }
 
+        /// <summary>
+        /// 检查和设置租户Id属性
+        /// </summary>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void CheckAndSetTenantIdProperty(DbEntityEntry entry)
         {
             if (entry.Entity is IMustHaveTenant)
@@ -260,9 +278,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 检查和设置必须有租户
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void CheckAndSetMustHaveTenant(DbEntityEntry entry)
         {
             var entity = entry.Cast<IMustHaveTenant>().Entity;
@@ -295,9 +313,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 检查可能有租户
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void CheckMayHaveTenant(DbEntityEntry entry)
         {
             if (!this.IsFilterEnabled(AbpDataFilters.MayHaveTenant))
@@ -316,9 +334,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 设置创建审计属性
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void SetCreationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IHasCreationTime)
@@ -333,9 +351,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 防止设置创建审计属性
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void PreventSettingCreationAuditProperties(DbEntityEntry entry)
         {
             //TODO@Halil: Implement this when tested well (Issue #49)
@@ -351,9 +369,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 设置修改审计属性
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void SetModificationAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IHasModificationTime)
@@ -368,9 +386,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 处理软删除
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void HandleSoftDelete(DbEntityEntry entry)
         {
             if (!(entry.Entity is ISoftDelete))
@@ -386,6 +404,10 @@ namespace Abp.EntityFramework
             SetDeletionAuditProperties(entry);
         }
 
+        /// <summary>
+        /// 设置删除审计属性
+        /// </summary>
+        /// <param name="entry">数据实体条目</param>
         protected virtual void SetDeletionAuditProperties(DbEntityEntry entry)
         {
             if (entry.Entity is IHasDeletionTime)
@@ -400,9 +422,9 @@ namespace Abp.EntityFramework
         }
 
         /// <summary>
-        /// 
+        /// 日志数据实体验证异常
         /// </summary>
-        /// <param name="exception"></param>
+        /// <param name="exception">数据实体验证异常</param>
         private void LogDbEntityValidationException(DbEntityValidationException exception)
         {
             Logger.Error("There are some validation errors while saving changes in EntityFramework:");
