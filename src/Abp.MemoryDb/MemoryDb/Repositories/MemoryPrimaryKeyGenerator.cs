@@ -2,15 +2,29 @@
 
 namespace Abp.MemoryDb.Repositories
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TPrimaryKey">主键</typeparam>
     public class MemoryPrimaryKeyGenerator<TPrimaryKey>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private object _lastPk;
 
+        /// <summary>
+        /// 构造函数 
+        /// </summary>
         public MemoryPrimaryKeyGenerator()
         {
             InitializeLastPk();
         }
 
+        /// <summary>
+        /// 获取下一个主键
+        /// </summary>
+        /// <returns></returns>
         public TPrimaryKey GetNext()
         {
             lock (this)
@@ -19,6 +33,9 @@ namespace Abp.MemoryDb.Repositories
             }
         }
 
+        /// <summary>
+        /// 初始化最后的主键
+        /// </summary>
         private void InitializeLastPk()
         {
             if (typeof(TPrimaryKey) == typeof(int))
@@ -47,6 +64,10 @@ namespace Abp.MemoryDb.Repositories
             }
         }
 
+        /// <summary>
+        /// 获取下一个主键
+        /// </summary>
+        /// <returns></returns>
         private TPrimaryKey GetNextPrimaryKey()
         {
             if (typeof(TPrimaryKey) == typeof(int))

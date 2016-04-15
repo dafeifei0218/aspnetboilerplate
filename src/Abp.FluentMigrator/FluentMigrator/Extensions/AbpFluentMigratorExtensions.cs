@@ -8,11 +8,13 @@ namespace Abp.FluentMigrator.Extensions
 {
     /// <summary>
     /// This class is an extension for migration system to make easier to some common tasks.
+    /// AbpFluentMigrator扩展类
     /// </summary>
     public static class AbpFluentMigratorExtensions
     {
         /// <summary>
         /// Adds an auto increment <see cref="int"/> primary key to the table.
+        /// 添加一个自增主键<see cref="int"/>
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithIdAsInt32(this ICreateTableWithColumnSyntax table)
         {
@@ -22,6 +24,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds an auto increment <see cref="long"/> primary key to the table.
+        /// 添加一个自增主键<see cref="long"/>
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithIdAsInt64(this ICreateTableWithColumnSyntax table)
         {
@@ -31,6 +34,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds IsDeleted column to the table. See <see cref="ISoftDelete"/>.
+        /// 添加IsDeleted是否删除列。看<see cref="ISoftDelete"/>
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithIsDeletedColumn(this ICreateTableWithColumnSyntax table)
         {
@@ -40,6 +44,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds IsDeleted column to the table. See <see cref="ISoftDelete"/>.
+        /// 添加IsDeleted是否删除列。看<see cref="ISoftDelete"/>
         /// </summary>
         public static IAlterTableColumnOptionOrAddColumnOrAlterColumnSyntax AddIsDeletedColumn(this IAlterTableAddColumnOrAlterColumnSyntax table)
         {
@@ -49,6 +54,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds DeletionTime column to a table. See <see cref="IDeletionAudited"/>.
+        /// 
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithDeletionTimeColumn(this ICreateTableWithColumnSyntax table)
         {
@@ -58,6 +64,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds DeletionTime column to a table. See <see cref="IDeletionAudited"/>.
+        /// 添加DeletionTime删除时间列。看<see cref="IDeletionAudited"/>
         /// </summary>
         public static IAlterTableColumnOptionOrAddColumnOrAlterColumnSyntax AddDeletionTimeColumn(this IAlterTableAddColumnOrAlterColumnSyntax table)
         {
@@ -67,6 +74,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Ads CreationTime field to the table for <see cref="IHasCreationTime"/> interface.
+        /// 添加CreationTime创建时间列。
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithCreationTimeColumn(this ICreateTableWithColumnSyntax table)
         {
@@ -76,6 +84,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds CreationTime field to a table. See <see cref="IHasCreationTime"/>.
+        /// 添加CreationTime创建时间列。
         /// </summary>
         public static IAlterTableColumnOptionOrAddColumnOrAlterColumnSyntax AddCreationTimeColumn(this IAlterTableAddColumnOrAlterColumnSyntax table)
         {
@@ -85,6 +94,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds LastModificationTime field to a table. See <see cref="IModificationAudited"/>.
+        /// 添加LastModificationTime最后修改时间列。
         /// </summary>
         public static IAlterTableColumnOptionOrAddColumnOrAlterColumnSyntax AddLastModificationTimeColumn(this IAlterTableAddColumnOrAlterColumnSyntax table)
         {
@@ -94,6 +104,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds LastModificationTime field to a table. See <see cref="IModificationAudited"/>.
+        /// 添加LastModificationTime最后修改时间列。
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithLastModificationTimeColumn(this ICreateTableWithColumnSyntax table, bool defaultValue = true)
         {
@@ -103,6 +114,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds IsDeleted column to the table. See <see cref="IPassivable"/>.
+        /// 添加IsActive是否激活列。
         /// </summary>
         public static ICreateTableColumnOptionOrWithColumnSyntax WithIsActiveColumn(this ICreateTableWithColumnSyntax table, bool defaultValue = true)
         {
@@ -112,6 +124,7 @@ namespace Abp.FluentMigrator.Extensions
 
         /// <summary>
         /// Adds IsDeleted column to the table. See <see cref="IPassivable"/>.
+        /// 添加IsActive是否激活列。
         /// </summary>
         public static IAlterTableColumnOptionOrAddColumnOrAlterColumnSyntax AddIsActiveColumn(this IAlterTableAddColumnOrAlterColumnSyntax table, bool defaultValue = true)
         {
