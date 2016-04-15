@@ -12,15 +12,20 @@ namespace Abp.NHibernate
 {
     /// <summary>
     /// This module is used to implement "Data Access Layer" in NHibernate.
+    /// Abp Nhibernate模块，这个模块使用Nhibernate来实现“数据层”
     /// </summary>
     [DependsOn(typeof(AbpKernelModule))]
     public class AbpNHibernateModule : AbpModule
     {
         /// <summary>
         /// NHibernate session factory object.
+        /// NHibernate会话工厂对象。
         /// </summary>
         private ISessionFactory _sessionFactory;
-        
+
+        /// <summary>
+        ///  初始化
+        /// </summary>
         /// <inheritdoc/>
         public override void Initialize()
         {
@@ -35,7 +40,10 @@ namespace Abp.NHibernate
             IocManager.IocContainer.Install(new NhRepositoryInstaller(_sessionFactory));
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
         }
-
+        
+        /// <summary>
+        /// 关闭
+        /// </summary>
         /// <inheritdoc/>
         public override void Shutdown()
         {

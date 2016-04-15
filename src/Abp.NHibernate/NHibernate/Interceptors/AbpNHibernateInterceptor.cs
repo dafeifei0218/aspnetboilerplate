@@ -11,14 +11,33 @@ using NHibernate.Type;
 
 namespace Abp.NHibernate.Interceptors
 {
+    /// <summary>
+    /// Abp NHbernate拦截器
+    /// </summary>
     internal class AbpNHibernateInterceptor : EmptyInterceptor
     {
+        /// <summary>
+        /// 实体更改时间帮助类
+        /// </summary>
         public IEntityChangeEventHelper EntityChangeEventHelper { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly IIocManager _iocManager;
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly Lazy<IAbpSession> _abpSession;
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly Lazy<IGuidGenerator> _guidGenerator;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="iocManager">IOc管理类</param>
         public AbpNHibernateInterceptor(IIocManager iocManager)
         {
             _iocManager = iocManager;
@@ -36,6 +55,15 @@ namespace Abp.NHibernate.Interceptors
                     );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="id">主键</param>
+        /// <param name="state">状态</param>
+        /// <param name="propertyNames">属性名称</param>
+        /// <param name="types">类型</param>
+        /// <returns></returns>
         public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
             //Set Id for Guids
@@ -78,6 +106,16 @@ namespace Abp.NHibernate.Interceptors
             return base.OnSave(entity, id, state, propertyNames, types);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="id">主键</param>
+        /// <param name="currentState">当前状态</param>
+        /// <param name="previousState"></param>
+        /// <param name="propertyNames">实行名称</param>
+        /// <param name="types"></param>
+        /// <returns></returns>
         public override bool OnFlushDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames, IType[] types)
         {
             //TODO@Halil: Implement this when tested well (Issue #49)
@@ -185,6 +223,14 @@ namespace Abp.NHibernate.Interceptors
             return base.OnFlushDirty(entity, id, currentState, previousState, propertyNames, types);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="id"></param>
+        /// <param name="state">状态</param>
+        /// <param name="propertyNames"></param>
+        /// <param name="types"></param>
         public override void OnDelete(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
             EntityChangeEventHelper.TriggerEntityDeletingEvent(entity);

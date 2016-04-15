@@ -8,15 +8,17 @@ namespace Abp.NHibernate.EntityMappings
 {
     /// <summary>
     /// This class is base class to map entities to database tables.
+    /// 这个类是将实体映射到数据表的基类。
     /// </summary>
-    /// <typeparam name="TEntity">Entity type</typeparam>
-    /// <typeparam name="TPrimaryKey">Type of primary key of the entity</typeparam>
+    /// <typeparam name="TEntity">Entity type 实体类型</typeparam>
+    /// <typeparam name="TPrimaryKey">Type of primary key of the entity 实体主键类型</typeparam>
     public abstract class EntityMap<TEntity, TPrimaryKey> : ClassMap<TEntity> where TEntity : IEntity<TPrimaryKey>
     {
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
-        /// <param name="tableName">Table name</param>
+        /// <param name="tableName">Table name 表名</param>
         protected EntityMap(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName)) //TODO: Use code contracts?
