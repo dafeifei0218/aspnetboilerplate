@@ -8,6 +8,7 @@ namespace Abp.Runtime.Caching.Redis
 {
     /// <summary>
     /// Implements <see cref="IAbpRedisCacheDatabaseProvider"/>.
+    /// Abp Redis缓存数据提供者，实现<see cref="IAbpRedisCacheDatabaseProvider"/>。
     /// </summary>
     public class AbpRedisCacheDatabaseProvider : IAbpRedisCacheDatabaseProvider, ISingletonDependency
     {
@@ -18,6 +19,7 @@ namespace Abp.Runtime.Caching.Redis
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbpRedisCacheDatabaseProvider"/> class.
+        /// 构造函数
         /// </summary>
         public AbpRedisCacheDatabaseProvider()
         {
@@ -26,17 +28,26 @@ namespace Abp.Runtime.Caching.Redis
 
         /// <summary>
         /// Gets the database connection.
+        /// 获取数据连接
         /// </summary>
         public IDatabase GetDatabase()
         {
             return _connectionMultiplexer.Value.GetDatabase(GetDatabaseId());
         }
 
+        /// <summary>
+        /// 创建链接多路复用器
+        /// </summary>
+        /// <returns></returns>
         private static ConnectionMultiplexer CreateConnectionMultiplexer()
         {
             return ConnectionMultiplexer.Connect(GetConnectionString());
         }
 
+        /// <summary>
+        /// 获取数据库Id
+        /// </summary>
+        /// <returns></returns>
         private static int GetDatabaseId()
         {
             var appSetting = ConfigurationManager.AppSettings[DatabaseIdSettingKey];
@@ -54,6 +65,10 @@ namespace Abp.Runtime.Caching.Redis
             return databaseId;
         }
 
+        /// <summary>
+        /// 获取链接字符串
+        /// </summary>
+        /// <returns></returns>
         private static string GetConnectionString()
         {
             var connStr = ConfigurationManager.ConnectionStrings[ConnectionStringKey];

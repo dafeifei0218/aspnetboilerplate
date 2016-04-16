@@ -5,9 +5,15 @@ namespace Abp.Runtime.Caching.Redis
 {
     /// <summary>
     /// Extension methods for <see cref="IDatabase"/>.
+    /// Redis数据扩展类
     /// </summary>
     internal static class RedisDatabaseExtensions
     {
+        /// <summary>
+        /// 键删除前缀
+        /// </summary>
+        /// <param name="database">数据库</param>
+        /// <param name="prefix">前缀</param>
         public static void KeyDeleteWithPrefix(this IDatabase database, string prefix)
         {
             if (database == null)
@@ -27,6 +33,12 @@ namespace Abp.Runtime.Caching.Redis
                 end", values: new RedisValue[] { prefix });
         }
 
+        /// <summary>
+        /// 键数量
+        /// </summary>
+        /// <param name="database">数据库</param>
+        /// <param name="prefix">前缀</param>
+        /// <returns></returns>
         public static int KeyCount(this IDatabase database, string prefix)
         {
             if (database == null)
