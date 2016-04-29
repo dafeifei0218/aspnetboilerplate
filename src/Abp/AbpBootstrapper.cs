@@ -68,6 +68,7 @@ namespace Abp
 
             //解析abp模块
             _moduleManager = IocManager.Resolve<IAbpModuleManager>();
+            //初始化模块
             _moduleManager.InitializeModules();
         }
 

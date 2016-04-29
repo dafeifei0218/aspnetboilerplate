@@ -9,11 +9,13 @@ namespace Abp.Web.Mvc.Controllers.Results
 {
     /// <summary>
     /// This class is used to override returning Json results from MVC controllers.
+    /// Abp Json结果
     /// </summary>
     public class AbpJsonResult : JsonResult
     {
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         public AbpJsonResult()
         {
@@ -22,6 +24,7 @@ namespace Abp.Web.Mvc.Controllers.Results
 
         /// <summary>
         /// Constructor with JSON data.
+        /// JSON数据的构造函数
         /// </summary>
         /// <param name="data">JSON data</param>
         public AbpJsonResult(object data)
@@ -30,6 +33,10 @@ namespace Abp.Web.Mvc.Controllers.Results
             Data = data;
         }
 
+        /// <summary>
+        /// 执行结果
+        /// </summary>
+        /// <param name="context"></param>
         /// <inheritdoc/>
         public override void ExecuteResult(ControllerContext context)
         {

@@ -33,58 +33,69 @@ namespace Abp.Web.Mvc.Controllers
 {
     /// <summary>
     /// Base class for all MVC Controllers in Abp system.
+    /// Abp系统MVC控制器基类
     /// </summary>
     public abstract class AbpController : Controller
     {
         /// <summary>
         /// Gets current session information.
+        /// 获取当前Session信息
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
         /// <summary>
         /// Gets the event bus.
+        /// 获取时间总线。
         /// </summary>
         public IEventBus EventBus { get; set; }
 
         /// <summary>
         /// Reference to the permission manager.
+        /// 权限管理类
         /// </summary>
         public IPermissionManager PermissionManager { get; set; }
 
         /// <summary>
         /// Reference to the setting manager.
+        /// 设置管理类
         /// </summary>
         public ISettingManager SettingManager { get; set; }
 
         /// <summary>
         /// Reference to the permission checker.
+        /// 权限检查
         /// </summary>
         public IPermissionChecker PermissionChecker { protected get; set; }
 
         /// <summary>
         /// Reference to the feature manager.
+        /// 特征管理类
         /// </summary>
         public IFeatureManager FeatureManager { protected get; set; }
 
         /// <summary>
         /// Reference to the permission checker.
+        /// 特征检查
         /// </summary>
         public IFeatureChecker FeatureChecker { protected get; set; }
 
         /// <summary>
         /// Reference to the localization manager.
+        /// 本地化管理类
         /// </summary>
         public ILocalizationManager LocalizationManager { protected get; set; }
 
         /// <summary>
         /// Gets/sets name of the localization source that is used in this application service.
         /// It must be set in order to use <see cref="L(string)"/> and <see cref="L(string,CultureInfo)"/> methods.
+        /// 获取/设置本地化源名称用于应用程序服务
         /// </summary>
         protected string LocalizationSourceName { get; set; }
 
         /// <summary>
         /// Gets localization source.
         /// It's valid if <see cref="LocalizationSourceName"/> is set.
+        /// 获取本地化源
         /// </summary>
         protected ILocalizationSource LocalizationSource
         {
@@ -107,17 +118,20 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Reference to the logger to write logs.
+        /// 日志
         /// </summary>
         public ILogger Logger { get; set; }
 
         /// <summary>
         /// Gets current session information.
+        /// 获取当前Session信息。
         /// </summary>
         [Obsolete("Use AbpSession property instead. CurrentSession will be removed in future releases.")]
         protected IAbpSession CurrentSession { get { return AbpSession; } }
 
         /// <summary>
         /// Reference to <see cref="IUnitOfWorkManager"/>.
+        /// 工作单元管理类
         /// </summary>
         public IUnitOfWorkManager UnitOfWorkManager
         {
@@ -136,17 +150,28 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Gets current unit of work.
+        /// 获取当前工作单元
         /// </summary>
         protected IActiveUnitOfWork CurrentUnitOfWork { get { return UnitOfWorkManager.Current; } }
 
+        /// <summary>
+        /// 审计配置
+        /// </summary>
         public IAuditingConfiguration AuditingConfiguration { get; set; }
 
+        /// <summary>
+        /// 审计信息提供者
+        /// </summary>
         public IAuditInfoProvider AuditInfoProvider { get; set; }
 
+        /// <summary>
+        /// 审计存储
+        /// </summary>
         public IAuditingStore AuditingStore { get; set; }
 
         /// <summary>
         /// This object is used to measure an action execute duration.
+        /// 动作执行时间，这个对象是用来衡量一个动作的执行时间。
         /// </summary>
         private Stopwatch _actionStopwatch;
 
@@ -154,18 +179,24 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// MethodInfo for currently executing action.
+        /// 当前正在执行的工作的方法信息。
         /// </summary>
         private MethodInfo _currentMethodInfo;
 
         /// <summary>
         /// WrapResultAttribute for currently executing action.
+        /// 包装结果属性，当前正在执行的动作包装结果属性。
         /// </summary>
         private WrapResultAttribute _wrapResultAttribute;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private static Type[] _ignoredTypesForSerialization = {typeof (HttpPostedFileBase)};
 
         /// <summary>
         /// Constructor.
+        /// 构造函数
         /// </summary>
         protected AbpController()
         {
@@ -179,9 +210,10 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Gets localized string for given key name and current language.
+        /// 获取给定键名称和当前语言的本地化字符串。
         /// </summary>
-        /// <param name="name">Key name</param>
-        /// <returns>Localized string</returns>
+        /// <param name="name">Key name 键名称</param>
+        /// <returns>Localized string 本地化字符串</returns>
         protected virtual string L(string name)
         {
             return LocalizationSource.GetString(name);
@@ -189,10 +221,11 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Gets localized string for given key name and current language with formatting strings.
+        /// 获取给定键名称和当前语言格式的本地化字符串。
         /// </summary>
-        /// <param name="name">Key name</param>
-        /// <param name="args">Format arguments</param>
-        /// <returns>Localized string</returns>
+        /// <param name="name">Key name 键名称</param>
+        /// <param name="args">Format arguments 格式化参数</param>
+        /// <returns>Localized string 本地化字符串</returns>
         protected string L(string name, params object[] args)
         {
             return LocalizationSource.GetString(name, args);
@@ -200,10 +233,11 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Gets localized string for given key name and specified culture information.
+        /// 获取给定键名称和特定区域信息的本地化字符串
         /// </summary>
-        /// <param name="name">Key name</param>
-        /// <param name="culture">culture information</param>
-        /// <returns>Localized string</returns>
+        /// <param name="name">Key name 键名称</param>
+        /// <param name="culture">culture information 提供有关特定区域性信息</param>
+        /// <returns>Localized string 本地化字符串</returns>
         protected virtual string L(string name, CultureInfo culture)
         {
             return LocalizationSource.GetString(name, culture);
@@ -211,11 +245,12 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Gets localized string for given key name and current language with formatting strings.
+        /// 获取给定键名称和特定区域信息的本地化字符串
         /// </summary>
-        /// <param name="name">Key name</param>
-        /// <param name="culture">culture information</param>
-        /// <param name="args">Format arguments</param>
-        /// <returns>Localized string</returns>
+        /// <param name="name">Key name 键名称</param>
+        /// <param name="culture">culture information 提供有关特定区域性信息</param>
+        /// <param name="args">Format arguments 格式化参数</param>
+        /// <returns>Localized string 本地化字符串</returns>
         protected string L(string name, CultureInfo culture, params object[] args)
         {
             return LocalizationSource.GetString(name, culture, args);
@@ -223,8 +258,9 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Checks if current user is granted for a permission.
+        /// 检查当前用户是否授予权限-异步
         /// </summary>
-        /// <param name="permissionName">Name of the permission</param>
+        /// <param name="permissionName">Name of the permission 权限名称</param>
         protected Task<bool> IsGrantedAsync(string permissionName)
         {
             return PermissionChecker.IsGrantedAsync(permissionName);
@@ -232,8 +268,9 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Checks if current user is granted for a permission.
+        /// 检查当前用户是否授予权限
         /// </summary>
-        /// <param name="permissionName">Name of the permission</param>
+        /// <param name="permissionName">Name of the permission 权限名称</param>
         protected bool IsGranted(string permissionName)
         {
             return PermissionChecker.IsGranted(permissionName);
@@ -242,8 +279,9 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Checks if given feature is enabled for current tenant.
+        /// 检查当前租户是否启用给定的特征-异步
         /// </summary>
-        /// <param name="featureName">Name of the feature</param>
+        /// <param name="featureName">Name of the feature 特征名称</param>
         /// <returns></returns>
         protected virtual Task<bool> IsEnabledAsync(string featureName)
         {
@@ -252,8 +290,9 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Checks if given feature is enabled for current tenant.
+        /// 检查当前租户是否启用给定的特征
         /// </summary>
-        /// <param name="featureName">Name of the feature</param>
+        /// <param name="featureName">Name of the feature 特征名称</param>
         /// <returns></returns>
         protected virtual bool IsEnabled(string featureName)
         {
@@ -262,10 +301,11 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Json the specified data, contentType, contentEncoding and behavior.
+        /// 
         /// </summary>
-        /// <param name="data">Data.</param>
-        /// <param name="contentType">Content type.</param>
-        /// <param name="contentEncoding">Content encoding.</param>
+        /// <param name="data">Data. 数据</param>
+        /// <param name="contentType">Content type. 内容类型</param>
+        /// <param name="contentEncoding">Content encoding. 内容字符串编码</param>
         /// <param name="behavior">Behavior.</param>
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
         {

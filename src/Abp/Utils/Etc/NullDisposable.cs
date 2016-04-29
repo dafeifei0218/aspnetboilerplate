@@ -15,7 +15,7 @@ namespace Abp.Utils.Etc
         private static readonly NullDisposable SingletonInstance = new NullDisposable();
 
         /// <summary>
-        /// 
+        /// ¹¹Ôìº¯Êý
         /// </summary>
         private NullDisposable()
         {
