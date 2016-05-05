@@ -301,12 +301,12 @@ namespace Abp.Web.Mvc.Controllers
 
         /// <summary>
         /// Json the specified data, contentType, contentEncoding and behavior.
-        /// 
+        /// Json的指定数据，内容类型，内容编码和行为。
         /// </summary>
         /// <param name="data">Data. 数据</param>
         /// <param name="contentType">Content type. 内容类型</param>
         /// <param name="contentEncoding">Content encoding. 内容字符串编码</param>
-        /// <param name="behavior">Behavior.</param>
+        /// <param name="behavior">Behavior. 行为</param>
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             if (_wrapResultAttribute != null && !_wrapResultAttribute.WrapOnSuccess)
@@ -334,6 +334,10 @@ namespace Abp.Web.Mvc.Controllers
 
         #region OnActionExecuting / OnActionExecuted
         
+        /// <summary>
+        /// 动作执行时
+        /// </summary>
+        /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             SetCurrentMethodInfoAndWrapResultAttribute(filterContext);
@@ -342,6 +346,10 @@ namespace Abp.Web.Mvc.Controllers
             base.OnActionExecuting(filterContext);
         }
 
+        /// <summary>
+        /// 动作执行后
+        /// </summary>
+        /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
@@ -349,6 +357,10 @@ namespace Abp.Web.Mvc.Controllers
             HandleAuditingAfterAction(filterContext);
         }
 
+        /// <summary>
+        /// 设置当前方法信息和包装结果自定义属性
+        /// </summary>
+        /// <param name="filterContext"></param>
         private void SetCurrentMethodInfoAndWrapResultAttribute(ActionExecutingContext filterContext)
         {
             _currentMethodInfo = ActionDescriptorHelper.GetMethodInfo(filterContext.ActionDescriptor);
@@ -361,6 +373,10 @@ namespace Abp.Web.Mvc.Controllers
 
         #region Exception handling
 
+        /// <summary>
+        /// 出现异常时
+        /// </summary>
+        /// <param name="context"></param>
         protected override void OnException(ExceptionContext context)
         {
             if (context == null)
@@ -423,12 +439,21 @@ namespace Abp.Web.Mvc.Controllers
             EventBus.Trigger(this, new AbpHandledExceptionData(context.Exception));
         }
 
+        /// <summary>
+        /// 是否Json结果
+        /// </summary>
+        /// <returns></returns>
         protected virtual bool IsJsonResult()
         {
             return typeof (JsonResult).IsAssignableFrom(_currentMethodInfo.ReturnType) ||
                    typeof (Task<JsonResult>).IsAssignableFrom(_currentMethodInfo.ReturnType);
         }
 
+        /// <summary>
+        /// 通用Json异常结果
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         protected virtual ActionResult GenerateJsonExceptionResult(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = 200; //TODO: Consider to return 500
@@ -440,6 +465,11 @@ namespace Abp.Web.Mvc.Controllers
                 );
         }
 
+        /// <summary>
+        /// 通用非Json异常结果
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         protected virtual ActionResult GenerateNonJsonExceptionResult(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = 500;
@@ -456,6 +486,10 @@ namespace Abp.Web.Mvc.Controllers
         
         #region Auditing
 
+        /// <summary>
+        /// 动作前审计
+        /// </summary>
+        /// <param name="filterContext"></param>
         private void HandleAuditingBeforeAction(ActionExecutingContext filterContext)
         {
             if (!ShouldSaveAudit(filterContext))
@@ -480,6 +514,10 @@ namespace Abp.Web.Mvc.Controllers
             };
         }
 
+        /// <summary>
+        /// 动作后审计
+        /// </summary>
+        /// <param name="filterContext"></param>
         private void HandleAuditingAfterAction(ActionExecutedContext filterContext)
         {
             if (_auditInfo == null || _actionStopwatch == null)
@@ -500,6 +538,11 @@ namespace Abp.Web.Mvc.Controllers
             AuditingStore.Save(_auditInfo);
         }
 
+        /// <summary>
+        /// 应该保存审计
+        /// </summary>
+        /// <param name="filterContext"></param>
+        /// <returns></returns>
         private bool ShouldSaveAudit(ActionExecutingContext filterContext)
         {
             if (AuditingConfiguration == null)
@@ -525,6 +568,11 @@ namespace Abp.Web.Mvc.Controllers
                 );
         }
 
+        /// <summary>
+        /// 转换参数到Json
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         private string ConvertArgumentsToJson(IDictionary<string, object> arguments)
         {
             try

@@ -13,7 +13,8 @@ namespace Abp.Dependency
         /// <summary>
         /// Install all <see cref="IInterceptor"/> implementations automatically or not.
         /// Default: true. 
-        /// 安装所有的拦截自动或不。默认：true
+        /// 安装所有的拦截自动或不。默认：true。
+        /// 用以告诉Abp底层框架是否要register相应assembly中通过IWindsorInstaller接口指定的register规则。
         /// </summary>
         public bool InstallInstallers { get; set; }
 
