@@ -106,7 +106,7 @@ namespace Abp
         }
 
         /// <summary>
-        /// 
+        /// 初始化之后
         /// </summary>
         public override void PostInitialize()
         {
@@ -128,7 +128,7 @@ namespace Abp
         }
 
         /// <summary>
-        /// 
+        /// 关闭
         /// </summary>
         public override void Shutdown()
         {

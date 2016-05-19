@@ -3,7 +3,8 @@
 namespace Abp.BackgroundJobs
 {
     /// <summary>
-    /// 后台工作配置
+    /// 后台工作配置，
+    /// 配置是否激活后台工作任务功能。
     /// </summary>
     internal class BackgroundJobConfiguration : IBackgroundJobConfiguration
     {

@@ -15,7 +15,13 @@ namespace Abp.Domain.Uow
     {
         public const string DidNotCallCompleteMethodExceptionMessage = "Did not call Complete method of a unit of work.";
 
+        /// <summary>
+        /// 是否完成
+        /// </summary>
         private volatile bool _isCompleteCalled;
+        /// <summary>
+        /// 是否销毁
+        /// </summary>
         private volatile bool _isDisposed;
 
         /// <summary>

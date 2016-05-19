@@ -9,7 +9,7 @@ namespace Abp.Threading.Timers
     /// Abp定时器，确保没有发生重叠。
     /// </summary>
     //TODO: Extract interface or make all members virtual to make testing easier.
-    //
+    /// 提取接口或使所有成员的虚拟化简化测试。
     public class AbpTimer : RunnableBase, ITransientDependency
     {
         /// <summary>
@@ -114,6 +114,11 @@ namespace Abp.Threading.Timers
         /// </summary>
         public override void WaitToStop()
         {
+            //第二，如何知道一个Timer真正结束了呢？
+            //也就是说如何知道一个Timer要执行的任务已经完成（这里定义为A效果），同时timer已失效(这里定义为B效果)？
+            //ABP通过stop方法实现B，通过WaitToStop实现A效果。
+            //WaitToStop会一直阻塞调用他的线程直到_performingTasks变成false,
+            //也就是说Timer要执行的任务已经完成（任务完成时会将_performingTasks设为False，并且释放锁）。
             lock (_taskTimer)
             {
                 while (_performingTasks)
@@ -139,6 +144,12 @@ namespace Abp.Threading.Timers
                     return;
                 }
 
+                // Abp是整个ABP框架实现后台工作的核心类，其实现原理就是通过一个CLR中的timer定时启动执行任务。
+                // 这里有两个要点值得留意：
+                // 第一，用timer有一个弊端，就是当timer间隔时间内，事件没执行完，timer就会新建一个线程，
+                // 从头开始执行这个事件，而上一个线程继续执行，这样就会出现，系统中线程n多，一会儿系统的资源就耗尽了。
+                // ABP的解决思路是在执行真正的业务方法之前，通过将timer的duetime设为无限大，从而timer就失效了。
+                // 业务方法执行完以后在恢复timer的设置。
                 _taskTimer.Change(Timeout.Infinite, Timeout.Infinite);
                 _performingTasks = true;
             }

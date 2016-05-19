@@ -9,8 +9,10 @@ namespace Abp.Threading.BackgroundWorkers
 {
     /// <summary>
     /// Base class that can be used to implement <see cref="IBackgroundWorker"/>.
-    /// 后台工作基类
-    /// </summary>
+    /// 后台工作基类，
+    /// 可以用于实现<see cref="IBackgroundWorker"/>。
+    /// </summary> 
+    /// 同事添加了uow，Setting和本地化的一些辅助方法。
     public abstract class BackgroundWorkerBase : RunnableBase, IBackgroundWorker
     {
         /// <summary>

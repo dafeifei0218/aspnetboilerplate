@@ -9,6 +9,7 @@ namespace Abp.Net.Mail
     /// <see cref="EmailSettingNames"/> for all available configurations.
     /// 邮件设置提供者
     /// </summary>
+    /// 继承自SettingProvider，将SMTP的各项设置封装成SettingDefinition，并以数组形式返回。
     internal class EmailSettingProvider : SettingProvider
     {
         /// <summary>

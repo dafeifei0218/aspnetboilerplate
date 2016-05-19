@@ -9,10 +9,14 @@ namespace Abp.Domain.Uow
     /// A method that has this attribute is intercepted, a database connection is opened and a transaction is started before call the method.
     /// At the end of method call, transaction is commited and all changes applied to the database if there is no exception,
     /// othervise it's rolled back. 
-    /// 工作单元自定义属性
+    /// 工作单元自定义属性。
+    /// 这个属性是用来表示生命方法的原子的，应该被视为一个工作单元。
+    /// 在调用该方法时，将该属性的方法被截取，数据库链接被打开，并且在调用该方法之前开启一个事务。
+    /// 在方法结束后，如果没有异常提交所有更改到数据库，其他则回滚。
     /// </summary>
     /// <remarks>
     /// This attribute has no effect if there is already a unit of work before calling this method, if so, it uses the same transaction.
+    /// 
     /// </remarks>
     [AttributeUsage(AttributeTargets.Method)]
     public class UnitOfWorkAttribute : Attribute
@@ -26,7 +30,8 @@ namespace Abp.Domain.Uow
         /// <summary>
         /// Is this UOW transactional?
         /// Uses default value if not supplied.
-        /// 是否UOW事务，
+        /// 是否UOW工作单元事务，
+        /// 如果未提供默认值，使用默认值。
         /// </summary>
         public bool? IsTransactional { get; private set; }
 

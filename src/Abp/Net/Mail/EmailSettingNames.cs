@@ -22,6 +22,8 @@
         /// SMTP related email settings.
         /// SMTP相关电子邮件设置
         /// </summary>
+        /// 封装SMTP设置的信息。也就是说定义了一些常量用作Setting的Name。
+        /// 比如Host就是“Abp.Net.Mail.Smtp.Host”，所以在web.config就是配置一项key是“Abp.Net.Mail.Smtp.Host”的配置项。
         public static class Smtp
         {
             /// <summary>

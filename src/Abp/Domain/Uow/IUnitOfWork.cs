@@ -20,7 +20,7 @@ namespace Abp.Domain.Uow
 
         /// <summary>
         /// Reference to the outer UOW if exists.
-        /// 外层工作单元
+        /// 如果存在，参考外层工作单元
         /// </summary>
         IUnitOfWork Outer { get; set; }
         

@@ -32,6 +32,8 @@ namespace Abp.Configuration
         /// Reference to the setting store.
         /// 设置范围
         /// </summary>
+        /// 通过ISettingStore获取或更改Setting的值，
+        /// SettingManager并不是每次调用ISettingStore去读取设置，而是在第一次读取的时候就将结果缓存起来。
         public ISettingStore SettingStore { get; set; }
 
         private readonly ISettingDefinitionManager _settingDefinitionManager;

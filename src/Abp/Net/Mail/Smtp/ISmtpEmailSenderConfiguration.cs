@@ -6,6 +6,7 @@ namespace Abp.Net.Mail.Smtp
     /// Defines configurations to used by <see cref="SmtpClient"/> object.
     /// SMTP邮件发送配置接口
     /// </summary>
+    /// 定义了获取EmailSettingNames中定义的设置的接口。
     public interface ISmtpEmailSenderConfiguration : IEmailSenderConfiguration
     {
         /// <summary>

@@ -11,6 +11,13 @@ namespace Abp.Domain.Uow
     /// This is the default implementation.
     /// 调用上下文当前工作单元提供者
     /// </summary>
+    /// CallContextCurrentUnitOfWorkProvider的主要功能其实只有一个：通过current返回当前UOW环境下的UOW实例。
+    /// 一般思路是：将IUnitOfWork对象定义为实例变量或者是类变量。 但是两者事实上都不可行。
+    /// 如果定义为类变量，那就会面临线程安全的问题，解决方式无非加锁，但会导致并发能力下降，ABP是web框架，因为锁导致并发能力下降是不能接受的。
+    /// 如果定义为实例变量，在同一线程其他地方resolve CallContextCurrentUnitOfWorkProvider这个实例的时候都会得到一个新的实例，新的实例下current自然是NULL.
+    /// ABP的做法是：线程逻辑上下文+线程安全的Dictinoray容器。
+    /// 线程逻辑上下文用于存储UOW实例的key, 而线程逻辑上下文对于本线程是全局可访问的，而同时具有天然的隔离性。这就确保了当前线程的各个地方都可以得到current的UOW的key
+    /// 线程安全的Dictinoray容器是一个类实例，用于存放UOW的实例，通过UOW的key就可以取到UOW的实例。
     public class CallContextCurrentUnitOfWorkProvider : ICurrentUnitOfWorkProvider, ITransientDependency
     {
         /// <summary>
@@ -18,7 +25,9 @@ namespace Abp.Domain.Uow
         /// </summary>
         public ILogger Logger { get; set; }
 
-        //上下文键
+        /// <summary>
+        /// 上下文键
+        /// </summary>
         private const string ContextKey = "Abp.UnitOfWork.Current";
 
         //TODO: Clear periodically..?

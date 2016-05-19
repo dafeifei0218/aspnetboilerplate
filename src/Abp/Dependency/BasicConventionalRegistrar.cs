@@ -5,7 +5,8 @@ namespace Abp.Dependency
 {
     /// <summary>
     /// This class is used to register basic dependency implementations such as <see cref="ITransientDependency"/> and <see cref="ISingletonDependency"/>.
-    /// 基本常规注册类，这个类用来注册基本依赖实现ITransientDependency和ISingletonDependency
+    /// 基本常规注册类，
+    /// 这个类用来注册所有依赖实现ITransientDependency和ISingletonDependency和IInterceptor接口的类。
     /// </summary>
     public class BasicConventionalRegistrar : IConventionalDependencyRegistrar
     {

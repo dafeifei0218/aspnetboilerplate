@@ -84,6 +84,9 @@ namespace Abp.BackgroundJobs
         /// </summary>
         protected override void DoWork()
         {
+            //是PeriodicBackgroundWorkerBase一个派生类，
+            //其具体实现了DoWork方法：从BackgroundJobStore（可以自定义实现从数据库中读取）取最多1000个BackgroundJobInfo，
+            //然后反射执行BackgroundJobInfo中定义的任务。
             var waitingJobs = AsyncHelper.RunSync(() => _store.GetWaitingJobsAsync(1000));
 
             foreach (var job in waitingJobs)

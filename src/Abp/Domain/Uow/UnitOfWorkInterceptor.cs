@@ -10,6 +10,9 @@ namespace Abp.Domain.Uow
     /// </summary>
     internal class UnitOfWorkInterceptor : IInterceptor
     {
+        /// <summary>
+        /// 工作单元管理类
+        /// </summary>
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         /// <summary>
@@ -73,6 +76,7 @@ namespace Abp.Domain.Uow
         /// </summary>
         /// <param name="invocation">调用</param>
         /// <param name="options">工作单元选项</param>
+        /// UnitOfWorkInterceptor拦截器调用调用UnitOfWorkManager开启UOW流程的
         private void PerformSyncUow(IInvocation invocation, UnitOfWorkOptions options)
         {
             using (var uow = _unitOfWorkManager.Begin(options))

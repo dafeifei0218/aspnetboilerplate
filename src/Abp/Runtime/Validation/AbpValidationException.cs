@@ -23,6 +23,8 @@ namespace Abp.Runtime.Validation
         /// <summary>
         /// Exception severity.
         /// Default: Warn.
+        /// 异常严重程度。
+        /// 默认：严重
         /// </summary>
         public LogSeverity Severity { get; set; }
 

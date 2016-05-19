@@ -6,9 +6,13 @@ namespace Abp.Threading.BackgroundWorkers
     /// <summary>
     /// Extends <see cref="BackgroundWorkerBase"/> to add a periodic running Timer. 
     /// 周期后台工作基类，
+    /// 继承<see cref="BackgroundWorkerBase"/>添加一个周期性的运行计时器。
     /// </summary>
     public abstract class PeriodicBackgroundWorkerBase : BackgroundWorkerBase
     {
+        /// <summary>
+        /// 定制器
+        /// </summary>
         protected readonly AbpTimer Timer;
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace Abp.Threading.BackgroundWorkers
 
         /// <summary>
         /// Periodic works should be done by implementing this method.
-        /// 定期工作应通过实施这一方法
+        /// 定期工作应通过实施这一方法。
         /// </summary>
         protected abstract void DoWork();
     }

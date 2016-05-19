@@ -5,9 +5,16 @@ namespace Abp.Logging
 {
     /// <summary>
     /// Extensions for <see cref="ILogger"/>.
+    /// 日志<see cref="ILogger"/>扩展类。
     /// </summary>
     public static class LoggerExtensions
     {
+        /// <summary>
+        /// 日志
+        /// </summary>
+        /// <param name="logger">日志接口</param>
+        /// <param name="severity">日志严重程度</param>
+        /// <param name="message">消息</param>
         public static void Log(this ILogger logger, LogSeverity severity, string message)
         {
             switch (severity)

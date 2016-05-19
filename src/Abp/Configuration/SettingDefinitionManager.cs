@@ -10,6 +10,11 @@ namespace Abp.Configuration
     /// Implements <see cref="ISettingDefinitionManager"/>.
     /// 设置定义管理类
     /// </summary>
+    /// <remarks>
+    /// 主要完成注册到ABP中的SettingDefinition初始化。
+    /// 首先通过ISettingsConfiguration实例获取SettingProviders集合，然后在Initialize方法中通过SettingProviders获取SettingDefinition的数组。
+    /// 并将其保存在Dictionary中，其key就是SettingDefinition的Name
+    /// </remarks>
     internal class SettingDefinitionManager : ISettingDefinitionManager, ISingletonDependency
     {
         private readonly IIocManager _iocManager;
@@ -32,6 +37,8 @@ namespace Abp.Configuration
         /// </summary>
         public void Initialize()
         {
+            //此方法是在AbpKernelModule的PostInitialize方法执行的时候被调用。
+
             var context = new SettingDefinitionProviderContext();
 
             foreach (var providerType in _settingsConfiguration.Providers)

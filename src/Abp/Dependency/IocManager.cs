@@ -95,6 +95,7 @@ namespace Abp.Dependency
                 registerer.RegisterAssembly(context);
             }
 
+            //安装所有拦截器
             if (config.InstallInstallers)
             {
                 IocContainer.Install(FromAssembly.Instance(assembly));

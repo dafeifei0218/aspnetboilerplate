@@ -6,6 +6,8 @@ namespace Abp.Dependency
     /// Used to get a singleton of any class which can be resolved using <see cref="IocManager.Instance"/>.
     /// Important: Use classes by injecting wherever possible. This class is for cases that's not possible.
     /// 单例依赖
+    /// 任何一个使用了单例的类，可以用<see cref="IocManager.Instance"/>解析。
+    /// 重要：尽可能地使用类。这个类是不可能的。
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public static class SingletonDependency<T>

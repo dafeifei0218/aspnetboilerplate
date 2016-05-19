@@ -12,14 +12,16 @@ namespace Abp.Configuration
         /// <summary>
         /// TenantId for this setting.
         /// TenantId is null if this setting is not Tenant level.
-        /// 租户Id
+        /// 设置的租户Id。
+        /// 如果设置不为租户级别，租户Id为空。
         /// </summary>
         public int? TenantId { get; set; }
 
         /// <summary>
         /// UserId for this setting.
         /// UserId is null if this setting is not user level.
-        /// 用户Id
+        /// 设置的用户Id
+        /// 如果设置不为用户级别，用户Id为空。
         /// </summary>
         public long? UserId { get; set; }
 
