@@ -7,6 +7,10 @@ namespace Abp.Runtime.Caching
     /// Extension methods for <see cref="ICache"/>.
     /// 缓存扩展类
     /// </summary>
+    /// <remarks>
+    /// 定义了ICache的扩展方法。最关键的是如下两个支持泛型的方法：GetOrDefault和GetOrDefaultAsync。
+    /// 如下，内部调用ICache实例的相应方法并通过类型转换。
+    /// </remarks>
     public static class CacheExtensions
     {
         /// <summary>

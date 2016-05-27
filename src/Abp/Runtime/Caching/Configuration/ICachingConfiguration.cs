@@ -12,6 +12,7 @@ namespace Abp.Runtime.Caching.Configuration
     {
         /// <summary>
         /// Gets the ABP configuration object.
+        /// 获取ABP启动配置
         /// </summary>
         IAbpStartupConfiguration AbpConfiguration { get; }
 

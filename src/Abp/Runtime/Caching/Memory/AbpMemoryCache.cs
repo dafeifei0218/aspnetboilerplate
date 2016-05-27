@@ -9,6 +9,9 @@ namespace Abp.Runtime.Caching.Memory
     /// </summary>
     public class AbpMemoryCache : CacheBase
     {
+        /// <summary>
+        /// 内存缓存
+        /// </summary>
         private MemoryCache _memoryCache;
 
         /// <summary>

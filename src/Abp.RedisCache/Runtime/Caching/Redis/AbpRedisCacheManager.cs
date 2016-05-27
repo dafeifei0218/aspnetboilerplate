@@ -7,6 +7,10 @@ namespace Abp.Runtime.Caching.Redis
     /// Used to create <see cref="AbpRedisCache"/> instances.
     /// Abp Redis管理类
     /// </summary>
+    /// <remarks>
+    /// 重写了CacheManagerBase的CreateCacheImplementation方法，该方法用于创建真实的Icache对象。 
+    /// 具体到AbpRedisCacheManager就是创建AbpRedisCache。
+    /// </remarks>
     public class AbpRedisCacheManager : CacheManagerBase
     {
         /// <summary>
