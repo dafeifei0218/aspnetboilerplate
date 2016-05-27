@@ -7,6 +7,10 @@ namespace Abp.Localization
     /// Represents a string that can be localized.
     /// 本地化字符串
     /// </summary>
+    /// <remarks>
+    /// 封装需要被本地化的string的信息，并提供Localize方法（调用ILocalizationManager的GetString方法）返回本地化的string。
+    /// SourceName指定其从那个本地化资源读取本地化文本。
+    /// </remarks>
     public class LocalizableString : ILocalizableString
     {
         /// <summary>

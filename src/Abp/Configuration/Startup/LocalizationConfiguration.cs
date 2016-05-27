@@ -7,6 +7,11 @@ namespace Abp.Configuration.Startup
     /// Used for localization configurations.
     /// 本地化配置
     /// </summary>
+    /// <remarks>
+    /// 用于配置支持本地化的语言的一个LanguageInfo集合，以及这些语言所对应的本地化资源。
+    /// 这两者分别对应ILocalizationConfiguration中的Languages和Sources属性。
+    /// 注意这个Sources是一个ILocalizationSourceList实例。
+    /// </remarks>
     internal class LocalizationConfiguration : ILocalizationConfiguration
     {
         /// <summary>

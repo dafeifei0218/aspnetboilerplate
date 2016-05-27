@@ -4,7 +4,12 @@ namespace Abp.Localization.Dictionaries.Json
 {
     /// <summary>
     /// Use it to serialize json file
+    /// Json本地化文件，
+    /// 用于序列化Json文件。
     /// </summary>
+    /// <remarks>
+    /// 反序列化Json字符串到JsonLocalizationFile对象。
+    /// </remarks>
     public class JsonLocalizationFile
     {
         /// <summary>

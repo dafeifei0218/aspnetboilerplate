@@ -6,6 +6,9 @@ namespace Abp.Localization
     /// A class that gets the same string on every localization.
     /// 固定的本地化字符串，在每个本地化上都得到相同字符串的类
     /// </summary>
+    /// <remarks>
+    /// 封装不需要被本地化的string
+    /// </remarks>
     public class FixedLocalizableString : ILocalizableString
     {
         /// <summary>

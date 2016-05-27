@@ -1,3 +1,4 @@
+//公司修改代码 2016-05-26 11:40
 using System;
 
 namespace Abp.Timing

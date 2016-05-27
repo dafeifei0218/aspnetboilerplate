@@ -5,6 +5,10 @@ namespace Abp.Localization.Dictionaries.Xml
     /// <summary>
     /// 本地化字典提供者基类
     /// </summary>
+    /// <remarks>
+    /// 实现了ILocalizationDictionaryProvider的抽象类，实现了extend本地化Dictionary的方法，
+    /// 这个方法主要用于初始化完成以后，用于扩展相应的ILocalizationDictionary对象。
+    /// </remarks>
     public abstract class LocalizationDictionaryProviderBase : ILocalizationDictionaryProvider
     {
         /// <summary>

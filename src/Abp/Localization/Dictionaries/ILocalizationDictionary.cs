@@ -17,7 +17,8 @@ namespace Abp.Localization.Dictionaries
 
         /// <summary>
         /// Gets/sets a string for this dictionary with given name (key).
-        /// 索引器
+        /// 索引器，
+        /// 获取/设置给定名称（键）的字典中的字符串。
         /// </summary>
         /// <param name="name">Name to get/set 名称的获取/设置</param>
         string this[string name] { get; set; }

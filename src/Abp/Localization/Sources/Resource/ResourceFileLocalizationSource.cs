@@ -29,6 +29,9 @@ namespace Abp.Localization.Sources.Resource
         /// </summary>
         public ResourceManager ResourceManager { get; private set; }
 
+        /// <summary>
+        /// 本地化配置
+        /// </summary>
         private ILocalizationConfiguration _configuration;
 
         /// <summary>

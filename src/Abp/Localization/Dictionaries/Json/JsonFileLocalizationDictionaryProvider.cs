@@ -5,8 +5,11 @@ using Abp.Localization.Sources.Xml;
 namespace Abp.Localization.Dictionaries.Json
 {
     /// <summary>
-    ///     Provides localization dictionaries from json files in a directory.
+    /// Provides localization dictionaries from json files in a directory.
     /// </summary>
+    /// <remarks>
+    /// 提供从Json文件中读取本地化信息，并将本地化信息装载到DefaultDictionary（IDictionary对象）中。
+    /// </remarks>
     public class JsonFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
         private readonly string _directoryPath;

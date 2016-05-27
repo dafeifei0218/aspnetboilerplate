@@ -6,6 +6,10 @@ namespace Abp.Localization.Sources
     /// Used to store a localization source extension information.
     /// 本地化源扩展信息
     /// </summary>
+    /// <remarks>
+    /// ABP在LocalizationManager初始化的过程中将LocalizationSourceExtensionInfo所对应的本地化资源，
+    /// 扩充到ILocalizationSource对象的响应本地化资源字典中。
+    /// </remarks>
     public class LocalizationSourceExtensionInfo
     {
         /// <summary>
