@@ -10,15 +10,17 @@ using Newtonsoft.Json.Serialization;
 namespace Abp.Localization.Dictionaries.Json
 {
     /// <summary>
-    ///     This class is used to build a localization dictionary from json.
+    /// This class is used to build a localization dictionary from json.
     /// </summary>
     /// <remarks>
-    ///     Use static Build methods to create instance of this class.
+    /// Use static Build methods to create instance of this class.
+    /// 使用静态生成方法来创建这个类的实例。
+    /// 实现BuildFromFile和BuildFromJsonString方法用于从Json文件读取本地化数据
     /// </remarks>
     public class JsonLocalizationDictionary : LocalizationDictionary
     {
         /// <summary>
-        ///     Private constructor.
+        /// Private constructor.
         /// </summary>
         /// <param name="cultureInfo">Culture of the dictionary</param>
         private JsonLocalizationDictionary(CultureInfo cultureInfo)

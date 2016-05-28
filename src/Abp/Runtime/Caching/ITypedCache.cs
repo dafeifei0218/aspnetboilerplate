@@ -11,6 +11,12 @@ namespace Abp.Runtime.Caching
     /// </summary>
     /// <typeparam name="TKey">Key type for cache items 缓存项目键类型</typeparam>
     /// <typeparam name="TValue">Value type for cache items</typeparam>
+    /// <remarks>
+    /// 支持泛型key和value的缓存接口与实现，其内部通过封装ICache实例和CacheExtension定义的对ICache的扩展方法是实现泛型版本的ICache。
+    /// 另外通过CacheExtension中的方法可以方便的将ICache对象转换为 ITypedCache对象。 
+    /// ITypeCache是ICache的包装器，提供类型安全、泛型的cache。
+    /// 为了将ICache转为ITypedCache，我们可以使用AsTyped扩展方法。
+    /// </remarks>
     public interface ITypedCache<TKey, TValue> : IDisposable
     {
         /// <summary>

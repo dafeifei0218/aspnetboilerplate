@@ -8,6 +8,9 @@ namespace Abp.Localization.Dictionaries.Json
     /// <summary>
     /// Provides localization dictionaries from JSON files embedded into an <see cref="Assembly"/>.
     /// </summary>
+    /// <remarks>
+    /// 提供从xml文件(本地资源)中读取本地化信息，并将本地化信息装载到DefaultDictionary（IDictionary对象）中。
+    /// </remarks>
     public class JsonEmbeddedFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {
         private readonly Assembly _assembly;

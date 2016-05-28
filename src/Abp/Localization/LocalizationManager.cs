@@ -69,6 +69,9 @@ namespace Abp.Localization
         /// <summary>
         /// 初始化源
         /// </summary>
+        /// <remarks>
+        /// LocalizationManager通过调用InitializeSources初始化和load本地化资源文件中的内容到IDictionary实例对象_sources中
+        /// </remarks>
         private void InitializeSources()
         {
             if (!_configuration.IsEnabled)
@@ -77,6 +80,10 @@ namespace Abp.Localization
                 return;
             }
 
+            //遍历LocalizationConfiguration中的ILocalizationSourceList实例，
+            //通过其ILocalizationSource的ILocalizationDictionaryProvider实例完成本地化资源的初始化。
+            //提供GetString方法返回本地化的string。
+            //LocalizationManager维护了一个ILocalizationSource对象的字典用于维护所有的本地化资源。
             Logger.Debug(string.Format("Initializing {0} localization sources.", _configuration.Sources.Count));
             foreach (var source in _configuration.Sources)
             {

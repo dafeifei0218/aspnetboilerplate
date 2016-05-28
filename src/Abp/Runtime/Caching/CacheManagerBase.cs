@@ -11,6 +11,10 @@ namespace Abp.Runtime.Caching
     /// Base class for cache managers.
     /// 缓存管理基类
     /// </summary>
+    /// <remarks>
+    /// 该接口和实现用于生成，配置以及销毁ICache实例。
+    /// 具体是通过ICachingConfiguration对象来初始化cache, 并通过ConcurrentDictionary来存放和管理cache。
+    /// </remarks>
     public abstract class CacheManagerBase : ICacheManager, ISingletonDependency
     {
         protected readonly IIocManager IocManager;
@@ -45,9 +49,11 @@ namespace Abp.Runtime.Caching
         /// 获取缓存
         /// </summary>
         /// <param name="name">缓存名称</param>
-        /// <returns></returns>
+        /// <returns>返回一个 <see cref="ICache"/></returns>
         public virtual ICache GetCache(string name)
         {
+            //第一次请求时会创建缓存，并通过CachingConfiguration中的CacheConfigurator完成对该Cache的配置，以后都是返回相同的缓存对象。
+            //因此，我们可以在不同的类（客户端）中共享具有相同名字的相同缓存。
             return Caches.GetOrAdd(name, (cacheName) =>
             {
                 var cache = CreateCacheImplementation(cacheName);

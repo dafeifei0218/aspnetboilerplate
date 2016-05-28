@@ -18,7 +18,7 @@ namespace Abp.Localization.Dictionaries
     {
         /// <summary>
         /// Unique Name of the source.
-        /// 
+        /// ×ÊÔ´Ãû³Æ
         /// </summary>
         public string Name { get; private set; }
 

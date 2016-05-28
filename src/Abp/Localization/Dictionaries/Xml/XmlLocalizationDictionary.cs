@@ -15,6 +15,8 @@ namespace Abp.Localization.Dictionaries.Xml
     /// </summary>
     /// <remarks>
     /// Use static Build methods to create instance of this class.
+    /// 使用静态生成方法来创建这个类的实例。
+    /// 实现BuildFormFile和BuildFormXmlString方法用于从XML文件读取本地化数据。
     /// </remarks>
     public class XmlLocalizationDictionary : LocalizationDictionary
     {
@@ -48,7 +50,7 @@ namespace Abp.Localization.Dictionaries.Xml
 
         /// <summary>
         /// Builds an <see cref="XmlLocalizationDictionary"/> from given xml string.
-        /// 根据给定的xml字符串，建造xml本地化字典
+        /// 根据给定的xml字符串，建造 <see cref="XmlLocalizationDictionary"/> xml本地化字典
         /// </summary>
         /// <param name="xmlString">XML string XML字符串</param>
         public static XmlLocalizationDictionary BuildFomXmlString(string xmlString)

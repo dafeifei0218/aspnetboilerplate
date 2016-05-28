@@ -6,8 +6,11 @@ using Abp.Dependency;
 namespace Abp.Localization
 {
     /// <summary>
-    /// 默认语言提供者
+    /// 默认语言提供者 
     /// </summary>
+    /// <remarks>
+    /// 从LocatizationConfiguration读取LanguageInfo集合
+    /// </remarks>
     public class DefaultLanguageProvider : ILanguageProvider, ITransientDependency
     {
         private readonly ILocalizationConfiguration _configuration;

@@ -5,7 +5,8 @@ namespace Abp.Runtime.Caching
 {
     /// <summary>
     /// Defines a cache that can be store and get items by keys.
-    /// 
+    /// 缓存接口，
+    /// 定义一个缓存，可以通过安检存储和获取项目。
     /// </summary>
     public interface ICache : IDisposable
     {
@@ -26,8 +27,8 @@ namespace Abp.Runtime.Caching
         /// Gets an item from the cache.
         /// 获取缓存的项
         /// </summary>
-        /// <param name="key">Key 键</param>
-        /// <param name="factory">Factory method to create cache item if not exists 工厂方法</param>
+        /// <param name="key">Key 键，缓存中一个条目的键（字符串类型）</param>
+        /// <param name="factory">Factory method to create cache item if not exists 工厂方法创建缓存项，如果不存在</param>
         /// <returns>Cached item 缓存的项</returns>
         object Get(string key, Func<string, object> factory);
 

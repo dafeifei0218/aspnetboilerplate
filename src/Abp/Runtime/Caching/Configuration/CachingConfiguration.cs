@@ -11,22 +11,23 @@ namespace Abp.Runtime.Caching.Configuration
     internal class CachingConfiguration : ICachingConfiguration
     {
         /// <summary>
-        /// 缓存配置列表
+        /// 获取ABP启动配置
         /// </summary>
         public IAbpStartupConfiguration AbpConfiguration { get; private set; }
 
         /// <summary>
-        /// 
+        /// 缓存配置列表
         /// </summary>
         public IReadOnlyList<ICacheConfigurator> Configurators
         {
             get { return _configurators.ToImmutableList(); }
         }
 
-        //缓存配置列表
+        /// <summary>
+        /// 缓存配置列表
+        /// </summary>
         private readonly List<ICacheConfigurator> _configurators;
-
-
+        
         /// <summary>
         /// 构造函数
         /// </summary>

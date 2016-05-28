@@ -8,6 +8,10 @@ namespace Abp.Runtime.Caching.Memory
     /// Implements <see cref="ICacheManager"/> to work with <see cref="MemoryCache"/>.
     /// Abp内存缓存管理类
     /// </summary>
+    /// <remarks>
+    /// 重写了CacheManagerBase的CreateCacheImplementation方法，该方法用于创建真实的ICache对象。 
+    /// 具体到AbpMemoryCacheManager就是创建AbpMemoryCache。
+    /// </remarks>
     public class AbpMemoryCacheManager : CacheManagerBase
     {
         /// <summary>

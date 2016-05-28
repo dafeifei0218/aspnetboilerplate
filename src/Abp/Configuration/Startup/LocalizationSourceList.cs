@@ -12,6 +12,9 @@ namespace Abp.Configuration.Startup
         /// <summary>
         /// 本地化源列表扩展信息列表
         /// </summary>
+        /// <remarks>
+        /// 用于扩展同组资源文件使用的。
+        /// </remarks>
         public IList<LocalizationSourceExtensionInfo> Extensions { get; private set; }
 
         /// <summary>
