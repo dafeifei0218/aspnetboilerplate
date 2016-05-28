@@ -1,3 +1,4 @@
+//家中修改代码未迁入，到公司再修改这两个文件再迁入 2016-05-26 00:33
 using System;
 
 namespace Abp.Timing
@@ -9,7 +10,7 @@ namespace Abp.Timing
     public class LocalClockProvider : IClockProvider
     {
         /// <summary>
-        /// 现在时间
+        /// 获取当前时间
         /// </summary>
         public DateTime Now
         {
