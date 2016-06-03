@@ -9,6 +9,12 @@ namespace Abp.Localization.Dictionaries
     /// Represents a simple implementation of <see cref="ILocalizationDictionary"/> interface.
     /// 本地化字典
     /// </summary>
+    /// <remarks>
+    /// 实现了ILocalizationDictionary和IEnumerable两个接口，他本身就是一个具有集合操作的类。
+    /// 其内部封装了一个Dictionary的实例，用于提供真正的集合操作。
+    /// 这个基类只提供了从其内部的Dictionary中根据原string查找返回本地化的string。 
+    /// 其本身并没有将本地化资源文件中的数据加载到其内部的Dictionary的功能，这部分是在其子类中实现的。
+    /// </remarks>
     public class LocalizationDictionary : ILocalizationDictionary, IEnumerable<LocalizedString>
     {
         /// <inheritdoc/>
