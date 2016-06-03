@@ -8,7 +8,7 @@ namespace Abp.Localization.Dictionaries.Xml
     /// Xml文件本地化字典提供者
     /// </summary>
     /// <remarks>
-    /// 提供从xml文件中读取本地化信息，并将本地化信息装载到DefaultDictionary（IDictionary对象）中。
+    /// 提供从xml文件中读取本地化信息，并将本地化信息装载到DefaultDictionary（IDictionary<string, ILocalizationDictionary>对象）中。
     /// </remarks>
     public class XmlFileLocalizationDictionaryProvider : LocalizationDictionaryProviderBase
     {

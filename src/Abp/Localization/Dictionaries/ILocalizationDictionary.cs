@@ -21,6 +21,11 @@ namespace Abp.Localization.Dictionaries
         /// 获取/设置给定名称（键）的字典中的字符串。
         /// </summary>
         /// <param name="name">Name to get/set 名称的获取/设置</param>
+        /// <remarks>
+        /// 提供了索引器this[]方法的接口，该方法接受一个string返回的是本地化的string。
+        /// 当LocalizationManager初始化动作结束后，每一种本地化语言的都对应有且仅有的一个ILocalizationDictionary对象，
+        /// 这个对象用于保存该语言的所有本地化信息。
+        /// </remarks>
         string this[string name] { get; set; }
 
         /// <summary>
