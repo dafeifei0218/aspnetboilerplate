@@ -8,6 +8,10 @@ namespace Abp.Runtime.Validation
     /// So, implementing class can define it's own validation logic.
     /// 自定义验证器
     /// </summary>
+    /// <remarks>
+    /// 用于自定义Validation 规则. ABP默认的Validation 规则是来自System.ComponentModel.DataAnnotations中的规则。
+    /// 如果要添加自定义Validation 规则，需要实现ICustomValidate接口。
+    /// </remarks>
     public interface ICustomValidate : IValidate
     {
         /// <summary>
