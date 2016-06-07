@@ -48,6 +48,10 @@ namespace Abp
             //功能拦截器注册
             FeatureInterceptorRegistrar.Initialize(IocManager);
             //审计拦截器注册
+            //ABP是如何实现在方法执行时自动完成Auditing的呢（俗话叫AOP）？
+            //通过注入到IApplicationService对象的ComponentModel上的AuditingInterceptor拦截器实现的。
+            //AuditingInterceptor拦截器是由AuditingInterceptorRegistrar对象的Initialize方法注入的。
+            //而AuditingInterceptorRegistrar的Initialize会在AbpKernelModule的Initialize的时候被调用。
             AuditingInterceptorRegistrar.Initialize(IocManager);
 
             //工作单元注册
@@ -57,6 +61,8 @@ namespace Abp
             AuthorizationInterceptorRegistrar.Initialize(IocManager);
 
             //审计配置
+            //给IAuditingConfiguration对象配置了一个类型选择器（用于筛选出IApplicationService对象），
+            //稍后所有IApplicationService对象都会被注入Auditing拦截器。
             Configuration.Auditing.Selectors.Add(
                 new NamedTypeSelector(
                     "Abp.ApplicationServices",

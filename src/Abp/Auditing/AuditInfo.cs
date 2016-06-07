@@ -6,6 +6,9 @@ namespace Abp.Auditing
     /// This informations are collected for an <see cref="AuditedAttribute"/> method.
     /// 审计信息
     /// </summary>
+    /// <remarks>
+    /// 定义被审计的信息
+    /// </remarks>
     public class AuditInfo
     {
         /// <summary>

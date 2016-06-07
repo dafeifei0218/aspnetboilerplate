@@ -8,6 +8,9 @@ namespace Abp.Auditing
     /// Default implementation is <see cref="SimpleLogAuditingStore"/>.
     /// 审计存储接口 
     /// </summary>
+    /// <remarks>
+    /// 这个接口定义持久化AuditInfo的方法
+    /// </remarks>
     public interface IAuditingStore
     {
         /// <summary>

@@ -7,6 +7,9 @@ namespace Abp.Auditing
     /// Implements <see cref="IAuditingStore"/> to simply write audits to logs.
     /// 简单日志审计存储
     /// </summary>
+    /// <remarks>
+    /// ABP底层框架自带的IAuditingStore实现是SimpleLogAuditingStore，
+    /// </remarks>
     public class SimpleLogAuditingStore : IAuditingStore
     {
         /// <summary>

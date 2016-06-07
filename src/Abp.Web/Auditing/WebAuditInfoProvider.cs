@@ -10,6 +10,12 @@ namespace Abp.Auditing
     /// <summary>
     /// Implements <see cref="IAuditInfoProvider"/> to fill web specific audit informations.
     /// </summary>
+    /// <remarks>
+    /// 这个IAuditInfoProvider对象就是上面所说的上层的IAuditInfoProvider实现。
+    /// 这个类就是在Abp.Web模块中实现的。
+    /// （ 注意：整个项目中除了NullAuditInfoProvider 只能有一个自定义的IAuditInfoProvider实现。
+    /// 也就是说实际项目中无法直接创建自定义的IAuditInfoProvider，因为Abp.Web模块中已经有一个了。）
+    /// </remarks>
     public class WebAuditInfoProvider : IAuditInfoProvider, ITransientDependency
     {
         public ILogger Logger { get; set; }

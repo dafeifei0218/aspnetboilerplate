@@ -7,6 +7,13 @@ namespace Abp.Auditing
     /// <summary>
     /// 审计帮助类
     /// </summary>
+    /// <remarks>
+    /// 那些方法会执行的时候会被真正加入Auditing功能呢？具体可参见AuditingHelper的代码。
+    /// 大概总结如下条件（同时满足）：
+    /// 1.必须满足AuditingConfiguration中的IsEnabled为true
+    /// 2.如果session为空，则configuration.IsEnabledForAnonymousUsers也必须为true
+    /// 3.Public 方法
+    /// </remarks>
     public static class AuditingHelper
     {
         /// <summary>
