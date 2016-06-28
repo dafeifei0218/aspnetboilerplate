@@ -8,7 +8,8 @@ namespace Abp.Runtime.Validation.Interception
     /// 这个拦截器是用来拦截方法的，必须验证方法的类
     /// </summary>
     /// <remarks>
-    /// 上面MethodInvocationValidator的Validate方法是由ValidationInterceptor触发的。这是一个自定义的Castle拦截器。
+    /// MethodInvocationValidator的Validate方法是由ValidationInterceptor触发的。
+    /// 这是一个自定义的Castle拦截器。
     /// </remarks>
     public class ValidationInterceptor : IInterceptor
     {

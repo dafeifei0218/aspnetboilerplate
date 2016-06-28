@@ -9,9 +9,9 @@ namespace Abp.Runtime.Validation.Interception
     /// 验证拦截器注册类
     /// </summary>
     /// <remarks>
-    /// 上面ValidationInterceptor拦截器则是由ValidationInterceptorRegistrar注入到ABP底层容器中的。
-    /// ABP只针对实现了Iapplicationservice接口的对象注入ValidationInterceptor拦截器。
-    /// 而ValidationInterceptorRegistrar的initialize方法则是通过AbpKernelModule来触发的（以前的博文已有分析）。
+    /// ValidationInterceptor拦截器则是由ValidationInterceptorRegistrar注入到ABP底层容器中的。
+    /// ABP只针对实现了IApplicationservice接口的对象注入ValidationInterceptor拦截器。
+    /// 而ValidationInterceptorRegistrar的Initialize方法则是通过AbpKernelModule来触发的（以前的博文已有分析）。
     /// </remarks>
     internal static class ValidationInterceptorRegistrar
     {

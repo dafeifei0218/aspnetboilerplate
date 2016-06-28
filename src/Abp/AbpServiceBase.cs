@@ -15,6 +15,9 @@ namespace Abp
     /// 这个类可以用作服务的基类。
     /// 它有一些有用的对象属性注入，并有一些基本的方法，大多数的服务可能需要。
     /// </summary>
+    /// <remarks>
+    /// 抽象类，封装了对一些通用功能的调用。比如Setting,Localization和UnitOfWork功能。
+    /// </remarks>
     public abstract class AbpServiceBase
     {
         /// <summary>

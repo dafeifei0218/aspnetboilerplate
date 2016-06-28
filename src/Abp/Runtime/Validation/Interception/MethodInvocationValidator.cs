@@ -115,8 +115,8 @@ namespace Abp.Runtime.Validation.Interception
         /// </summary>
         /// <param name="validatingObject">验证对象</param>
         /// <remarks>
-        /// ABP通过这个对象中的Validate方法对被调用方法中的参数（继承自IValidate的参数）做Validate. 
-        /// 通过下面的代码可以看出只要对象实现了Ivalidate接口，都会被强制执行Validation.
+        /// ABP通过这个对象中的Validate方法对被调用方法中的参数（继承自IValidate的参数）做Validate。
+        /// 通过下面的代码可以看出只要对象实现了IValidate接口，都会被强制执行Validation。
         /// </remarks>
         private void ValidateObjectRecursively(object validatingObject)
         {
