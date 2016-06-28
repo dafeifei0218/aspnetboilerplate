@@ -4,6 +4,9 @@
     /// Defines standard interface for authorization attributes.
     /// 授权自定义属性接口
     /// </summary>
+    /// <remarks>
+    /// AbpAuthorize特性用于标注ApplicationService中只能被授权用户使用的方法。
+    /// </remarks>
     public interface IAbpAuthorizeAttribute
     {
         /// <summary>

@@ -8,6 +8,12 @@ namespace Abp.Authorization
     /// 授权提供者，
     /// 这是定义应用程序的权限的主要接口。实现它为您的模块定义权限。
     /// </summary>
+    /// <remarks>
+    /// 功能类似于FeatureProvider。
+    /// 抽象基类，用于设置PermissionManager的PermissionDictionary。
+    /// Abp框架只提供了抽象类，下面代码是一个简单的示例。
+    /// 实际项目中可以创建自定义AuthorizationProvider来从数据库中读取Permission信息来填充到PermissionManager对象中。
+    /// </remarks>
     public abstract class AuthorizationProvider : ITransientDependency
     {
         /// <summary>

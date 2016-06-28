@@ -10,6 +10,10 @@ namespace Abp.Authorization
     /// <summary>
     /// 授权自定义属性帮助类
     /// </summary>
+    /// <remarks>
+    /// 是对IPermissionChecker的更近一步的封装同时提供了以AuthorizeAttribute为参数的校验方法，
+    /// 以方便AuthorizationInterceptor的调用。
+    /// </remarks>
     internal class AuthorizeAttributeHelper : IAuthorizeAttributeHelper, ITransientDependency
     {
         /// <summary>
@@ -22,6 +26,9 @@ namespace Abp.Authorization
         /// </summary>
         public IPermissionChecker PermissionChecker { get; set; }
 
+        /// <summary>
+        /// 本地化管理类
+        /// </summary>
         public ILocalizationManager LocalizationManager { get; set; }
 
         /// <summary>

@@ -10,8 +10,12 @@ namespace Abp.Authorization
     /// <summary>
     /// Represents a permission.
     /// A permission is used to restrict functionalities of the application from unauthorized users.
-    /// 权限类
+    /// 权限类。
+    /// 一个权限是用来限制应用程序的功能，从未经授权的用户。
     /// </summary>
+    /// <remarks>
+    /// 用于定义一个Permission，一个Permission可以包含多个子Permission.
+    /// </remarks>
     public sealed class Permission
     {
         /// <summary>
