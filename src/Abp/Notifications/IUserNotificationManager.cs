@@ -8,6 +8,9 @@ namespace Abp.Notifications
     /// Used to manage user notifications.
     /// 用户通知管理接口，用于管理用户通知。
     /// </summary>
+    /// <remarks>
+    /// 用于获取，删除UserNotification，以及更改UserNotification的状态。
+    /// </remarks>
     public interface IUserNotificationManager
     {
         /// <summary>

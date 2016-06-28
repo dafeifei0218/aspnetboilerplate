@@ -11,6 +11,10 @@ namespace Abp.Notifications
     /// Definition for a notification.
     /// 通知的定义
     /// </summary>
+    /// <remarks>
+    /// 用于封装Notification Definnition 的信息。
+    /// 注意和Notification 的区别，如果把Notification看成是具体的消息内容，NotificationDefinition则是对这个消息自身的定义（可理解为消息的类型）。
+    /// </remarks>
     public class NotificationDefinition
     {
         /// <summary>

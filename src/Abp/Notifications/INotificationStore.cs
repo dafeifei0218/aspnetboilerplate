@@ -8,6 +8,11 @@ namespace Abp.Notifications
     /// Used to store (persist) notifications.
     /// 通知存储接口，用户存储（持久）通知。
     /// </summary>
+    /// <remarks>
+    /// 该接口提供持久化NotificationInfo的方法。
+    /// NullNotificationStore是其空的实现。
+    /// 具体的实现留到外部的模块中。
+    /// </remarks>
     public interface INotificationStore
     {
         /// <summary>

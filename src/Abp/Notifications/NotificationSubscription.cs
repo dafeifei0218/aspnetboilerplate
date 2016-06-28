@@ -6,8 +6,12 @@ namespace Abp.Notifications
 {
     /// <summary>
     /// Represents a user subscription to a notification.
-    /// 通知订阅，表示一个用户的通知订阅。
+    /// 通知订阅，
+    /// 表示一个用户的通知订阅。
     /// </summary>
+    /// <remarks>
+    /// 用于封装封装Notification 和Subscriptor（User） 的关系的DTO,不是Entity。
+    /// </remarks>
     public class NotificationSubscription : IHasCreationTime
     {
         /// <summary>

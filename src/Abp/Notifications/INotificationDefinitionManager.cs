@@ -7,6 +7,9 @@ namespace Abp.Notifications
     /// Used to manage notification definitions.
     /// 通知定义管理接口
     /// </summary>
+    /// <remarks>
+    /// 该接口定义根据Name返回NotificationDefinition的一些方法
+    /// </remarks>
     public interface INotificationDefinitionManager
     {
         /// <summary>

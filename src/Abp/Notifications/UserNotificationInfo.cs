@@ -11,6 +11,9 @@ namespace Abp.Notifications
     /// Used to store a user notification.
     /// 用户通知信息，用于用户通知信息。
     /// </summary>
+    /// <remarks>
+    /// 用于封装User和Notification关系的Entity。
+    /// </remarks>
     [Serializable]
     [Table("AbpUserNotifications")]
     public class UserNotificationInfo : Entity<Guid>, IHasCreationTime

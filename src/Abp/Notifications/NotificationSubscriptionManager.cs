@@ -11,6 +11,9 @@ namespace Abp.Notifications
     /// Implements <see cref="INotificationSubscriptionManager"/>.
     /// 通知订阅管理类
     /// </summary>
+    /// <remarks>
+    /// 用于获取，删除和添加NotificationSubscription。
+    /// </remarks>
     public class NotificationSubscriptionManager : INotificationSubscriptionManager, ITransientDependency
     {
         private readonly INotificationStore _store;

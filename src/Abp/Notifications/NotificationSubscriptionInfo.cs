@@ -11,6 +11,9 @@ namespace Abp.Notifications
     /// Used to store a notification subscription.
     /// 通知订阅的信息
     /// </summary>
+    /// <remarks>
+    /// 用于封装Notification 通知 和Subscription 订阅人 的关系的Entity
+    /// </remarks>
     [Table("AbpNotificationSubscriptions")]
     public class NotificationSubscriptionInfo : CreationAuditedEntity<Guid>
     {
