@@ -145,8 +145,7 @@ namespace Abp.Application.Navigation
                     }
 
                     var userMenuItem = new UserMenuItem(menuItemDefinition, _localizationContext);
-                    //if (menuItemDefinition.IsLeaf ||
-                    //    (await FillUserMenuItems(userId, menuItemDefinition.Items, userMenuItem.Items)) > 0)
+                    //if (menuItemDefinition.IsLeaf || (await FillUserMenuItems(userId, menuItemDefinition.Items, userMenuItem.Items)) > 0)
                     //{
                     //    userMenuItems.Add(userMenuItem);
                     //    ++addedMenuItemCount;

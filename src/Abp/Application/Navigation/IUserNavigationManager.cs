@@ -7,6 +7,12 @@ namespace Abp.Application.Navigation
     /// Used to manage navigation for users.
     /// 用户导航管理接口
     /// </summary>
+    /// <remarks>
+    /// 通过INavigationManager的Menus和用户信息，生成该用户可访问的菜单集合。
+    /// 主要检查两点：
+    /// 一是通过PermissionChecker检查一个用户是否拥有对某个菜单项的访问权限，
+    /// 另一项则是通过Featurechecker检查一个用户所在的tenant是否有对该菜单项的访问权限。
+    /// </remarks>
     public interface IUserNavigationManager
     {
         /// <summary>

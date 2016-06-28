@@ -6,6 +6,9 @@ namespace Abp.Application.Navigation
     /// Manages navigation in the application.
     /// 导航管理接口
     /// </summary>
+    /// <remarks>
+    /// 这个接口封装了一个字典类型的Menus和MenuDefinition类型的MainMenu。
+    /// </remarks>
     public interface INavigationManager
     {
         /// <summary>

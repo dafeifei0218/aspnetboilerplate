@@ -10,6 +10,9 @@ namespace Abp.Application.Navigation
     /// Represents an item in a <see cref="MenuDefinition"/>.
     /// 菜单项定义，表示<see cref="MenuDefinition"/>中的一项
     /// </summary>
+    /// <remarks>
+    /// 封装了主菜单的子菜单的属性。子菜单可以引用其他子菜单构成一个菜单树。
+    /// </remarks>
     public class MenuItemDefinition : IHasMenuItemDefinitions
     {
         /// <summary>
