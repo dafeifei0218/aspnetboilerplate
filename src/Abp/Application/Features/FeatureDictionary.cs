@@ -7,6 +7,9 @@ namespace Abp.Application.Features
     /// Used to store <see cref="Feature"/>s.
     /// 功能字典
     /// </summary>
+    /// <remarks>
+    /// 其本身继承自Dictionary。其作用就是把一个Feature及其Child Feature从树状结构加载到Dictionary结构中（扁平化）。
+    /// </remarks>
     public class FeatureDictionary : Dictionary<string, Feature>
     {
         /// <summary>

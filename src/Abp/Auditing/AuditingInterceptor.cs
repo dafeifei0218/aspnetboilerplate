@@ -43,12 +43,19 @@ namespace Abp.Auditing
         /// </summary>
         public IAuditingStore AuditingStore { get; set; }
 
-        //审计配置
+        /// <summary>
+        /// 审计配置
+        /// </summary>
         private readonly IAuditingConfiguration _configuration;
 
-        //审计信息提供者
+        /// <summary>
+        /// 审计信息提供者
+        /// </summary>
         private readonly IAuditInfoProvider _auditInfoProvider;
-        //工作单元管理类
+
+        /// <summary>
+        /// 工作单元管理类
+        /// </summary>
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         /// <summary>

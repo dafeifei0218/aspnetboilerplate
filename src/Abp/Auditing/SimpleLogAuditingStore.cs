@@ -8,7 +8,8 @@ namespace Abp.Auditing
     /// 简单日志审计存储
     /// </summary>
     /// <remarks>
-    /// ABP底层框架自带的IAuditingStore实现是SimpleLogAuditingStore，
+    /// ABP底层框架自带的IAuditingStore实现是SimpleLogAuditingStore，可以把下图中5个信息持久化到日志中。
+    /// module-zero项目中有个更为完整的实现。
     /// </remarks>
     public class SimpleLogAuditingStore : IAuditingStore
     {
@@ -33,7 +34,7 @@ namespace Abp.Auditing
         }
 
         /// <summary>
-        /// 保存
+        /// 保存-异步
         /// </summary>
         /// <param name="auditInfo">审计信息</param>
         /// <returns></returns>

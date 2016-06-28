@@ -7,8 +7,13 @@ namespace Abp.Application.Features
 {
     /// <summary>
     /// Implements <see cref="IFeatureManager"/>.
-    /// 功能管理类
+    /// 功能管理类。
     /// </summary>
+    /// <remarks>
+    /// 通过调用继承自FeatureDefinitionContextBase中的方法来实现IFeatureManager中定义的方法。
+    /// 这个FeatureManager起到了一个类似适配器的作用，把IFeatureDefinitionContext适配成IFeatureManager。
+    /// FeatureManager的另一个作用是初始化FeatureDictionary（其Features属性）。
+    /// </remarks>
     internal class FeatureManager : FeatureDefinitionContextBase, IFeatureManager, ISingletonDependency
     {
         private readonly IIocManager _iocManager;
@@ -38,6 +43,11 @@ namespace Abp.Application.Features
             Features.AddAllFeatures();
         }
 
+        /// <summary>
+        /// 获取指定名称的功能。
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Feature Get(string name)
         {
             var feature = GetOrNull(name);
@@ -49,11 +59,20 @@ namespace Abp.Application.Features
             return feature;
         }
 
+        /// <summary>
+        /// 获取全部功能。
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<Feature> GetAll()
         {
             return Features.Values.ToImmutableList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="providerType"></param>
+        /// <returns></returns>
         private FeatureProvider CreateProvider(Type providerType)
         {
             _iocManager.RegisterIfNot(providerType);

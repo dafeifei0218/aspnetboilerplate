@@ -54,7 +54,8 @@ namespace Abp.Application.Navigation
         /// <summary>
         /// A feature dependency.
         /// Optional.
-        /// 特征依赖
+        /// 特征依赖。
+        /// 可选。
         /// </summary>
         public IFeatureDependency FeatureDependency { get; set; }
 

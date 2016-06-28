@@ -11,6 +11,9 @@ namespace Abp.Application.Features
     /// Used to register <see cref="FeatureInterceptor"/> for needed classes.
     /// 功能拦截器注册类
     /// </summary>
+    /// <remarks>
+    /// 用于给标注了RequiresFeatureAttribute特性的对象注册FeatureInterceptor拦截器。由AbpKernelModuel调用。
+    /// </remarks>
     internal static class FeatureInterceptorRegistrar
     {
         /// <summary>
