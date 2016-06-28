@@ -7,6 +7,9 @@ namespace Abp.Authorization
     /// Used to store and manipulate dictionary of permissions.
     /// 权限字典，用于存储和操作权限字典
     /// </summary>
+    /// <remarks>
+    /// 继承自Dictionary<string, Permission>类，很明显是一个用于存储Permission对象的字典。
+    /// </remarks>
     internal class PermissionDictionary : Dictionary<string, Permission>
     {
         /// <summary>

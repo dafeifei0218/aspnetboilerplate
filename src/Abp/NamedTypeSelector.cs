@@ -6,6 +6,9 @@ namespace Abp
     /// Used to represent a named type selector.
     /// 名称类型选择器
     /// </summary>
+    /// <remarks>
+    /// 类型选择器，这个对象的核心属性是一个以Type为输入参数，返回bool类型的委托Predicate
+    /// </remarks>
     public class NamedTypeSelector
     {
         /// <summary>

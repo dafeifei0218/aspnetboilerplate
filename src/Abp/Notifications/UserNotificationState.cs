@@ -4,6 +4,9 @@
     /// Represents state of a <see cref="UserNotification"/>.
     /// 用户通知状态。
     /// </summary>
+    /// <remarks>
+    /// 表示UserNotification的状态：读和未读
+    /// </remarks>
     public enum UserNotificationState
     {
         /// <summary>

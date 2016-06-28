@@ -9,6 +9,9 @@ namespace Abp.Application.Features
     /// Intercepts methods to apply <see cref="RequiresFeatureAttribute"/>.
     /// 功能拦截器
     /// </summary>
+    /// <remarks>
+    /// 执行拦截器的逻辑，主要是IFeatureChecker完成Feature的检查。一个标准的Castle 拦截器。
+    /// </remarks>
     public class FeatureInterceptor : IInterceptor
     {
         private readonly IIocResolver _iocResolver;

@@ -11,9 +11,14 @@ namespace Abp.Authorization.Interceptors
     /// This class is used to intercept methods to make authorization if the method defined <see cref="AbpAuthorizeAttribute"/>.
     /// 授权拦截器，如果方法定义AbpAuthorizeAttribute，使用此类来拦截方法进行授权
     /// </summary>
+    /// <remarks>
+    /// 拦截器，拦截所有标注了AbpAuthorize特性的方法。
+    /// </remarks>
     public class AuthorizationInterceptor : IInterceptor
     {
-        //IOC控制反转解析器
+        /// <summary>
+        /// IOC控制反转解析器
+        /// </summary>
         private readonly IIocResolver _iocResolver;
 
         /// <summary>

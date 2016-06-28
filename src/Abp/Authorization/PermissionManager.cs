@@ -15,6 +15,12 @@ namespace Abp.Authorization
     /// Permission manager.
     /// 权限管理类
     /// </summary>
+    /// <remarks>
+    /// 在ABP这是一个单例实例，继承了PermissionDefinitionContextBase类，实现了IPermissionManager的四个方法。
+    /// PermissionManager在Initialize方法中会实例化系统的Permissio并存入PermissionDictionary中。
+    /// 具体是通过调用AuthorizationProvider的SetPermissions的方法实现的。
+    /// 这边的做法和FeatureManager通过FeatureProvider初始化FeatureDictionary一致，也和NavigationManager通过NavigationProvider初始化menus一致的。
+    /// </remarks>
     internal class PermissionManager : PermissionDefinitionContextBase, IPermissionManager, ISingletonDependency
     {
         /// <summary>
@@ -22,7 +28,13 @@ namespace Abp.Authorization
         /// </summary>
         public IAbpSession AbpSession { get; set; }
 
+        /// <summary>
+        /// IOC管理
+        /// </summary>
         private readonly IIocManager _iocManager;
+        /// <summary>
+        /// 授权配置
+        /// </summary>
         private readonly IAuthorizationConfiguration _authorizationConfiguration;
         //private readonly FeatureDependencyContext _featureDependencyContext;
 
@@ -59,6 +71,9 @@ namespace Abp.Authorization
         /// <summary>
         /// 初始化
         /// </summary>
+        /// <remarks>
+        /// PermissionManager的Initialize方法 是在AbpKernelModule的PostInitialize的方法中被调用的。
+        /// </remarks>
         public void Initialize()
         {
             foreach (var providerType in _authorizationConfiguration.Providers)

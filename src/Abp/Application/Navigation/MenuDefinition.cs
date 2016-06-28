@@ -8,6 +8,9 @@ namespace Abp.Application.Navigation
     /// Represents a navigation menu for an application.
     /// 菜单定义，表示一个应用的导航菜单
     /// </summary>
+    /// <remarks>
+    /// 封装了导航栏上的主菜单的属性。
+    /// </remarks>
     public class MenuDefinition : IHasMenuItemDefinitions
     {
         /// <summary>

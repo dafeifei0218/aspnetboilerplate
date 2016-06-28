@@ -4,6 +4,9 @@
     /// Used to configure auditing.
     /// 审计配置接口
     /// </summary>
+    /// <remarks>
+    /// 可以配置如下四个属性，除了Selectors外其他三个属性都很容易理解。
+    /// </remarks>
     public interface IAuditingConfiguration
     {
         /// <summary>

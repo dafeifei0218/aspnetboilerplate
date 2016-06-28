@@ -9,6 +9,9 @@ namespace Abp.Notifications
     /// Used to store published/sent notification.
     /// 通知信息类，用于存储发布/发送的通知。
     /// </summary>
+    /// <remarks>
+    /// 用于封装Notification的Entity。
+    /// </remarks>
     [Serializable]
     [Table("AbpNotifications")]
     public class NotificationInfo : CreationAuditedEntity<Guid>

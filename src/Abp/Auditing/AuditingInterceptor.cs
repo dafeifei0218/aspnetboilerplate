@@ -17,6 +17,15 @@ namespace Abp.Auditing
     /// <summary>
     /// 审计拦截器
     /// </summary>
+    /// <remarks>
+    /// 满足以下四个条件的方法都会被AuditingInterceptor拦截：
+    /// 1.IApplicationService的实例中的方法
+    /// 2.添加了AuditedAttribute的类的实例的方法
+    /// 3.加了AuditedAttribute的方法
+    /// 4.通过IAuditingConfiguration对象的Selectors属性添加需要被auditing的类型。
+    /// 
+    /// 生成AuditInfo实例，然后调用IAuditingStore类实例执行AuditInfo持久化。
+    /// </remarks>
     internal class AuditingInterceptor : IInterceptor
     {
         /// <summary>
@@ -34,12 +43,19 @@ namespace Abp.Auditing
         /// </summary>
         public IAuditingStore AuditingStore { get; set; }
 
-        //审计配置
+        /// <summary>
+        /// 审计配置
+        /// </summary>
         private readonly IAuditingConfiguration _configuration;
 
-        //审计信息提供者
+        /// <summary>
+        /// 审计信息提供者
+        /// </summary>
         private readonly IAuditInfoProvider _auditInfoProvider;
-        //工作单元管理类
+
+        /// <summary>
+        /// 工作单元管理类
+        /// </summary>
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         /// <summary>

@@ -6,11 +6,17 @@ namespace Abp.Application.Features
     /// Used in <see cref="IFeatureDependency.IsSatisfiedAsync"/> method.
     /// 功能依赖上下文
     /// </summary>
+    /// <remarks>
+    /// 这个上下文类封装了IFeatureChecker 和 IResolver对象。被用于方法的形参。
+    /// </remarks>
     public interface IFeatureDependencyContext
     {
         /// <summary>
         /// Tenant id which required the feature.
         /// Null for current tenant.
+        /// 租户Id
+        /// 功能的租户Id。
+        /// 当前租户的为空。
         /// </summary>
         int? TenantId { get; }
 

@@ -8,7 +8,10 @@ namespace Abp.Notifications
     /// <summary>
     /// Represents a published notification.
     /// 通知，
-    /// </summary>
+    /// </summary> 
+    /// <remarks>
+    /// 用于封装Notification 的信息。用作DTO而不是Entity
+    /// </remarks>
     [Serializable]
     public class Notification : EntityDto<Guid>, IHasCreationTime
     {

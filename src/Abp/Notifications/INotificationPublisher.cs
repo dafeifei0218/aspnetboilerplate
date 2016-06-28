@@ -8,6 +8,10 @@ namespace Abp.Notifications
     /// Used to publish notifications.
     /// 通知发布接口，用于发布通知。
     /// </summary>
+    /// <remarks>
+    /// 用于发布Notification，首先调用INotificationStore实例进行实例化，接着分发Notification。
+    /// 如果有接收者并且接收者少于5个则直接调用INotificationDistributer进行分发，否则就把分发的任务加到后台工作队列中去。
+    /// </remarks>
     public interface INotificationPublisher
     {
         /// <summary>

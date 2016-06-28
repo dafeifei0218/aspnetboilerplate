@@ -6,7 +6,12 @@ namespace Abp.Application.Features
     /// <summary>
     /// This interface should be used to get value of
     /// 功能检查接口
-    /// </summary>
+    /// </summary> 
+    /// <remarks>
+    /// 提供检查特定的Feture对于特定的Tenant是否可用。
+    /// 首先FeatureChecker 根据Feature Name通过FeatureManager获取Featue,然后通过从IFeatureValueStore对象根据Feature的Name和tenantId获取Feature的value值。
+    /// 然后判断value是否为“true”。
+    /// </remarks>
     public interface IFeatureChecker
     {
         /// <summary>

@@ -6,11 +6,20 @@ namespace Abp.Authorization
     /// <summary>
     /// 静态权限检查
     /// </summary>
+    /// <remarks>
+    /// 用于从容器生成IPermissionChecker接口的实现，
+    /// 如果没有自定义的IPermissionChecker实现被注入到容器中则返回NullPermissionChecker。
+    /// 这边通过Lazy实现延迟加载。
+    /// </remarks>
     internal static class StaticPermissionChecker
     {
-        //实例
+        /// <summary>
+        /// 实例
+        /// </summary>
         public static IPermissionChecker Instance { get { return LazyInstance.Value; } }
-        //延迟实例
+        /// <summary>
+        /// 延迟实例
+        /// </summary>
         private static readonly Lazy<IPermissionChecker> LazyInstance;
 
         /// <summary>

@@ -7,6 +7,9 @@ namespace Abp.Notifications
     /// Represents a notification sent to a user.
     /// 用户通知，表示发送给用户的通知。
     /// </summary>
+    /// <remarks>
+    /// 用于封装User和Notification关系的信息。用作DTO而不是Entity
+    /// </remarks>
     public class UserNotification : EntityDto<Guid>
     {
         /// <summary>

@@ -9,6 +9,9 @@ namespace Abp.Authorization.Interceptors
     /// This class is used to register interceptors on the Application Layer.
     /// 授权拦截器注册类，这个类用来在应用层注册拦截器
     /// </summary>
+    /// <remarks>
+    /// 用于将AuthorizationInterceptor拦截器注册到所有实现IApplicationService的类的ComponentModel中。
+    /// </remarks>
     internal static class AuthorizationInterceptorRegistrar
     {
         /// <summary>

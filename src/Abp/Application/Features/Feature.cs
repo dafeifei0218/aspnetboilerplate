@@ -10,8 +10,14 @@ namespace Abp.Application.Features
     /// <summary>
     /// Defines a feature of the application. A <see cref="Feature"/> can be used in a multi-tenant application
     /// to enable disable some application features depending on editions and tenants.
-    /// 特征， 定义应用程序的功能。可用于多租户应用程序的功能启用禁用某些应用程序功能
+    /// 特征，
+    /// 定义应用程序的功能。可用于多租户应用程序的功能启用禁用某些应用程序功能
     /// </summary>
+    /// <remarks>
+    /// Feature是什么？Feature就是对function的分类方法，其与function的关系就比如Role和User的关系一样。
+    /// ABP中Feature具有以下属性： 其中最重要的属性是Name，用以表示Feature的Identity,一个Feature一个Name。
+    /// 一个Feature可以有一组子Features，从而构成Feature树。
+    /// </remarks>
     public class Feature
     {
         /// <summary>
@@ -136,6 +142,10 @@ namespace Abp.Application.Features
             return feature;
         }
 
+        /// <summary>
+        /// 重写ToString方法
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("[Feature: {0}]", Name);

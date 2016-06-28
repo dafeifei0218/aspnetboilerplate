@@ -7,6 +7,11 @@ namespace Abp.Application.Features
     /// Used in <see cref="FeatureProvider.SetFeatures"/> method as context.
     /// 特征定义上下文接口
     /// </summary>
+    /// <remarks>
+    /// IFeatureDefinitionContext/FeatureDefinitionContextBase : 
+    /// 这组接口和抽象类提供管理FeatureDictionary的方法, 新建一个Feature到FeatureDictionary中,和根据 Name从 FeatureDictionary返回一个Featur。
+    /// 他们是FeatureManager的基类。
+    /// </remarks>
     public interface IFeatureDefinitionContext
     {
         /// <summary>

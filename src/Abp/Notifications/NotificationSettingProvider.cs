@@ -7,6 +7,10 @@ namespace Abp.Notifications
     /// <summary>
     /// 通知设置提供者
     /// </summary>
+    /// <remarks>
+    /// 用于初始化Notification功能模块的Setting，
+    /// Notification功能模块的唯一一项Setting就是设置是否接收Notification。
+    /// </remarks>
     public class NotificationSettingProvider : SettingProvider
     {
         /// <summary>

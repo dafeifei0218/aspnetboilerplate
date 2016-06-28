@@ -8,6 +8,12 @@ namespace Abp.Application.Navigation
     /// <summary>
     /// 导航管理类
     /// </summary>
+    /// <remarks>
+    /// 实现了INavigationManager，运行时是一个单例对象。完成菜单集的初始化。
+    /// NavigationManager在Initialize方法中先从Configuration中获取NavigationProvider派生类的type,
+    /// 然后通过容器生成该类型的实例，并调用NavigationProvider实例的SetNavigation完成菜单项的初始化。
+    /// NavigationManager的Initialize方法是在AbpKernelModule的PostInitialize方法中被调用的。
+    /// </remarks>
     internal class NavigationManager : INavigationManager, ISingletonDependency
     {
         /// <summary>

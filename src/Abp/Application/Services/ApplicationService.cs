@@ -10,6 +10,14 @@ namespace Abp.Application.Services
     /// This class can be used as a base class for application services. 
     /// 应用服务抽象类，这个类可以用作应用程序服务的基类。
     /// </summary>
+    /// <remarks>
+    /// 作为所有其他AppService的基类。其封装了对AbpSession, Permission和Feature这些模块的功能调用。
+    /// 使用过ABP的都知道，ApplicationService有诸多"神奇"的功能。
+    /// 是不是没想到ApplicationService设计却如此简单。
+    /// 其实不然，ApplicationService这些"神奇"的功能都是通过Castle拦截器实现的。
+    /// 这些拦截器的实现其实不简单。
+    /// 这样的设计不就是平时一直强调的解耦，AOP，IOC什么的么。
+    /// </remarks>
     public abstract class ApplicationService : AbpServiceBase, IApplicationService
     {
         /// <summary>

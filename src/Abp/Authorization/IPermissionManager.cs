@@ -7,6 +7,9 @@ namespace Abp.Authorization
     /// Permission manager.
     /// 权限管理类
     /// </summary>
+    /// <remarks>
+    /// 该接口定义了一些返回Permission的方法。
+    /// </remarks>
     public interface IPermissionManager
     {
         /// <summary>

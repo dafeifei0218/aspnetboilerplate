@@ -4,6 +4,9 @@
     /// Defines MVC Controller auditing configurations
     /// MVC控制器审计配置
     /// </summary>
+    /// <remarks>
+    /// 用于配置是否启用对MVC Controller及其Action的Auditing功能。
+    /// </remarks>
     public interface IMvcControllersAuditingConfiguration
     {
         /// <summary>

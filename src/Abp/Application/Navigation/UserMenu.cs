@@ -7,6 +7,11 @@ namespace Abp.Application.Navigation
     /// Represents a menu shown to the user.
     /// 表示一个用户显示的菜单
     /// </summary>
+    /// <remarks>
+    /// UserMenu/UserMenuItem：封装了用于显示给用户的菜单/以及子菜单集合。
+    /// ABP通过MenuDefinition/MenuItemDefinition构成了完整的系统菜单集合（超集）。
+    /// 而UserMenu/UserMenuItem只构成用户所能访问的菜单集合，并且其DisplayName是本地化以后的DisplayName。
+    /// </remarks>
     public class UserMenu
     {
         /// <summary>

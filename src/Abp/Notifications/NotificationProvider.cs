@@ -7,6 +7,10 @@ namespace Abp.Notifications
     /// 通知提供者，
     /// 定义通知，应该被实现。
     /// </summary>
+    /// <remarks>
+    /// 抽象基类，用于向INotificationDefinitionManager对象（NotificationDefinitionManager）中添加NotificationDefinition。
+    /// Abp框架只提供了抽象类，实际项目中可以创建自定义NotificationProvider来从数据库中读取NotificationDefinition来填充到NotificationDefinitionManager对象中。
+    /// </remarks>
     public abstract class NotificationProvider : ITransientDependency
     {
         /// <summary>

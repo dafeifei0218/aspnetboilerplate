@@ -12,11 +12,25 @@ namespace Abp.Notifications
     /// Implements <see cref="INotificationDefinitionManager"/>.
     /// 通知定义管理类
     /// </summary>
+    /// <remarks>
+    /// 单例对象，实现了INotificationDefinitionManager接口。
+    /// NotificationDefinitionManager封装了一个Dictionary<string, NotificationDefinition>字典对象用于存放NotificationDefinition。其Initialize方法完成所有NotificationDefinition的初始化和装载。Initialize方法从NotificationConfiguration读取NotificationProvider以装载NotificationDefinition到他的私有的IDictionary容器中。
+    /// 其实现的手法和Feature，Navigation以及Authorization是一致的
+    /// </remarks>
     internal class NotificationDefinitionManager : INotificationDefinitionManager, ISingletonDependency
     {
+        /// <summary>
+        /// 通知配置接口
+        /// </summary>
         private readonly INotificationConfiguration _configuration;
+        /// <summary>
+        /// IOC控制反转管理类
+        /// </summary>
         private readonly IocManager _iocManager;
 
+        /// <summary>
+        /// 通知定义字典
+        /// </summary>
         private readonly IDictionary<string, NotificationDefinition> _notificationDefinitions;
 
         /// <summary>

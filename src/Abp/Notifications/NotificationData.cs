@@ -11,6 +11,9 @@ namespace Abp.Notifications
     /// 用于存储通知的数据。
     /// 可直接使用或可衍生。
     /// </summary>
+    /// <remarks>
+    /// 用于储存真正的Notification的数据(即内容)
+    /// </remarks>
     [Serializable]
     public class NotificationData
     {
@@ -65,6 +68,10 @@ namespace Abp.Notifications
             Properties = new Dictionary<string, object>();
         }
 
+        /// <summary>
+        /// 重写ToString方法
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.ToJsonString();
