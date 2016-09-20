@@ -5,6 +5,7 @@ namespace Abp.Json
 {
     /// <summary>
     /// Defines helper methods to work with JSON.
+    /// JSON–Ú¡–ªØ∞Ô÷˙¿‡
     /// </summary>
     public static class JsonSerializationHelper
     {

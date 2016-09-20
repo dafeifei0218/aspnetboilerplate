@@ -21,12 +21,12 @@ namespace Abp.Auditing
     public class WebAuditInfoProvider : IAuditInfoProvider, ITransientDependency
     {
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         public ILogger Logger { get; set; }
 
         /// <summary>
-        /// 
+        /// Http上下文
         /// </summary>
         private readonly HttpContext _httpContext;
 
@@ -40,6 +40,10 @@ namespace Abp.Auditing
             Logger = NullLogger.Instance;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="auditInfo">审计信息</param>
         public void Fill(AuditInfo auditInfo)
         {
             var httpContext = HttpContext.Current ?? _httpContext;
@@ -61,6 +65,11 @@ namespace Abp.Auditing
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         private static string GetBrowserInfo(HttpContext httpContext)
         {
             return httpContext.Request.Browser.Browser + " / " +
@@ -68,6 +77,11 @@ namespace Abp.Auditing
                    httpContext.Request.Browser.Platform;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         private static string GetClientIpAddress(HttpContext httpContext)
         {
             var clientIp = httpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ??
@@ -92,6 +106,11 @@ namespace Abp.Auditing
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         private static string GetComputerName(HttpContext httpContext)
         {
             if (!httpContext.Request.IsLocal)

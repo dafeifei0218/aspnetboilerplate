@@ -13,8 +13,8 @@ namespace Abp.Json
         /// object转换为JSON字符串
         /// </summary>
         /// <param name="obj">object</param>
-        /// <param name="camelCase">是否骆驼命名</param>
-        /// <param name="indented">是否缩进</param>
+        /// <param name="camelCase">是否骆驼命名，默认为false</param>
+        /// <param name="indented">是否缩进，默认为false</param>
         /// <returns></returns>
         public static string ToJsonString(this object obj, bool camelCase = false, bool indented = false)
         {

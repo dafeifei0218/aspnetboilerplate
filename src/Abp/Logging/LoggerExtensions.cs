@@ -39,6 +39,13 @@ namespace Abp.Logging
             }
         }
 
+        /// <summary>
+        /// 日志
+        /// </summary>
+        /// <param name="logger">日志接口</param>
+        /// <param name="severity">日志严重程度</param>
+        /// <param name="message">消息</param>
+        /// <param name="exception">异常</param>
         public static void Log(this ILogger logger, LogSeverity severity, string message, Exception exception)
         {
             switch (severity)
@@ -63,6 +70,12 @@ namespace Abp.Logging
             }
         }
 
+        /// <summary>
+        /// 日志
+        /// </summary>
+        /// <param name="logger">日志接口</param>
+        /// <param name="severity">日志严重程度</param>
+        /// <param name="messageFactory">消息工厂委托</param>
         public static void Log(this ILogger logger, LogSeverity severity, Func<string> messageFactory)
         {
             switch (severity)
