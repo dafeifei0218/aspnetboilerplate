@@ -42,10 +42,10 @@ namespace Abp
         {
             IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
 
-            //验证拦截器注册
+            // 验证拦截器注册
             ValidationInterceptorRegistrar.Initialize(IocManager);
 
-            //功能拦截器注册
+            // 功能拦截器注册
             FeatureInterceptorRegistrar.Initialize(IocManager);
             //审计拦截器注册
             //ABP是如何实现在方法执行时自动完成Auditing的呢（俗话叫AOP）？
@@ -54,10 +54,10 @@ namespace Abp
             //而AuditingInterceptorRegistrar的Initialize会在AbpKernelModule的Initialize的时候被调用。
             AuditingInterceptorRegistrar.Initialize(IocManager);
 
-            //工作单元注册
+            // 工作单元注册
             UnitOfWorkRegistrar.Initialize(IocManager);
 
-            //授权拦截器注册
+            // 授权拦截器注册
             AuthorizationInterceptorRegistrar.Initialize(IocManager);
 
             //审计配置
@@ -70,7 +70,7 @@ namespace Abp
                     )
                 );
 
-            //本地化源配置
+            // 本地化源配置
             Configuration.Localization.Sources.Add(
                 new DictionaryBasedLocalizationSource(
                     AbpConsts.LocalizationSourceName,
@@ -78,14 +78,14 @@ namespace Abp
                         Assembly.GetExecutingAssembly(), "Abp.Localization.Sources.AbpXmlSource"
                         )));
 
-            //本地化设置
+            // 本地化设置
             Configuration.Settings.Providers.Add<LocalizationSettingProvider>();
-            //邮件设置
+            // 邮件设置
             Configuration.Settings.Providers.Add<EmailSettingProvider>();
-            //通知设置
+            // 通知设置
             Configuration.Settings.Providers.Add<NotificationSettingProvider>();
 
-            //工作单元注册过滤器
+            // 工作单元注册过滤器
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.SoftDelete, true);
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MustHaveTenant, true);
             Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MayHaveTenant, true);
@@ -100,10 +100,10 @@ namespace Abp
         {
             base.Initialize();
 
-            //IOC容器注册事件总线
+            // IOC容器注册事件总线
             IocManager.IocContainer.Install(new EventBusInstaller(IocManager));
 
-            //IOC容器注册常规注册配置
+            // IOC容器注册常规注册配置
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly(),
                 new ConventionalRegistrationConfig
                 {
@@ -149,19 +149,19 @@ namespace Abp
         /// </summary>
         private void ConfigureCaches()
         {
-            //应用程序设置缓存8小时
+            // 应用程序设置缓存8小时
             Configuration.Caching.Configure(AbpCacheNames.ApplicationSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromHours(8);
             });
 
-            //租户设置缓存60分钟
+            // 租户设置缓存60分钟
             Configuration.Caching.Configure(AbpCacheNames.TenantSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(60);
             });
 
-            //用户设置缓存20分钟
+            // 用户设置缓存20分钟
             Configuration.Caching.Configure(AbpCacheNames.UserSettings, cache =>
             {
                 cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(20);

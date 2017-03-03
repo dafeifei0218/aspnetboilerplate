@@ -60,15 +60,15 @@ namespace Abp
         /// </summary>
         public virtual void Initialize()
         {
-            //Abp核心安装程序
+            // Abp核心安装程序
             IocManager.IocContainer.Install(new AbpCoreInstaller());
 
-            //abp启动配置初始化
+            // Abp启动配置初始化
             IocManager.Resolve<AbpStartupConfiguration>().Initialize();
 
-            //解析abp模块
+            // 解析Abp模块
             _moduleManager = IocManager.Resolve<IAbpModuleManager>();
-            //初始化模块
+            // 初始化模块
             _moduleManager.InitializeModules();
         }
 

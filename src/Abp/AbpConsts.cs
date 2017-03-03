@@ -2,7 +2,7 @@ namespace Abp
 {
     /// <summary>
     /// Used to define some constants for ABP.
-    /// Abp常量
+    /// 用于定义一些Abp常量
     /// </summary>
     public static class AbpConsts
     {
