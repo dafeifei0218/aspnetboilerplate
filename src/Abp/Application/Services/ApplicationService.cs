@@ -71,7 +71,7 @@ namespace Abp.Application.Services
         /// Checks if current user is granted for a permission.
         /// 检查当前用户是否赋予权限。
         /// </summary>
-        /// <param name="permissionName">Name of the permission 权限名</param>
+        /// <param name="permissionName">Name of the permission 权限名称</param>
         protected virtual Task<bool> IsGrantedAsync(string permissionName)
         {
             return PermissionChecker.IsGrantedAsync(permissionName);
@@ -81,7 +81,7 @@ namespace Abp.Application.Services
         /// Checks if current user is granted for a permission.
         /// 检查当前用户是否赋予权限。
         /// </summary>
-        /// <param name="permissionName">Name of the permission 权限名</param>
+        /// <param name="permissionName">Name of the permission 权限名称</param>
         protected virtual bool IsGranted(string permissionName)
         {
             return PermissionChecker.IsGranted(permissionName);
